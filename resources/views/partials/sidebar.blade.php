@@ -2,7 +2,7 @@
     <div class="h-full px-2 py-4 pb-4 overflow-y-auto bg-gradient-to-r from-blue-500 via-blue-500 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg">
         <ul class="space-y-4 font-medium">
              <li>
-                <a href="{{ route('dashboard') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center w-full p-2 text-base text-white rounded-lg group hover:bg-blue-500 dark:text-white dark:hover:bg-gray-700">
+                <a href="{{ route('admin.dashboard') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center w-full p-2 text-base text-white rounded-lg group hover:bg-blue-500 dark:text-white dark:hover:bg-gray-700">
                  <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-gray-400 dark:group-hover:text-white " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 20C20 20.5523 19.5523 21 19 21H5C4.44772 21 4 20.5523 4 20V11H1L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11H20V20ZM18 19V9.15745L12 3.7029L6 9.15745V19H18ZM12 17L8.64124 13.6412C7.76256 12.7625 7.76256 11.3379 8.64124 10.4592C9.51992 9.58056 10.9445 9.58056 11.8232 10.4592L12 10.636L12.1768 10.4592C13.0555 9.58056 14.4801 9.58056 15.3588 10.4592C16.2374 11.3379 16.2374 12.7625 15.3588 13.6412L12 17Z"></path></svg>
                  <span class="ms-3 font-extrabold">Tableau de bord</span>
                 </a>
@@ -34,7 +34,7 @@
                         <svg class="shrink-0 w-6 h-6 text-green-300 transition duration-75 dark:text-gray-400 dark:group-hover:text-white"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
                       </svg>
-                      <span class="ms-3 font-extrabold">Année</span>
+                      <span class="ms-3 font-extrabold">Année scolaire</span>
                     </a>
                    </li>
 
@@ -67,9 +67,16 @@
                    </li>
 
                    <li>
-                        <a href="{{ route('actors.prof.index') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg hover:bg-blue-500 group">
+                        <a href="{{ route('traitements.prof.index') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg hover:bg-blue-500 group">
                          <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-whith-400 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11 14.0619V20H13V14.0619C16.9463 14.554 20 17.9204 20 22H4C4 17.9204 7.05369 14.554 11 14.0619ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13Z"></path></svg>
                          <span class="ms-3 font-extrabold">Gestion Prof</span>
+                        </a>
+                   </li>
+
+                   <li>
+                        <a href="{{ route('admin.index') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg hover:bg-blue-500 group">
+                         <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-whith-400 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11 14.0619V20H13V14.0619C16.9463 14.554 20 17.9204 20 22H4C4 17.9204 7.05369 14.554 11 14.0619ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13Z"></path></svg>
+                         <span class="ms-3 font-extrabold">Gestion admin</span>
                         </a>
                    </li>
 
@@ -108,7 +115,7 @@
                 <ul id="dropdown-two" class="hidden py-2 space-y-2 font-extrabold">
 
                    <li>
-                      <a href="#" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-blue-500  group">
+                      <a href="{{ route('profile.compte') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-blue-500  group">
                          <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-whith-400 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14 14.252V22H4C4 17.5817 7.58172 14 12 14C12.6906 14 13.3608 14.0875 14 14.252ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM18 17V14H20V17H23V19H20V22H18V19H15V17H18Z"></path></svg>
                          <span class="ms-3 font-extrabold">Gestion compte</span>
                       </a>
@@ -146,7 +153,7 @@
              {{-- <hr> --}}
 
              <li>
-                <a href="#" class="cursor-pointer group  font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center p-2 text-white  rounded-lg dark:text-white hover:bg-blue-500 dark:hover:bg-gray-700 group">
+                <a href="{{ route('auth.logout') }}" class="cursor-pointer group  font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center p-2 text-white  rounded-lg dark:text-white hover:bg-blue-500 dark:hover:bg-gray-700 group">
                    <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75  dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
                    </svg>

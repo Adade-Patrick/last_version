@@ -22,19 +22,18 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|string|email|unique:users,email',
+            'name' => 'required|string|exists:users,name',
             'password' => 'required|string|min:6|max:20',
         ];
     }
 
     public function messages()
     {
-        
+
         return [
-            'email.required' => 'L\'email est requis.',
-            'email.string' => 'L\'email doit être une chaîne de caractères.',
-            'email.email' => 'L\'email doit être valide.',
-            'email.unique' => 'Cet email existe déjà.',
+            'name.required' => 'Le nom d\'utilisateur est requis.',
+            'name.string' => 'Le nom d\'utilisateur doit être une chaîne de caractères.',
+            'name.exists' => 'Ce nom d\'utilisateur n\'existe pas.',
 
             'password.required' => 'Le mot de passe est requis.',
             'password.string' => 'Le mot de passe doit être une chaîne de caractères.',

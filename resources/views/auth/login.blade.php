@@ -24,15 +24,15 @@
                     </div>
                 @endif
                 <div>
-                    <input type="email" name="email" placeholder="email" required class="w-full px-4 py-3 rounded-lg bg-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 animate-pulse-slow">
+                    <input type="text" name="name" placeholder="Nom d'utilisateur" required class="w-full px-4 py-3 rounded-lg bg-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 animate-pulse-slow">
                     @error('name')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div>
-                    <input type="password" name="password" placeholder="password" required  class="w-full px-4 py-3 rounded-lg bg-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 animate-pulse-slow">
-                    @error('name')
+                    <input type="password" name="password" placeholder="Mot de passe" required  class="w-full px-4 py-3 rounded-lg bg-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 animate-pulse-slow">
+                    @error('password')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
@@ -41,9 +41,7 @@
                     <a href="#" class="ms-auto text-sm text-red-600 hover:underline dark:text-red-500">Mot de passe oublié?</a>
                 </div>
                 <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Se connecter</button>
-                {{-- <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
-                    Pas de compte? <a href="" class="text-blue-700 hover:underline dark:text-blue-500">Créer un compte</a>
-                </div> --}}
+
             </form>
         </div>
     </div>

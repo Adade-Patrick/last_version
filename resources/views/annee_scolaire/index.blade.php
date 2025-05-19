@@ -32,7 +32,7 @@
 </div>
 
 {{-- Contenu principal --}}
-<div class="p-2 sm:ml-64 bg-no-repeat bg-cover bg-white bg-blend-multiply">
+<div class="p-2 sm:ml-64 bg-no-repeat bg-cover bg-gray-200 bg-blend-multiply">
     <main class="mt-5 mb-0">
         <div class="h-full p-8 overflow">
             {{-- Formulaire de recherche et ajout --}}
@@ -50,28 +50,12 @@
                 <button id="openModalBtn" class="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition" onclick="openModal()">
                     + Ajouter une Année
                 </button>
-
-                {{-- <ul class="divide-y divide-gray-200">
-                    @foreach ($annees as $annee)
-                        <li class="py-3 flex justify-between items-center">
-                            <span class="text-gray-800">{{ $annee->libelle_A }}</span>
-                            <div class="flex space-x-2">
-                                <a href="#" class="text-blue-500 hover:underline">Modifier</a>
-                                <form action="#" method="POST" onsubmit="return confirm('Supprimer cette année ?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:underline">Supprimer</button>
-                                </form>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul> --}}
             </div>
         </div>
 
         {{-- Tableau des années --}}
-        <div class="mt-8 max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-md">
-            <h3 class="mb-4 text-3xl text-center font-bold text-blue-600 dark:text-white">Liste Année</h3>
+        <div class="mt-10 max-w-full mx-auto bg-white p-6 rounded-xl shadow-md">
+            <h3 class="mb-4 text-3xl text-center font-bold text-blue-600 dark:text-white">Liste Année scolaire</h3>
 
             <div class="flex justify-center overflow-x-auto shadow-md sm:rounded-lg">
                     @if (session()->has('success'))

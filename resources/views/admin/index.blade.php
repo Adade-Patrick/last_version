@@ -1,0 +1,288 @@
+@extends('layouts.app')
+
+@section('content')
+
+@include('partials.navbar')
+@include('partials.sidebar')
+
+<div class="p-3 sm:ml-64  bg-no-repeat bg-cover bg-white bg-blend-multiply">
+    <main class="mt-24 mb-0 ">
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li class="inline-flex items-center">
+                    <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+                    </svg>
+                    Tableau de bord
+                    </a>
+                </li>
+
+                <li aria-current="page">
+                    <div class="flex items-center">
+                    <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                    </svg>
+                    <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Prof</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </main>
+</div>
+
+<div class="p-10 sm:ml-64 bg-no-repeat bg-cover bg-gray-200 bg-blend-multiply">
+    <main class="mt-5 mb-5">
+
+        <div class="h-full p-8 overflow">
+            <!--Zone erreur-->
+            <div class="max-w-xl mx-auto bg-white p-0 rounded-xl">
+                @if($errors->any())
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li role="alert" class="flex justify-center  bg-red-100 border-black text-red-500 px-4 py-3 rounded relative">{{$error }}</li>
+                        @endforeach
+                    </ul>
+                    @endif
+                    <!--message apres action-->
+                    @if (session('success'))
+                        <div class="flex justify-center  bg-green-100 border-black text-green-500 px-4 py-3 rounded relative" role="alert">
+                        <span class="block sm:inline">{{session('success')}}</span>
+                    </div>
+                @endif
+            </div>
+            {{-- Formulaire de recherche et ajout --}}
+            <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-2xl font-bold text-blue-600 mb-6">Admin</h2>
+
+                <form method="GET" action="{{ route('admin.index') }}" class="mb-4">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher un admin..."
+                        class="px-4 py-2 border rounded-lg focus:ring focus:ring-indigo-200">
+                    <button type="submit" class="bg-violet-600 text-white px-4 py-2 rounded hover:bg-blue-600 ml-2">
+                        Rechercher
+                    </button>
+                </form>
+
+                <button id="openModalBtn" class="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition" onclick="openModal()">
+                    + Ajouter un admin
+                </button>
+            </div>
+        </div>
+
+    <div class="mt-10 max-w-full mx-auto bg-white p-6 rounded-xl shadow-md">
+            <h3 class="mb-4 text-3xl text-center font-bold text-blue-600 dark:text-white">Liste des admins</h3>
+
+            <div class="flex justify-center overflow-x-auto shadow-md sm:rounded-lg">
+
+                <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-white uppercase bg-blue-500 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">ID</th>
+                            <th scope="col" class="px-6 py-3">Nom</th>
+                            <th scope="col" class="px-6 py-3">Prénom</th>
+                            <th scope="col" class="px-6 py-3">Email</th>
+                            <th scope="col" class="px-6 py-3">Téléphone</th>
+                            <th scope="col" class="px-6 py-3">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tableBody">
+                        @if($admins->isEmpty())
+                            <tr>
+                                <td colspan="7">Aucun admin trouvé</td>
+                            </tr>
+                        @else
+                            @foreach($admins as $admin)
+                                <tr class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700 border-gray-200">
+                                    <td class="px-6 py-4">{{ $admin->id }}</td>
+                                    <td class="px-6 py-4">{{ $admin->infoPerso->nom }}</td>
+                                    <td class="px-6 py-4">{{ $admin->infoPerso->prenom }}</td>
+                                    <td class="px-6 py-4">{{ $admin->user->email }}</td>
+                                    <td class="px-6 py-4">{{ $admin->infoPerso->telephone ?? '-' }}</td>
+                                    <td class="px-6 py-4">
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+ <!-- Formulaire modal -->
+    <div id="formModal" class="fixed inset-0 flex items-center justify-center invisible bg-black bg-opacity-30 backdrop-blur-sm z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-xl relative">
+        <h2 class="text-xl font-bold mb-4 text-center text-blue-600">Ajouter un administrateur</h2>
+        <form id="multiStepForm" action="{{ route('admin.store') }}" method="POST">
+            @csrf
+            <div id="step1" class="step hidden">
+                <h3 class="text-lg font-semibold mb-2 text-gray-700">Étape 1 : Informations personnelles</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="mb-4">
+                        <label for="nom" class="block text-sm font-medium text-blue-600">Nom</label>
+                        <input type="text" name="nom" id="nom" class="w-full border p-2 rounded" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="prenom" class="block text-sm font-medium text-blue-600">Prénom</label>
+                        <input type="text" name="prenom" id="prenom" class="w-full border p-2 rounded" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="date_N" class="block text-sm font-medium text-blue-600">Date de naissance</label>
+                        <input type="date" name="date_N" id="date_N" class="w-full border p-2 rounded" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="lieu_N" class="block text-sm font-medium text-blue-600">Lieu de naissance</label>
+                        <input type="text" name="lieu_N" id="lieu_N" class="w-full border p-2 rounded" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="sexe" class="block text-sm font-medium text-blue-600">Sexe</label>
+                        <select name="sexe" id="sexe" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+                            <option value="">-- Sélectionner --</option>
+                            <option value="Homme">Homme</option>
+                            <option value="Femme">Femme</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-blue-600">Email</label>
+                        <input type="email" name="email" class="w-full border rounded p-2" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="nationalite" class="block text-sm font-medium text-blue-600">Nationalité</label>
+                        <input type="text" name="nationalite" id="nationalite" class="w-full border p-2 rounded" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="ville_residence" class="block text-sm font-medium text-blue-600">Ville de résidence</label>
+                        <input type="text" name="ville_residence" id="ville_residence" class="w-full border p-2 rounded" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="telephone" class="block text-sm font-medium text-blue-600">Téléphone</label>
+                        <input type="tel" name="telephone" id="telephone"
+                            pattern="^\d{2}\s\d{3}\s\d{2}\s\d{2}$"
+                            minlength="9"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                            placeholder="Ex : 06 610 29 10"
+                            required>
+                        {{-- <p class="text-sm text-gray-500 mt-1">Le numéro doit contenir au moins 9 chiffres.</p> --}}
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-2">
+                    <button type="button" class="nextStep bg-blue-600 text-white px-4 py-2 rounded">Suivant</button>
+                </div>
+            </div>
+
+            <div id="step2" class="step">
+                <h3 class="text-lg font-semibold mb-2 text-gray-700">Étape 2 : Informations utilisateur</h3>
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium text-blue-600">Nom utilisateur</label>
+                    <input type="text" name="name" class="w-full border rounded p-2" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-blue-600">Mot de passe</label>
+                    <input type="password" name="password" class="w-full border rounded p-2" required>
+                </div>
+
+                <div class="flex justify-between mt-4">
+                    <button type="button" class="prevStep bg-gray-400 text-white px-4 py-2 rounded">Retour</button>
+                    <button type="button" class="nextStep bg-blue-600 text-white px-4 py-2 rounded">Suivant</button>
+                </div>
+            </div>
+
+
+            <div id="step3" class="step hidden">
+                <h3 class="text-lg font-semibold mb-2 text-gray-700">Étape 3 : Finalisation</h3>
+                <p class="mb-4 text-sm text-gray-600">Cliquez sur <strong>Enregistrer</strong> pour ajouter l'administrateur.</p>
+                <div class="flex justify-between">
+                    <button type="button" class="prevStep bg-gray-400 text-white px-4 py-2 rounded">Retour</button>
+                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Enregistrer</button>
+                </div>
+            </div>
+        </form>
+        <button id="closeModalBtn" class="absolute top-2 right-3 text-gray-500 hover:text-red-600 text-lg font-bold">&times;</button>
+    </div>
+</div>
+
+
+
+        <!--active l'évenement-->
+<script>
+    document.getElementById('openModalBtn').addEventListener('click', function() {
+        document.getElementById('formModal').classList.remove('invisible');
+    });
+
+    document.getElementById('closeModalBtn').addEventListener('click', function() {
+        document.getElementById('formModal').classList.add('invisible');
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let currentStep = 0;
+        const steps = document.querySelectorAll('.step');
+        const nextButtons = document.querySelectorAll('.nextStep');
+        const prevButtons = document.querySelectorAll('.prevStep');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const formModal = document.getElementById('formModal');
+
+        function showStep(index) {
+            steps.forEach((step, i) => {
+                step.classList.toggle('hidden', i !== index);
+            });
+        }
+
+        nextButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (currentStep < steps.length - 1) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            });
+        });
+
+        prevButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            formModal.classList.add('invisible');
+            currentStep = 0;
+            showStep(currentStep);
+        });
+
+        // Init
+        showStep(currentStep);
+    });
+</script>
+
+<script>
+document.getElementById('telephone').addEventListener('input', function (e) {
+    let value = e.target.value.replace(/\D/g, ''); // Ne garder que les chiffres
+    let formatted = '';
+
+    if (value.length > 0) formatted += value.substring(0, 2);
+    if (value.length > 2) formatted += ' ' + value.substring(2, 5);
+    if (value.length > 5) formatted += ' ' + value.substring(5, 7);
+    if (value.length > 7) formatted += ' ' + value.substring(7, 9);
+
+    e.target.value = formatted;
+});
+</script>
+
+
+
+@endsection

@@ -27,7 +27,7 @@ Route::get('/auth',function(){
 })->name('auth.form.login');
 
 Route::post('/auth/login',[UserController::class, 'login'])->name('auth.login');
-Route::post('/auth/logout',[UserController::class, 'logout'])->name('auth.logout');
+Route::get('/auth/logout',[UserController::class, 'logout'])->name('auth.logout');
 Route::get('/auth/user/register/forms',[UserController::class, 'create'])->name('auth.user.create');
 Route::post('/auth/user/register',[UserController::class, 'store'])->name('auth.register');
 
@@ -51,9 +51,19 @@ require __DIR__.'/cours_route.php';
 
 require __DIR__.'/evaluation_route.php';
 
+require __DIR__.'/profile_route.php';
+
+require __DIR__.'/profileProf_route.php';
+
+require __DIR__.'/profcours_route.php';
+
+require __DIR__.'/CreerProfcours_route.php';
+
+require __DIR__.'/profParametre_route.php';
+
 
 
 
 
 //  Zone de test
-Route::view('/admin/dashboard', 'admin.dashboard')->name('dashboard');
+// Route::view('test/admin/dashboard', 'admin.dashboard')->name('dashboard');

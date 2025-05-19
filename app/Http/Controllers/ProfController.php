@@ -18,7 +18,7 @@ class ProfController extends Controller
     public function index()
     {
         $profs = Prof::with(['user', 'classe', 'cycle', 'anneeScolaire'])->paginate(10);
-        return view('actors.prof.index', compact('profs'));
+        return view('traitements.prof.index', compact('profs'));
     }
 
     /**

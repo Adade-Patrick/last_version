@@ -13,14 +13,17 @@ class UserController extends Controller
     public function  login(LoginRequest $request){
         try{
             // dd($request->all());
-        if(Auth::attempt($request->only("email","password"))){
-            request->session()->regenerate();
+        if(Auth::attempt($request->only("name","password"))){
+            $request->session()->regenerate();
 
-            if(auth()->user()->role === "admin" ||auth()->user()->role === "superadmin" ){
+            // dd(auth()->user()->role);
+    
+            if(auth()->user()->role === "admin" ||auth()->user()->role === "super_admin" ){
                 return redirect()->route('admin.dashboard');
             }
+
             else if(auth()->user()->role === "prof"){
-                return redirect()->route('prof.dashboard');
+                return redirect()->route('int_prof.dashboard');
             }else{
                 redirect()->back()->withErrors([
                     "Vous n'etes pas autorisé a acceder a cette application"
@@ -28,12 +31,13 @@ class UserController extends Controller
             }
         }else{
             return redirect()->back()->withErrors([
-                "email ou mot de passe incorrect"
+                "Le nom d'utilisateur ou mot de passe incorrect"
             ]);
 
         }
 
         }catch(Exception $e){
+            dd($e);
             return redirect()->back()->withErrors([
                 "Erreur impossible de se connecter "
             ]);
@@ -42,8 +46,8 @@ class UserController extends Controller
 
     public function logout(Request $request){
         Auth::logout();
-        $request->invalidate();
-        $request->regenerateToken();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
 
         return redirect('/');
@@ -58,7 +62,7 @@ class UserController extends Controller
         return view('auth.register');
     }
 
-    
+
     public function destroy(Request $request){
 
     }

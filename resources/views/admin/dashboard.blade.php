@@ -5,7 +5,7 @@
 @include('partials.navbar')
 @include('partials.sidebar')
 
-<div class="p-4 sm:ml-64 bg-no-repeat bg-cover  bg-white bg-blend-multiply">
+<div class="p-4 sm:ml-64 bg-no-repeat bg-cover  bg-gray-200 bg-blend-multiply">
     <main class="mt-20 mb-20">
     <div class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +27,7 @@
             <!-- Stats Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                 <!-- Total Students -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-black dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="bg-blue-50 dark:bg-blue-500/10 p-3 rounded-lg">
                             <svg class="w-6 h-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -41,7 +41,7 @@
                 </div>
 
                 <!-- Total Teachers -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-black dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="bg-purple-50 dark:bg-purple-500/10 p-3 rounded-lg">
                             <svg class="w-6 h-6 text-purple-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -55,7 +55,7 @@
                 </div>
 
                 <!-- Total Classes -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-black dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="bg-orange-50 dark:bg-orange-500/10 p-3 rounded-lg">
                             <svg class="w-6 h-6 text-orange-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -69,7 +69,7 @@
                 </div>
 
                 <!-- Success Rate -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-black dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="bg-green-50 dark:bg-green-500/10 p-3 rounded-lg">
                             <svg class="w-6 h-6 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -85,7 +85,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- Recent Activities -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-black dark:border-gray-700">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700">
                     <div class="p-6 border-b border-gray-100 dark:border-gray-700">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Activités Récentes</h3>
                     </div>
@@ -107,13 +107,14 @@
                 </div>
 
                 <!-- Quick Actions -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-black dark:border-gray-700">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700">
                     <div class="p-6 border-b border-gray-100 dark:border-gray-700">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Actions Rapides</h3>
                     </div>
                     <div class="p-6">
                         <div class="grid grid-cols-2 gap-4">
-                            <a href="#" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <!--Ajouter élève-->
+                            <a href="{{ route('traitements.eleve.index') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                                 <div class="flex-shrink-0">
                                     <div class="p-2 bg-blue-500 rounded-lg">
                                         <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -126,7 +127,8 @@
                                 </div>
                             </a>
 
-                            <a href="#" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <!--Ajouter prof-->
+                            <a href="{{ route('traitements.prof.index') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                                 <div class="flex-shrink-0">
                                     <div class="p-2 bg-purple-500 rounded-lg">
                                         <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -139,7 +141,8 @@
                                 </div>
                             </a>
 
-                            <a href="#" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <!--Cours publier-->
+                            <a href="{{ route('traitements.cours.index') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                                 <div class="flex-shrink-0">
                                     <div class="p-2 bg-yellow-300 rounded-lg">
                                         <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -148,11 +151,12 @@
                                     </div>
                                 </div>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Créer un cours</p>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Cours publier</p>
                                 </div>
                             </a>
 
-                            <a href="#" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <!--Gérer profil compte-->
+                            <a href="{{ route('profile.compte') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                                 <div class="flex-shrink-0">
                                     <div class="p-2 bg-orange-500 rounded-lg">
                                         <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -161,22 +165,10 @@
                                     </div>
                                 </div>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Créer un cours</p>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Gérer compte</p>
                                 </div>
                             </a>
 
-                            <a href="#" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                                <div class="flex-shrink-0">
-                                    <div class="p-2 bg-green-500 rounded-lg">
-                                        <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M6 4V8H18V4H20.0066C20.5552 4 21 4.44495 21 4.9934V21.0066C21 21.5552 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5551 3 21.0066V4.9934C3 4.44476 3.44495 4 3.9934 4H6Z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Noter un élève</p>
-                                </div>
-                            </a>
                         </div>
                     </div>
                 </div>

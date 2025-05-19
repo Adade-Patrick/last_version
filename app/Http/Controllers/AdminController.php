@@ -4,57 +4,104 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Http\Requests\adminRegisterInfoRequest;
+use App\Http\Requests\profRegisterInfoRequest;
+use App\Models\InfoPerso;
+use App\Models\User;
+use App\Models\Prof;
 
 
 class AdminController extends Controller
 {
-    public function index()
+    public function dashboard()
     {
         return view('admin.dashboard');
     }
 
-    public function create()
+    public function index()
     {
-        return view('admin.form');
+        $admins = Admin::all();
+        return view('admin.index', ['admins' => $admins]);
     }
 
-    public function showForm()
+    public function storeProf(profRegisterInfoRequest $request)
     {
-        return view('admin.info');
-    }
+        try{
+            $validatedData=$request->validated();
 
-
-
-    public function storeInfo(Request $request)
-    {
-        $request->validate([
-            'nom' => 'required|string|max:50',
-            'prenom' => 'required|string|max:50',
-            'email' => 'required|email|unique:users,email',
-            'motDePasse' => 'required|string|min:6',
-            'adresse' => 'required|string',
-            'telephone' => 'required|string',
+            // Enregistrement dans info_perso
+        $infoPerso = InfoPerso::create([
+            'nom' => $validatedData['nom'],
+            'prenom' => $validatedData['prenom'],
+            'date_N' => $validatedData['date_N'],
+            'lieu_N' => $validatedData['lieu_N'],
+            'sexe' => $validatedData['sexe'],
+            'nationalite' => $validatedData['nationalite'],
+            'ville_residence' => $validatedData['ville_residence'],
+            'telephone' => $validatedData['telephone'],
         ]);
 
-        $user = User::findOrFail(session('incomplete_user_id'));
+        // Enregistrement dans users
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+            'role' => 'admin',
+        ]);
 
-    // Crée les infos admin liées à cet utilisateur
-    $user->admin()->create([
-        'adresse' => $request->adresse,
-        'telephone' => $request->telephone,
-        'idUsers' => $user->idUsers,
-        // autres champs
-    ]);
+        // Enregistrement dans prof
+        Prof::create([
+            'users_id' => $user->id,
+            'info_perso_id' => $infoPerso->id,
+            'specialite' => "physique",
 
+        ]);
 
-    // On supprime l'ID temporaire de la session
-    Auth::login($user);
-    session()->forget('incomplete_user_id');
-
-    return redirect()->route('admin.admin-dashboard')->with('success', 'Profil Admin complété !');
+        return redirect()->back()->with('success', 'Professeur enregistré avec succès.');
+        }catch(\Exception $e){
+            dd($e);
+        }
     }
 
 
 
+    public function storeInfo(adminRegisterInfoRequest $request)
+    {
+        try{
+            $validatedData=$request->validated();
+            // dd($validatedData);
+
+    // Enregistrement dans info_perso
+        $infoPerso = InfoPerso::create([
+            'nom' => $validatedData['nom'],
+            'prenom' => $validatedData['prenom'],
+            'date_N' => $validatedData['date_N'],
+            'lieu_N' => $validatedData['lieu_N'],
+            'sexe' => $validatedData['sexe'],
+            'nationalite' => $validatedData['nationalite'],
+            'ville_residence' => $validatedData['ville_residence'],
+            'telephone' => $validatedData['telephone'],
+        ]);
+
+        // Enregistrement dans users
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+            'role' => 'admin',
+        ]);
+
+        // Enregistrement dans admin
+        Admin::create([
+            'users_id' => $user->id,
+            'info_perso_id' => $infoPerso->id,
+
+        ]);
+
+        return redirect()->back()->with('success', 'Administrateur enregistré avec succès.');
+        }catch(\Exception $e){
+            // dd($e);
+        }
+    }
 }
 

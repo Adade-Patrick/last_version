@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('nationalite');
             $table->string('ville_residence');
             $table->string('telephone');
-            $table->string('email');
             $table->timestamps();
         });
     }

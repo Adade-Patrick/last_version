@@ -31,23 +31,25 @@
     </main>
 </div>
 
-<div class="p-2 sm:ml-64 bg-no-repeat bg-cover bg-white bg-blend-multiply">
+<div class="p-2 sm:ml-64 bg-no-repeat bg-cover bg-gray-200 bg-blend-multiply">
     <main class="mt-5 mb-0">
         <div class="h-full p-8 overflow">
             <!-- Cycle -->
-            <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md over">
-                <h2 class="text-2xl font-bold text-blue-600 mb-6">Cycle</h2>
+            <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-2xl font-bold text-blue-600 mb-6">
+                    Cycle
+                </h2>
 
                 <form method="GET" action="{{ route('cycles.index') }}" class="mb-4 overflow">
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher un cycle..."
                         class="px-4 py-2 border rounded-lg focus:ring focus:ring-indigo-200">
-                    <button type="submit" class="bg-violet-600 text-white px-4 py-2 rounded hover:bg-blue-600 ml-2 ">
+                    <button type="submit" class="bg-violet-600 text-white px-4 py-2 rounded hover:bg-blue-600 ml-2">
                         Rechercher
                     </button>
                 </form>
 
                 <!--Button-->
-                <button id="openModalBtn" class="mb-4 inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition" onclick="openModal()">
+                <button id="openModalBtn" class="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition" onclick="openModal()">
                 + Ajouter un Cycle
                 </button>
 
@@ -71,17 +73,16 @@
             </div>
 
             <!-- Section cycle -->
-            <div class="mt-10 max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
-                <h3 class="mb-4 text-3xl text-center font-bold tracking-tight text-blue-600 dark:text-white">Liste cycle</h3>
+            <div class="mt-10 max-w-full mx-auto bg-white p-6 rounded-xl shadow-md">
+                <h3 class="mb-4 text-3xl text-center font-bold text-blue-600 dark:text-white">Liste cycle</h3>
 
-                <div class="flex justify-center overflow shadow-md sm:rounded-lg">
-                    {{-- <div class="relative shadow-md sm:rounded-lg w-full md:w-3/4"> --}}
+                <div class="flex justify-center overflow-x-auto shadow-md sm:rounded-lg">
                         @if (session()->has('success'))
-                            {{-- Message après action (ajouter ici si nécessaire) --}}
+                            <div class="text-green-600 text-center p-2">{{ session('success') }}</div>
                         @endif
 
-                        <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-white uppercase bg-blue-500 dark:bg-gray-700 dark:text-gray-400">
+                        <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400 rounded">
+                            <thead class="text-xs text-white uppercase bg-blue-500 dark:bg-gray-700">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">Id</th>
                                     <th scope="col" class="px-6 py-3">Libelle</th>
@@ -91,14 +92,14 @@
                             <tbody id="tableBody">
                                 @if($cycles->isEmpty())
                                     <tr>
-                                        <td colspan="3">Aucune année scolaire trouvée</td>
+                                        <td colspan="3">Aucun cycle trouvé</td>
                                     </tr>
                                 @else
                                     @foreach($cycles as $cycle)
                                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
                                             <td class="px-6 py-4">{{ $cycle->id }}</td>
                                             <td class="px-6 py-4">{{ $cycle->libelle_c }}</td>
-                                            <td class="px-6 py-4">—</td> <!-- Mettre ici les actions si besoin -->
+                                            <td class="px-6 py-4">—</td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -110,7 +111,7 @@
     </main>
 </div>
 
-<!-- Formulaire modal -->
+        <!-- Formulaire modal -->
         <div id="formModal" class="fixed inset-0 flex items-center justify-center invisible bg-black bg-opacity-30 backdrop-blur-sm z-50">
             <div class="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
                 <h2 class="text-lg font-bold mb-4 text-center text-blue-600">Ajouter un cycle</h2>

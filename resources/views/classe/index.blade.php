@@ -32,11 +32,11 @@
 </div>
 
 {{-- Contenu principal --}}
-<div class="p-2 sm:ml-64 bg-no-repeat bg-cover bg-white bg-blend-multiply">
-<main class="mt-1 mb-0">
+<div class="p-10 sm:ml-64 bg-no-repeat bg-cover bg-gray-200 bg-blend-multiply">
+<main class="mt-5 mb-0">
         <div class="h-full p-8 overflow">
-        <!--Zone erreur-->
-            <div class="max-w-xl mx-auto bg-white p-1 rounded-xl">
+            <!--Zone erreur-->
+            <div class="max-w-xl mx-auto bg-white p-0 rounded-xl">
                 @if($errors->any())
                     <ul>
                         @foreach($errors->all() as $error)
@@ -49,8 +49,7 @@
                         <div class="flex justify-center  bg-green-100 border-black text-green-500 px-4 py-3 rounded relative" role="alert">
                         <span class="block sm:inline">{{session('success')}}</span>
                     </div>
-
-                    @endif
+                @endif
             </div>
             {{-- Formulaire de recherche et ajout --}}
             <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
@@ -87,10 +86,13 @@
         </div>
 
         <!--Zone Tableau-->
-       <div class="mt-6 max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-md">
+       <div class="mt-10 max-w-full mx-auto bg-white p-6 rounded-xl shadow-md">
             <h3 class="mb-4 text-3xl text-center font-bold text-blue-600 dark:text-white">Liste des Classes</h3>
 
             <div class="flex justify-center overflow-x-auto shadow-md sm:rounded-lg">
+                     @if (session()->has('success'))
+                        <div class="text-green-600 text-center p-2">{{ session('success') }}</div>
+                    @endif
                     <!--Tableau-->
                     <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-white uppercase bg-blue-500 dark:bg-gray-700 dark:text-gray-400">
@@ -101,66 +103,49 @@
                                 </tr>
                             </thead>
                             <tbody id="tableBody">
-                            @if($classes->isEmpty())
-                            <tr>
-                                <td colspan="3">Aucune classe trouvée</td>
-                            </tr>
-                            @else
-                            @foreach($classes as $classe)
-                        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                            <td class="px-6 py-4">{{ $classe->id }}</td>
-                            <td class="px-6 py-4">{{ $classe->libelle_Cl }}</td>
-                            <td class="px-6 py-4">
-                                <form action="{{ route('classe.destroy', $classe->id) }}" method="POST" class="inline-block">
-                                    @csrf
-                                    @method('DELETE')
+                                @if($classes->isEmpty())
+                                <tr>
+                                <td colspan="3">
+                                    Aucune classe trouvée</td>
+                                </tr>
+                                 @else
+                                @foreach($classes as $classe)
+                                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                                    <td class="px-6 py-4">
+                                    {{ $classe->id }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $classe->libelle_Cl }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <form action="{{ route('classe.destroy', $classe->id) }}" method="POST" class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
 
-                                    <!-- Bouton pour ouvrir le modal -->
-                                    <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline" onclick="openModal()">Supprimer</button>
+                                            <!-- Bouton pour ouvrir le modal -->
+                                            <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline" onclick="openModal()">Supprimer
+                                            </button>
 
-                                    <!-- Modal -->
-                                    <div id="deleteModal" class="fixed inset-0 flex items-center justify-center invisible">
-                                        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-                                            <h2 class="text-lg font-semibold mb-4">Confirmation</h2>
-                                            <p>Êtes-vous sûr de vouloir supprimer cette Classe ?</p>
-                                            <div class="flex justify-end mt-4">
-                                                <button class="px-4 py-2 bg-gray-300 rounded mr-2" onclick="closeModal()">Annuler</button>
-                                                <button id="confirmDelete" class="px-4 py-2 bg-red-600 text-white rounded">Supprimer</button>
+                                            <!-- Modal -->
+                                            <div id="deleteModal" class="fixed inset-0 flex items-center justify-center invisible">
+                                                <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+                                                    <h2 class="text-lg font-semibold mb-4">Confirmation</h2>
+                                                    <p>Êtes-vous sûr de vouloir supprimer cette Classe ?</p>
+                                                    <div class="flex justify-end mt-4">
+                                                        <button class="px-4 py-2 bg-gray-300 rounded mr-2" onclick="closeModal()">Annuler</button>
+                                                        <button id="confirmDelete" class="px-4 py-2 bg-red-600 text-white rounded">Supprimer</button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <script>
-                                        function openModal() {
-                                            document.getElementById('deleteModal').classList.remove('invisible');
-                                        }
-
-                                        function closeModal() {
-                                            document.getElementById('deleteModal').classList.add('invisible');
-                                        }
-
-                                        document.getElementById('confirmDelete').addEventListener('click', function() {
-                                            if (confirm('Confirmez-vous la suppression ?')) {
-                                                alert('Classe supprimer !');
-                                                closeModal();
-                                            }
-                                        });
-
-                                        document.getElementById('cancelButton').addEventListener('click', function() {
-                                            closeModal();
-                                        });
-                                    </script>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                        @endif
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @endif
                             </tbody>
                     </table>
             </div>
         </div>
-
-
 
         <!-- Formulaire modal -->
         <div id="formModal" class="fixed inset-0 flex items-center justify-center invisible bg-black bg-opacity-30 backdrop-blur-sm z-50">
@@ -178,21 +163,22 @@
                         <button type="button" id="closeModalBtn" class="bg-red-600 text-white px-4 py-2 rounded">Annuler</button>
                     </div>
                 </form>
-
-                  <!--active l'évenement-->
-                <script>
-                    document.getElementById('openModalBtn').addEventListener('click', function() {
-                        document.getElementById('formModal').classList.remove('invisible');
-                    });
-
-                    document.getElementById('closeModalBtn').addEventListener('click', function() {
-                        document.getElementById('formModal').classList.add('invisible');
-                    });
-                </script>
             </div>
         </div>
-    </div>
+    </main>
 </div>
+
+  <!--active l'évenement-->
+<script>
+    document.getElementById('openModalBtn').addEventListener('click', function() {
+        document.getElementById('formModal').classList.remove('invisible');
+    });
+
+    document.getElementById('closeModalBtn').addEventListener('click', function() {
+        document.getElementById('formModal').classList.add('invisible');
+    });
+</script>
+
 @endsection
 
 
