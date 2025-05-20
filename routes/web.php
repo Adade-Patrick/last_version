@@ -61,6 +61,8 @@ require __DIR__.'/CreerProfcours_route.php';
 
 require __DIR__.'/profParametre_route.php';
 
+require __DIR__.'/profile_image_route.php';
+
 
 
 

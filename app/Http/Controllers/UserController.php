@@ -17,7 +17,7 @@ class UserController extends Controller
             $request->session()->regenerate();
 
             // dd(auth()->user()->role);
-    
+
             if(auth()->user()->role === "admin" ||auth()->user()->role === "super_admin" ){
                 return redirect()->route('admin.dashboard');
             }
@@ -37,7 +37,7 @@ class UserController extends Controller
         }
 
         }catch(Exception $e){
-            dd($e);
+            // dd($e);
             return redirect()->back()->withErrors([
                 "Erreur impossible de se connecter "
             ]);
@@ -48,14 +48,14 @@ class UserController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
+        
 
         return redirect('/');
     }
 
     public function store(Request $request){
 
-        dd($request);
+        // dd($request);
     }
 
     public function create(){
@@ -70,6 +70,8 @@ class UserController extends Controller
     public function update(Request $request){
 
     }
+
+
 
 
 }
