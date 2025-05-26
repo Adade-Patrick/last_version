@@ -17,7 +17,7 @@ class ProfController extends Controller
      */
     public function index()
     {
-        $profs = Prof::with(['user', 'classe', 'cycle', 'anneeScolaire'])->paginate(10);
+        $profs = Prof::with(['user', 'cycle','classes', 'anneeScolaire'])->paginate(10);
         return view('traitements.prof.index', compact('profs'));
     }
 
@@ -26,6 +26,7 @@ class ProfController extends Controller
      */
     public function create()
     {
+
         $classes = Classe::all();
         $cycles = Cycle::all();
         $annees = AnneeScolaire::all();
@@ -74,7 +75,7 @@ class ProfController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('traitements.prof.show');
     }
 
     /**
@@ -93,32 +94,7 @@ class ProfController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'nom' => 'required|string|max:50',
-            'prenom' => 'required|string|max:50',
-            'email' => 'required|email|unique:users,email,' . $prof->user->id,
-            'dateNaissance' => 'required|date',
-            'telephone' => 'required|string|max:10',
-            'classe_id' => 'required|exists:classes,id',
-            'cycle_id' => 'required|exists:cycles,id',
-            'annee_scolaire_id' => 'required|exists:annee_scolaires,id',
-        ]);
 
-        $prof->user->update([
-            'nom' => $request->nom,
-            'prenom' => $request->prenom,
-            'email' => $request->email,
-        ]);
-
-        $prof->update([
-            'dateNaissance' => $request->dateNaissance,
-            'telephone' => $request->telephone,
-            'classe_id' => $request->classe_id,
-            'cycle_id' => $request->cycle_id,
-            'annee_scolaire_id' => $request->annee_scolaire_id,
-        ]);
-
-        return redirect()->route('actors.prof.index')->with('success', 'Prof mis à jour avec succès.');
     }
 
     /**
@@ -126,8 +102,8 @@ class ProfController extends Controller
      */
     public function destroy(string $id)
     {
-        $prof->user->delete();
+        $prof = Prof::findOrFail($id);
         $prof->delete();
-        return redirect()->route('actors.prof.index')->with('success', 'Prof supprimé avec succès.');
+        return redirect()->route('traitements.prof.index')->with('success', 'Prof supprimé avec succès.');
     }
 }

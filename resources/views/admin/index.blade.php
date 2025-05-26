@@ -31,10 +31,10 @@
     </main>
 </div>
 
-<div class="p-10 sm:ml-64 bg-no-repeat bg-cover bg-gray-200 bg-blend-multiply">
+<div class="p-2 sm:ml-64 bg-no-repeat bg-cover bg-gray-200 bg-blend-multiply">
     <main class="mt-5 mb-5">
-
-        <div class="h-full p-8 overflow">
+        <h2 class="text-3xl text-center font-bold text-blue-600 mb-6">Bienvenue dans la gestion des administrateurs</h2>
+        <div class="p-8 overflow">
             <!--Zone erreur-->
             <div class="max-w-xl mx-auto bg-white p-0 rounded-xl">
                 @if($errors->any())
@@ -53,7 +53,7 @@
             </div>
             {{-- Formulaire de recherche et ajout --}}
             <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
-                <h2 class="text-2xl font-bold text-blue-600 mb-6">Admin</h2>
+                <h2 class="text-2xl font-bold text-blue-600 mb-6">Ajouter un admin</h2>
 
                 <form method="GET" action="{{ route('admin.index') }}" class="mb-4">
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher un admin..."
@@ -68,8 +68,7 @@
                 </button>
             </div>
         </div>
-
-    <div class="mt-10 max-w-full mx-auto bg-white p-6 rounded-xl shadow-md">
+    <div class="mt-4 max-w-full mx-auto bg-white p-4 rounded-xl shadow-md">
             <h3 class="mb-4 text-3xl text-center font-bold text-blue-600 dark:text-white">Liste des admins</h3>
 
             <div class="flex justify-center overflow-x-auto shadow-md sm:rounded-lg">
@@ -99,7 +98,16 @@
                                     <td class="px-6 py-4">{{ $admin->infoPerso->prenom }}</td>
                                     <td class="px-6 py-4">{{ $admin->user->email }}</td>
                                     <td class="px-6 py-4">{{ $admin->infoPerso->telephone ?? '-' }}</td>
+
                                     <td class="px-6 py-4">
+                                        <!--button sup-->
+                                        <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:underline"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                            </svg></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -112,8 +120,8 @@
 </div>
 
  <!-- Formulaire modal -->
-    <div id="formModal" class="fixed inset-0 flex items-center justify-center invisible bg-black bg-opacity-30 backdrop-blur-sm z-50">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-xl relative">
+<div id="formModal" class="fixed inset-0 flex items-center justify-center invisible bg-black bg-opacity-30 backdrop-blur-sm z-50">
+    <div class="bg-white p-2 rounded-lg shadow-lg w-full max-w-xl relative">
         <h2 class="text-xl font-bold mb-4 text-center text-blue-600">Ajouter un administrateur</h2>
         <form id="multiStepForm" action="{{ route('admin.store') }}" method="POST">
             @csrf
@@ -122,59 +130,61 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div class="mb-4">
                         <label for="nom" class="block text-sm font-medium text-blue-600">Nom</label>
-                        <input type="text" name="nom" id="nom" class="w-full border p-2 rounded" required>
+                        <input type="text" name="nom" id="nom" class="w-full border p-1 rounded" pattern="^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ\s'-]*\d*$" required>
+                        <span class="text-red-500 text-xs hidden error-message"></span>
                     </div>
                     <div class="mb-4">
                         <label for="prenom" class="block text-sm font-medium text-blue-600">Prénom</label>
-                        <input type="text" name="prenom" id="prenom" class="w-full border p-2 rounded" required>
+                        <input type="text" name="prenom" id="prenom" class="w-full border p-1 rounded" required>
+                        <span class="text-red-500 text-xs hidden error-message"></span>
                     </div>
-
                     <div class="mb-4">
                         <label for="date_N" class="block text-sm font-medium text-blue-600">Date de naissance</label>
-                        <input type="date" name="date_N" id="date_N" class="w-full border p-2 rounded" required>
+                        <input type="date" name="date_N" id="date_N" class="w-full border p-1 rounded" required>
+                        <span class="text-red-500 text-xs hidden error-message"></span>
                     </div>
-
                     <div class="mb-4">
                         <label for="lieu_N" class="block text-sm font-medium text-blue-600">Lieu de naissance</label>
-                        <input type="text" name="lieu_N" id="lieu_N" class="w-full border p-2 rounded" required>
+                        <input type="text" name="lieu_N" id="lieu_N" class="w-full border p-1 rounded" required>
+                        <span class="text-red-500 text-xs hidden error-message"></span>
                     </div>
-
                     <div class="mb-4">
                         <label for="sexe" class="block text-sm font-medium text-blue-600">Sexe</label>
-                        <select name="sexe" id="sexe" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+                        <select name="sexe" id="sexe" class="w-full border p-1 rounded" required>
                             <option value="">-- Sélectionner --</option>
                             <option value="Homme">Homme</option>
                             <option value="Femme">Femme</option>
                         </select>
+                        <span class="text-red-500 text-xs hidden error-message"></span>
                     </div>
-
                     <div class="mb-4">
                         <label for="email" class="block text-sm font-medium text-blue-600">Email</label>
-                        <input type="email" name="email" class="w-full border rounded p-2" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+                        <input type="email" name="email" class="w-full border p-1 rounded" required>
+                        <span class="text-red-500 text-xs hidden error-message"></span>
                     </div>
-
                     <div class="mb-4">
                         <label for="nationalite" class="block text-sm font-medium text-blue-600">Nationalité</label>
-                        <input type="text" name="nationalite" id="nationalite" class="w-full border p-2 rounded" required>
+                        <input type="text" name="nationalite" id="nationalite" class="w-full border p-1 rounded" required>
+                        <span class="text-red-500 text-xs hidden error-message"></span>
                     </div>
-
                     <div class="mb-4">
                         <label for="ville_residence" class="block text-sm font-medium text-blue-600">Ville de résidence</label>
-                        <input type="text" name="ville_residence" id="ville_residence" class="w-full border p-2 rounded" required>
+                        <input type="text" name="ville_residence" id="ville_residence" class="w-full border p-1 rounded" required>
+                        <span class="text-red-500 text-xs hidden error-message"></span>
                     </div>
-
                     <div class="mb-4">
                         <label for="telephone" class="block text-sm font-medium text-blue-600">Téléphone</label>
                         <input type="tel" name="telephone" id="telephone"
-                            pattern="^\d{2}\s\d{3}\s\d{2}\s\d{2}$"
-                            minlength="9"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                            placeholder="Ex : 06 610 29 10"
-                            required>
-                        {{-- <p class="text-sm text-gray-500 mt-1">Le numéro doit contenir au moins 9 chiffres.</p> --}}
+                               pattern="^\d{2}\s\d{3}\s\d{2}\s\d{2}$"
+                               minlength="9"
+                               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-1"
+                               placeholder="Ex : 06 610 29 10"
+                               required>
+                        <span class="text-red-500 text-xs hidden error-message"></span>
                     </div>
                 </div>
                 <div class="flex justify-end space-x-2">
+                    <button type="button" id="cancelBtn" class="bg-red-600 text-white px-4 p-1 rounded">Annuler</button>
                     <button type="button" class="nextStep bg-blue-600 text-white px-4 py-2 rounded">Suivant</button>
                 </div>
             </div>
@@ -183,20 +193,18 @@
                 <h3 class="text-lg font-semibold mb-2 text-gray-700">Étape 2 : Informations utilisateur</h3>
                 <div class="mb-4">
                     <label for="name" class="block text-sm font-medium text-blue-600">Nom utilisateur</label>
-                    <input type="text" name="name" class="w-full border rounded p-2" required>
+                    <input type="text" name="name" class="w-full border rounded p-1" required>
+                    <span class="text-red-500 text-xs hidden error-message"></span>
                 </div>
-
                 <div class="mb-4">
                     <label for="password" class="block text-sm font-medium text-blue-600">Mot de passe</label>
-                    <input type="password" name="password" class="w-full border rounded p-2" required>
+                    <input type="password" name="password" class="w-full border rounded p-1" required>
                 </div>
-
                 <div class="flex justify-between mt-4">
-                    <button type="button" class="prevStep bg-gray-400 text-white px-4 py-2 rounded">Retour</button>
-                    <button type="button" class="nextStep bg-blue-600 text-white px-4 py-2 rounded">Suivant</button>
+                    <button type="button" class="prevStep bg-gray-400 text-white px-4 py-1 rounded">Retour</button>
+                    <button type="button" class="nextStep bg-blue-600 text-white px-4 py-1 rounded">Suivant</button>
                 </div>
             </div>
-
 
             <div id="step3" class="step hidden">
                 <h3 class="text-lg font-semibold mb-2 text-gray-700">Étape 3 : Finalisation</h3>
@@ -211,9 +219,122 @@
     </div>
 </div>
 
+<script>
+    document.querySelectorAll('#cancelBtn, #closeModalBtn').forEach(button => {
+        button.addEventListener('click', function () {
+            // Réinitialise le formulaire
+            document.getElementById('multiStepForm').reset();
+
+            // Revenir à l'étape 1
+            document.querySelectorAll('.step').forEach(step => step.classList.add('hidden'));
+            document.getElementById('step1').classList.remove('hidden');
+
+            // Cacher la modale
+            document.getElementById('formModal').classList.add('invisible');
+        });
+    });
+</script>
 
 
-        <!--active l'évenement-->
+<!--message required--->
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('multiStepForm');
+            const steps = document.querySelectorAll('.step');
+            let currentStep = 0;
+
+            // Show the first step initially
+            steps[0].classList.remove('hidden');
+
+            // Handle next button clicks
+            document.querySelectorAll('.nextStep').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (validateCurrentStep()) {
+                        steps[currentStep].classList.add('hidden');
+                        currentStep++;
+                        steps[currentStep].classList.remove('hidden');
+                    }
+                });
+            });
+
+            // Handle previous button clicks
+            document.querySelectorAll('.prevStep').forEach(button => {
+                button.addEventListener('click', function() {
+                    steps[currentStep].classList.add('hidden');
+                    currentStep--;
+                    steps[currentStep].classList.remove('hidden');
+                });
+            });
+
+            // Validate current step
+            function validateCurrentStep() {
+                const currentStepElement = steps[currentStep];
+                const inputs = currentStepElement.querySelectorAll('input, select');
+                let isValid = true;
+
+                inputs.forEach(input => {
+                    const errorMessage = input.nextElementSibling;
+
+                    // Reset previous error states
+                    input.classList.remove('border-red-500');
+                    errorMessage.classList.add('hidden');
+
+                    if (input.hasAttribute('required') && !input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('border-red-500');
+                        errorMessage.textContent = 'Ce champ est requis';
+                        errorMessage.classList.remove('hidden');
+                    } else if (input.type === 'email' && input.value && !isValidEmail(input.value)) {
+                        isValid = false;
+                        input.classList.add('border-red-500');
+                        errorMessage.textContent = 'Veuillez entrer une adresse email valide';
+                        errorMessage.classList.remove('hidden');
+                    } else if (input.type === 'tel' && input.value && !isValidPhone(input.value)) {
+                        isValid = false;
+                        input.classList.add('border-red-500');
+                        errorMessage.textContent = 'Format: XX XXX XX XX';
+                        errorMessage.classList.remove('hidden');
+                    }
+                });
+
+                return isValid;
+            }
+
+
+            // Email validation
+            function isValidEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            // Phone validation
+            function isValidPhone(phone) {
+                return /^\d{2}\s\d{3}\s\d{2}\s\d{2}$/.test(phone);
+            }
+
+            // Handle form submission
+            form.addEventListener('submit', function(e) {
+                if (!validateCurrentStep()) {
+                    e.preventDefault();
+                }
+            });
+
+            // Format phone number as user types
+            document.getElementById('telephone').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, ''); // Ne garder que les chiffres
+            let formatted = '';
+
+            if (value.length > 0) formatted += value.substring(0, 2);
+            if (value.length > 2) formatted += ' ' + value.substring(2, 5);
+            if (value.length > 5) formatted += ' ' + value.substring(5, 7);
+            if (value.length > 7) formatted += ' ' + value.substring(7, 9);
+
+            e.target.value = formatted;
+            });
+        });
+</script>
+
+
+    <!--active l'évenement-->
 <script>
     document.getElementById('openModalBtn').addEventListener('click', function() {
         document.getElementById('formModal').classList.remove('invisible');
@@ -224,8 +345,7 @@
     });
 </script>
 
-
-<script>
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function () {
         let currentStep = 0;
         const steps = document.querySelectorAll('.step');
@@ -267,20 +387,68 @@
         // Init
         showStep(currentStep);
     });
-</script>
+</script> --}}
 
+<!--fige buton--->
 <script>
-document.getElementById('telephone').addEventListener('input', function (e) {
-    let value = e.target.value.replace(/\D/g, ''); // Ne garder que les chiffres
-    let formatted = '';
+    document.addEventListener("DOMContentLoaded", function () {
+    const steps = document.querySelectorAll(".step");
+    const nextButtons = document.querySelectorAll(".nextStep");
+    const prevButtons = document.querySelectorAll(".prevStep");
+    let currentStep = 0;
 
-    if (value.length > 0) formatted += value.substring(0, 2);
-    if (value.length > 2) formatted += ' ' + value.substring(2, 5);
-    if (value.length > 5) formatted += ' ' + value.substring(5, 7);
-    if (value.length > 7) formatted += ' ' + value.substring(7, 9);
+    // Afficher la première étape
+    steps.forEach((step, index) => {
+        step.classList.toggle("hidden", index !== currentStep);
+    });
 
-    e.target.value = formatted;
-});
+    function validateStep(stepIndex) {
+        const inputs = steps[stepIndex].querySelectorAll("input, select");
+        return Array.from(inputs).every(input => input.checkValidity());
+    }
+
+    function toggleNextButton(stepIndex) {
+        const btn = steps[stepIndex].querySelector(".nextStep, [type='submit']");
+        if (btn) {
+            btn.enable = !validateStep(stepIndex);
+        }
+    }
+
+    // Appliquer la validation en temps réel sur chaque champ
+    steps.forEach((step, stepIndex) => {
+        const inputs = step.querySelectorAll("input, select");
+        inputs.forEach(input => {
+            input.addEventListener("input", () => toggleNextButton(stepIndex));
+            input.addEventListener("change", () => toggleNextButton(stepIndex));
+        });
+    });
+
+    // Gérer les clics sur "Suivant"
+    nextButtons.forEach(button => {
+        button.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (validateStep(currentStep)) {
+                steps[currentStep].classList.add("hidden");
+                currentStep++;
+                steps[currentStep].classList.remove("hidden");
+                toggleNextButton(currentStep);
+            }
+        });
+    });
+
+    // Gérer les clics sur "Retour"
+    prevButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            steps[currentStep].classList.add("hidden");
+            currentStep--;
+            steps[currentStep].classList.remove("hidden");
+            toggleNextButton(currentStep);
+        });
+    });
+
+    // Initialiser les boutons de l'étape 0
+    toggleNextButton(0);
+    });
 </script>
 
 

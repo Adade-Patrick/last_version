@@ -15,6 +15,7 @@ Route::middleware(['auth','role:admin,super_admin'])->group(function() {
 
         Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
 
+        Route::delete('/admin/{admin}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
     });
 

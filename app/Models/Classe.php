@@ -20,4 +20,9 @@ class Classe extends Model
     {
         return $this->hasMany(Eleve::class, 'classe_id');
     }
+
+      public function prof()
+    {
+        return $this->hasMany(Prof::class, 'classe_prof', 'classe_id', 'prof_id');
+    }
 }

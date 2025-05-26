@@ -134,12 +134,12 @@
 
           {{-- <hr> --}}
 
-          <li>
-                <a href="#" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center p-2 text-white  rounded-lg dark:text-white hover:bg-blue-500 dark:hover:bg-gray-700 group">
+          {{-- <li>
+                <a href="{{ route('stats') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center p-2 text-white  rounded-lg dark:text-white hover:bg-blue-500 dark:hover:bg-gray-700 group">
                    <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3V19H21V21H3V3H5ZM19.9393 5.93934L22.0607 8.06066L16 14.1213L13 11.121L9.06066 15.0607L6.93934 12.9393L13 6.87868L16 9.879L19.9393 5.93934Z"></path></svg>
                    <span class="flex-1 ms-3 whitespace-nowrap font-extrabold">Statistiques</span>
                 </a>
-             </li>
+            </li> --}}
 
              {{-- <hr> --}}
 

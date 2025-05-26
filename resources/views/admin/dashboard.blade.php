@@ -8,7 +8,7 @@
 <div class="p-4 sm:ml-64 bg-no-repeat bg-cover  bg-gray-200 bg-blend-multiply">
     <main class="mt-20 mb-20">
     <div class="py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-6">
             <!-- Welcome Banner -->
             <div class="relative overflow-hidden bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl shadow-lg mb-6">
                 <div class="absolute right-0 top-0 -mt-10 -mr-10">
@@ -19,32 +19,32 @@
                     </div>
                 </div>
                 <div class="relative p-6">
-                    <h2 class="text-2xl font-bold text-white mb-2">Bienvenue !</h2>
-                    <p class="text-blue-100">Voici un aperçu de votre tableau de bord</p>
+                    <h2 class="text-2xl text-center font-bold text-white mb-2">Bienvenue sur votre Dashbord {{ Auth::user()->name }} !</h2>
+                    <p class="text-blue-100 text-center">Voici un aperçu de votre tableau de bord</p>
                 </div>
             </div>
 
             <!-- Stats Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                 <!-- Total Students -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
+                <div class="bg-blue-500 dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <div class="bg-blue-50 dark:bg-blue-500/10 p-3 rounded-lg">
+                        <div class="bg-white dark:bg-blue-500/10 p-3 rounded-lg">
                             <svg class="w-6 h-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M20 22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22Z"></path>
                             </svg>
                         </div>
                         <span class="text-sm font-medium text-green-600 bg-green-50 px-2.5 py-0.5 rounded-full">+12%</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">2,450</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">Total Élèves</p>
+                    <h3 class="text-2xl font-bold text-white dark:text-white mb-1">2,450</h3>
+                    <p class="text-sm text-white dark:text-gray-400">Total Élèves</p>
                 </div>
 
                 <!-- Total Teachers -->
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <div class="bg-purple-50 dark:bg-purple-500/10 p-3 rounded-lg">
-                            <svg class="w-6 h-6 text-purple-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <div class="bg-purple-600 dark:bg-purple-500/10 p-3 rounded-lg">
+                            <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M11 14.0619V20H13V14.0619C16.9463 14.554 20 17.9204 20 22H4C4 17.9204 7.05369 14.554 11 14.0619Z"></path>
                             </svg>
                         </div>
@@ -55,7 +55,7 @@
                 </div>
 
                 <!-- Total Classes -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
+                <div class="bg-blue-500 dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="bg-orange-50 dark:bg-orange-500/10 p-3 rounded-lg">
                             <svg class="w-6 h-6 text-orange-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -64,8 +64,8 @@
                         </div>
                         <span class="text-sm font-medium text-green-600 bg-green-50 px-2.5 py-0.5 rounded-full">+8%</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">32</h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">Total Classes</p>
+                    <h3 class="text-2xl font-bold text-white dark:text-white mb-1">32</h3>
+                    <p class="text-sm text-white dark:text-gray-400">Total Classes</p>
                 </div>
 
                 <!-- Success Rate -->
@@ -107,9 +107,9 @@
                 </div>
 
                 <!-- Quick Actions -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700">
+                <div class="bg-blue-500 dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700">
                     <div class="p-6 border-b border-gray-100 dark:border-gray-700">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Actions Rapides</h3>
+                        <h3 class="text-lg font-semibold text-white dark:text-white">Actions Rapides</h3>
                     </div>
                     <div class="p-6">
                         <div class="grid grid-cols-2 gap-4">
@@ -130,7 +130,7 @@
                             <!--Ajouter prof-->
                             <a href="{{ route('traitements.prof.index') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                                 <div class="flex-shrink-0">
-                                    <div class="p-2 bg-purple-500 rounded-lg">
+                                    <div class="p-2 bg-purple-600 rounded-lg">
                                         <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                             <path d="M11 14.0619V20H13V14.0619C16.9463 14.554 20 17.9204 20 22H4C4 17.9204 7.05369 14.554 11 14.0619Z"></path>
                                         </svg>

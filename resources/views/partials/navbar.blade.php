@@ -1,4 +1,4 @@
-<nav class="fixed top-2 z-50 w-full bg-blue-600 rounded-lg">
+<nav class="fixed top-2 z-50 w-full bg-blue-500 rounded-lg">
     <div class="px-5 py-2 lg:px-7">
         <div class="flex items-center justify-between">
 
@@ -7,6 +7,9 @@
                 <a href="#">
                     <img src="/images/logo_emonaya.jpg" alt="Logo" class="h-12 w-14 rounded-lg">
                 </a>
+                <p class="text-white text-lg font-medium truncate px-2">
+                    C.S EMONAYA
+                </p>
             </div>
 
             <!-- Barre de recherche -->
@@ -20,7 +23,7 @@
                     <span class="sr-only">Search icon</span>
                 </div>
                 <input type="text" id="search-navbar"
-                    class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="block w-full p-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Recherche...">
             </div>
 
@@ -31,7 +34,7 @@
                     <!-- Image de profil avec badge -->
                     <label for="profile_photo_path" class="cursor-pointer">
                         <img
-                            src="{{ Auth::user()->profile_photo_path ? asset('storage/' . Auth::user()->profile_photo_path) . '?' . time() : asset('images/default-profile.png') }}"
+                            src="{{ Auth::user()->profile_photo_path ? asset('storage/' . Auth::user()->profile_photo_path) . '?' . time() : asset('images/logo_emonaya.jpg') }}"
                             alt="Profile"
                             class="w-12 h-13 rounded-full cursor-pointer"
                             title="Changer l'image de profil"

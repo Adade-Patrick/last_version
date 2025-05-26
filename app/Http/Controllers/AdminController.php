@@ -103,5 +103,12 @@ class AdminController extends Controller
             // dd($e);
         }
     }
+
+    public function destroy(string $id)
+    {
+        $admin = Admin::findOrFail($id);
+        $admin->delete();
+        return redirect()->route('admin.index')->with('success', 'Admin supprimé.');
+    }
 }
 

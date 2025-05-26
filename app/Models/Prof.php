@@ -33,4 +33,21 @@ class Prof extends Model
     {
         return $this->belongsTo(InfoPerso::class, 'info_perso_id');
     }
+
+
+    public function classes()
+    {
+        return $this->belongsToMany(Classe::class, 'classe_prof', 'prof_id', 'classes_id');
+    }
+
+    public function cycle()
+    {
+        return $this->belongsTo(Classe::class);
+    }
+
+    public function anneeScolaire()
+    {
+        return $this->belongsTo(anneeScolaire::class);
+    }
+
 }

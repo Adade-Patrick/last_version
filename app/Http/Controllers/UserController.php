@@ -6,6 +6,8 @@ use Exception;
 use App\Models\User;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+
 class UserController extends Controller
 {
     //
@@ -48,7 +50,7 @@ class UserController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        
+
 
         return redirect('/');
     }
@@ -61,7 +63,6 @@ class UserController extends Controller
     public function create(){
         return view('auth.register');
     }
-
 
     public function destroy(Request $request){
 

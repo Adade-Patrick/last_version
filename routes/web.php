@@ -63,6 +63,8 @@ require __DIR__.'/profParametre_route.php';
 
 require __DIR__.'/profile_image_route.php';
 
+require __DIR__.'/stats_route.php';
+
 
 
 

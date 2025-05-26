@@ -8,6 +8,10 @@ Route::prefix('/prof')->group(function(){
 
     // Route::post('/register', [AdminController::class, 'storeProf'])->name('prof.store');
 
+    Route::delete('/prof/{prof}', [ProfController::class, 'destroy'])->name('prof.destroy');
+
+    Route::delete('/show', [ProfController::class, 'show'])->name('traitements.prof.show');
+
 });
 
 ?>
