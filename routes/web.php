@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EleveController;
 use App\Http\Controllers\ProfController;
@@ -22,7 +23,7 @@ Route::get('/', function () {
 
 // Route de connexion
 
-Route::get('/auth',function(){
+Route::get('/auth',function(Request $request){
     return view('auth.login');
 })->name('auth.form.login');
 
@@ -45,7 +46,7 @@ require __DIR__.'/eleves_route.php';
 
 require __DIR__.'/prof_route.php';
 
-require __DIR__.'/cycles_route.php';
+require __DIR__.'/cycle_route.php';
 
 require __DIR__.'/cours_route.php';
 
@@ -64,6 +65,8 @@ require __DIR__.'/profParametre_route.php';
 require __DIR__.'/profile_image_route.php';
 
 require __DIR__.'/stats_route.php';
+
+require __DIR__.'/creer_matiere_route.php';
 
 
 

@@ -47,4 +47,10 @@ class Eleve extends Model
     {
         return $this->belongsTo(Annee_scolaire::class, 'annee_scolaires_id');
     }
+
+    public function resultats()
+    {
+        return $this->hasMany(Resultat::class, 'eleves_id');
+    }
+
 }

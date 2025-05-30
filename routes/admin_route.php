@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfController;
 
 Route::middleware(['auth','role:admin,super_admin'])->group(function() {
 
@@ -21,10 +22,14 @@ Route::middleware(['auth','role:admin,super_admin'])->group(function() {
 
     Route::prefix('/prof')->group(function(){
 
-        Route::post('/register', [AdminController::class, 'storeProf'])->name('prof.store');
+        // Route::post('/register', [ProfController::class, 'storeProf'])->name('prof.store');
+
+        Route::post('/store', [ProfController::class, 'store'])->name('prof.store');
+
 
     });
-});
 
+
+});
 
 ?>

@@ -18,4 +18,16 @@ class Evaluation extends Model
     {
         return $this->belongsTo(Chapitre::class);
     }
+
+    public function resultat()
+    {
+        return $this->hasMany(Resultat::class, 'evaluations_id');
+    }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class, 'evaluations_id');
+    }
+
+
 }

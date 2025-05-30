@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classe;
 use App\Models\Cycle;
+use App\Models\Matiere;
+use App\Models\Prof;
 use Illuminate\Http\Request;
 
-class cyclesController extends Controller
+class CreerMatiereController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $matieres = Matiere::all();
+        $classes = Classe::all();
         $cycles = Cycle::all();
-
-        return view('cycle.index', compact('cycles'));
+        return view('creer_matiere.index', compact('matieres','classes', 'cycles'));
     }
 
     /**
@@ -22,7 +26,7 @@ class cyclesController extends Controller
      */
     public function create()
     {
-        return view('cycle.create');
+        //
     }
 
     /**
@@ -30,14 +34,22 @@ class cyclesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'libelle_C' => 'required|unique:cycle,libelle_C|max:50',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'libelle_M' => 'required|string|max:50',
+                'classes_id' => 'required|exists:classes,id',
+                'cycle_id' => 'required|exists:cycles,id',
+                'prof_id' => 'required|exists:profs,id',
+            ]);
 
-        Cycle::create($request->all());
-        return redirect()->route('cycle.index')->with('success', 'Cycle ajouté avec succès.');
+            Matiere::create($validatedData);
 
+            return redirect()->route('creer_matiere.index')->with('success', 'Cours ajouté avec succès.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erreur lors de l’ajout du cours : ' . $e->getMessage());
+        }
     }
+
 
     /**
      * Display the specified resource.
@@ -52,7 +64,7 @@ class cyclesController extends Controller
      */
     public function edit(string $id)
     {
-        return view('cycle.edit', compact('cycle'));
+        //
     }
 
     /**
@@ -60,12 +72,7 @@ class cyclesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'libelle_C' => 'required|max:50|unique:cycle,libelle_C,' . $cycle->idcycle . ',idcycle',
-        ]);
-
-        $cycles->update($request->all());
-        return redirect()->route('cycle.index')->with('success', 'Cycle modifié avec succès.');
+        //
     }
 
     /**
@@ -73,8 +80,6 @@ class cyclesController extends Controller
      */
     public function destroy(string $id)
     {
-        $cycles = Cycle::findOrFail($id);
-        $cycles->delete();
-        return redirect()->route('cycle.index')->with('success', 'Cycle supprimé.');
+        //
     }
 }

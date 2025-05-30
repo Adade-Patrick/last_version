@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('libelle_Cl');
+            $table->unsignedBigInteger('cycle_id');
             $table->timestamps();
+
+            $table->foreign('cycle_id')->references('id')->on('cycle')->onDelete('cascade');
+
         });
-    }   
+    }
 
     /**
      * Reverse the migrations.

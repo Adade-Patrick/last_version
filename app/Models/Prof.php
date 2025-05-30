@@ -50,4 +50,16 @@ class Prof extends Model
         return $this->belongsTo(anneeScolaire::class);
     }
 
+    public function quizz()
+    {
+        return $this->hasMany(Quizz::class, 'prof_id');
+    }
+
+    public function matiere()
+    {
+        return $this->hasMany(Matiere::class, 'prof_id');
+    }
+
+
+
 }

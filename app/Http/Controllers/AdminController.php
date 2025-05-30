@@ -59,7 +59,7 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Professeur enregistré avec succès.');
         }catch(\Exception $e){
-            dd($e);
+            // dd($e);
         }
     }
 

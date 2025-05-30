@@ -6,9 +6,13 @@ use App\Models\Prof;
 use App\Models\Classe;
 use App\Models\Cycle;
 use App\Models\User;
+use App\Models\InfoPerso;
 use App\Models\AnneeScolaire;
+use App\Models\Matiere;
 use Illuminate\Http\Request;
+use App\Http\Requests\profRegisterInfoRequest;
 use Illuminate\Support\Facades\Hash;
+
 
 class ProfController extends Controller
 {
@@ -28,46 +32,49 @@ class ProfController extends Controller
     {
 
         $classes = Classe::all();
-        $cycles = Cycle::all();
+        $cycle = Cycle::all();
         $annees = AnneeScolaire::all();
-        return view('actors.prof.create', compact('classes', 'cycles', 'annees'));
+        return view('actors.prof.create', compact('classes', 'cycle', 'annees'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(profRegisterInfoRequest $request)
     {
-        $request->validate([
-            'nom' => 'required|string|max:50',
-            'prenom' => 'required|string|max:50',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
-            'dateNaissance' => 'required|date',
-            'telephone' => 'required|string|max:10',
-            'classe_id' => 'required|exists:classes,id',
-            'cycle_id' => 'required|exists:cycles,id',
-            'annee_scolaire_id' => 'required|exists:annee_scolaires,id',
-        ]);
+
+        // dd($request->all());
+        $validatedData = $request->validated();
+        try{
+            // Enregistrement dans info_perso
+            $infoPerso = InfoPerso::create([
+                'nom' => $validatedData['nom'],
+                'prenom' => $validatedData['prenom'],
+                'date_N' => $validatedData['date_N'],
+                'lieu_N' => $validatedData['lieu_N'],
+                'sexe' => $validatedData['sexe'],
+                'nationalite' => $validatedData['nationalite'],
+                'ville_residence' => $validatedData['ville_residence'],
+                'telephone' => $validatedData['telephone'],
+            ]);
 
         $user = User::create([
-            'nom' => $request->nom,
-            'prenom' => $request->prenom,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
             'role' => 'prof',
         ]);
 
         Prof::create([
-            'user_id' => $user->id,
-            'dateNaissance' => $request->dateNaissance,
-            'telephone' => $request->telephone,
-            'classe_id' => $request->classe_id,
-            'cycle_id' => $request->cycle_id,
-            'annee_scolaire_id' => $request->annee_scolaire_id,
+            'users_id' => $user->id,
+            'info_perso_id' => $infoPerso->id,
+            'specialite' => "physique",
         ]);
 
-        return redirect()->route('actors.prof.index')->with('success', 'Prof ajouté avec succès.');
+        return redirect()->route('traitements.prof.index')->with('success', 'Prof ajouté avec succès.');
+        }catch(\Exception $e){
+            // dd($e);
+        }
     }
 
     /**
@@ -84,9 +91,9 @@ class ProfController extends Controller
     public function edit(string $id)
     {
         $classes = Classe::all();
-        $cycles = Cycle::all();
+        $cycle = Cycle::all();
         $annees = AnneeScolaire::all();
-        return view('actors.prof.edit', compact('prof', 'classes', 'cycles', 'annees'));
+        return view('actors.prof.edit', compact('prof', 'classes', 'cycle', 'annees'));
     }
 
     /**

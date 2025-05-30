@@ -35,22 +35,6 @@
     <main class="mt-5 mb-5">
         <h2 class="text-3xl text-center font-bold text-blue-600 mb-6">Bienvenue dans la gestion des professeurs</h2>
         <div class="h-full p-8 overflow">
-            <!--Zone erreur-->
-            <div class="max-w-xl mx-auto bg-white p-0 rounded-xl">
-                @if($errors->any())
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li role="alert" class="flex justify-center  bg-red-100 border-black text-red-500 px-4 py-3 rounded relative">{{$error }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
-                    <!--message apres action-->
-                    @if (session('success'))
-                        <div class="flex justify-center  bg-green-100 border-black text-green-500 px-4 py-3 rounded relative" role="alert">
-                        <span class="block sm:inline">{{session('success')}}</span>
-                    </div>
-                @endif
-            </div>
             {{-- Formulaire de recherche et ajout --}}
             <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
                 <h2 class="text-2xl font-bold text-blue-600 mb-6">Ajouter un professeur</h2>
@@ -80,6 +64,7 @@
                             <th scope="col" class="px-6 py-3">ID</th>
                             <th scope="col" class="px-6 py-3">Nom</th>
                             <th scope="col" class="px-6 py-3">Prénom</th>
+                            <th scope="col" class="px-6 py-3">Nom d'utilisateur</th>
                             <th scope="col" class="px-6 py-3">Email</th>
                             <th scope="col" class="px-6 py-3">Téléphone</th>
                             <th scope="col" class="px-6 py-3">Spécialité</th>
@@ -94,16 +79,23 @@
                         @else
                             @foreach($profs as $prof)
                                <tr class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700 border-gray-200">
-                                    <td class="px-6 py-4">{{                                    $prof->id }}</td>
+                                    <td class="px-6 py-4">{{ $prof->id }}</td>
+
                                     <td class="px-6 py-4">{{ $prof->infoPerso->nom }}</td>
+
                                     <td class="px-6 py-4">{{ $prof->infoPerso->prenom }}</td>
+
+                                    <td class="px-6 py-4">{{ $prof->user->name }}</td>
+
                                     <td class="px-6 py-4">{{ $prof->user->email }}</td>
+
                                     <td class="px-6 py-4">{{ $prof->infoPerso->telephone}}</td>
+
                                     <td class="px-6 py-4">{{ $prof->specialite}}</td>
 
                                     <td class="px-6 py-4">
                                         <!--button sup-->
-                                        <form action="#" method="POST" class="inline-block">
+                                        <form action="{{ route('prof.destroy', $prof->id) }}" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-white hover:underline">
@@ -111,12 +103,12 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>
                                             </div>
-                                        </button>
+                                            </button>
 
                                         </form>
 
                                         <!--button voir-->
-                                        <form action="{{ route('traitements.prof.show', $prof->id) }}" method="POST" class="inline-block">
+                                        <form action="#" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-white hover:underline">
@@ -128,7 +120,7 @@
                                         </form>
 
                                         <!--button modif-->
-                                        <form action="{{ route('traitements.prof.show', $prof->id) }}" method="POST" class="inline-block">
+                                        <form action="#" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-white hover:underline">
@@ -441,6 +433,45 @@
 
     // Initialiser les boutons de l'étape 0
     toggleNextButton(0);
+    });
+</script>
+
+<!-- Modal message -->
+<div id="messageModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 invisible">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+        <h2 class="text-lg font-semibold mb-4 text-center">Message</h2>
+
+        @if ($errors->any())
+            <ul class="text-red-500 mb-4">
+                @foreach ($errors->all() as $error)
+                    <li class="mb-1">• {{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+
+        @if (session('success'))
+            <div class="text-green-500 mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <div class="flex justify-center">
+            <button onclick="closeModal()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                OK
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function closeModal() {
+        document.getElementById('messageModal').classList.add('invisible');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        @if ($errors->any() || session('success'))
+            document.getElementById('messageModal').classList.remove('invisible');
+        @endif
     });
 </script>
 

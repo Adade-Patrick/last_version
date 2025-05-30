@@ -6,7 +6,7 @@ Route::prefix('/prof')->group(function(){
 
     Route::get('/index', [ProfController::class, 'index'])->name('traitements.prof.index');
 
-    // Route::post('/register', [AdminController::class, 'storeProf'])->name('prof.store');
+    // Route::post('/store', [AdminController::class, 'storeInfo'])->name('prof.store');
 
     Route::delete('/prof/{prof}', [ProfController::class, 'destroy'])->name('prof.destroy');
 

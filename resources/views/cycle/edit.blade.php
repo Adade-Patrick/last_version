@@ -5,7 +5,7 @@
     <div class="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
         <h2 class="text-center text-2xl font-bold text-gray-800 mb-6">Modifier le Cycle</h2>
 
-        <form method="POST" action="{{ route('cycles.update', $cycle->idCycles) }}" class="space-y-4">
+        <form method="POST" action="{{ route('cycle.update', $cycle->cycle_id) }}" class="space-y-4">
             @csrf
             @method('PUT')
 

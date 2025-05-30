@@ -3,7 +3,7 @@
 @section('content')
 
 @include('partials.navbar')
-@include('partials.sidebarProf')
+@include('partials.sidebar')
 
 <div class="fixed-div p-3 sm:ml-64 bg-no-repeat bg-cover bg-gray-100 bg-blend-multiply">
     <main class="mt-24 mb-0">

@@ -3,7 +3,8 @@
 
 @section('content')
 
-<section class="relative w-full h-screen bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg');">
+<section class="relative w-full h-screen bg-cover bg-center bg-no-repeat bg-fixed"
+         style="background-image: url('/images/acceuil.jpg');">
     <div class="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm"></div>
 
     <div class="relative z-10 flex flex-col justify-center items-center h-full">

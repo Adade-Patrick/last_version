@@ -22,11 +22,11 @@ class EleveController extends Controller
     /** Show the form for creating a new resource. */
     public function create()
     {
-        $cycles = Cycle::all();
+        $cycle = Cycle::all();
         $annees = AnneeScolaire::all();
         $classes = Classe::all();
         $users = User::all();
-        return view('traitements.eleve.create', compact('cycles', 'annees', 'classes', 'users'));
+        return view('traitements.eleve.create', compact('cycle', 'annees', 'classes', 'users'));
     }
 
     /** Store a newly created resource in storage. */
@@ -35,14 +35,14 @@ class EleveController extends Controller
         // $validated = $request->validate([
         //     'dateNaissance' => 'required|date',
         //     'telephone'      => 'required|string|max:20',
-        //     'cycles_id'      => 'required|exists:cycles,id',
+        //     'cycle_id'      => 'required|exists:cycle,id',
         //     'annee_scolaires_id' => 'required|exists:annee_scolaires,id',
         //     'classes_id'     => 'required|exists:classes,id',
         //     'users_id'       => 'required|exists:users,id',
         // ]);
 
         // Eleve::create($validated);
-        
+
         return redirect()->route('traitements.eleve.index')->with('success', 'Élève créé avec succès.');
     }
 
@@ -55,11 +55,11 @@ class EleveController extends Controller
     /** Show the form for editing the specified resource. */
     public function edit(Eleve $eleve)
     {
-        $cycles = Cycle::all();
+        $cycle = Cycle::all();
         $annees = AnneeScolaire::all();
         $classes = Classe::all();
         $users = User::all();
-        return view('traitements.eleve.edit', compact('eleve', 'cycles', 'annees', 'classes', 'users'));
+        return view('traitements.eleve.edit', compact('eleve', 'cycle', 'annees', 'classes', 'users'));
     }
 
     /** Update the specified resource in storage. */
@@ -68,7 +68,7 @@ class EleveController extends Controller
         $validated = $request->validate([
             'dateNaissance' => 'required|date',
             'telephone'      => 'required|string|max:20',
-            'cycles_id'      => 'required|exists:cycles,id',
+            'cycle_id'      => 'required|exists:cycle,id',
             'annee_scolaires_id' => 'required|exists:annee_scolaires,id',
             'classes_id'     => 'required|exists:classes,id',
             'users_id'       => 'required|exists:users,id',

@@ -24,4 +24,14 @@ class Cycle extends Model
     {
         return $this->hasMany(Classe::class, 'cycle_id');
     }
+
+    public function matieres()
+    {
+        return $this->hasMany(Matiere::class, 'cycle_id');
+    }
+
+
+
+
 }
+
