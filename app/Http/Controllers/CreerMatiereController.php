@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Classe;
-use App\Models\Cycle;
 use App\Models\Matiere;
+use App\Models\Cycle;
+use App\Models\Categorie;
+use App\Models\Classe;
 use App\Models\Prof;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,11 @@ class CreerMatiereController extends Controller
     public function index()
     {
         $matieres = Matiere::all();
+        // $cycles = Cycle::all();
+        $categories = Categorie::all();
         $classes = Classe::all();
-        $cycles = Cycle::all();
-        return view('creer_matiere.index', compact('matieres','classes', 'cycles'));
+        $profs = Prof::all();
+        return view('creer_matiere.index', compact('matieres', 'categories', 'classes', 'profs'));
     }
 
     /**
@@ -36,10 +39,11 @@ class CreerMatiereController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'libelle_M' => 'required|string|max:50',
-                'classes_id' => 'required|exists:classes,id',
-                'cycle_id' => 'required|exists:cycles,id',
-                'prof_id' => 'required|exists:profs,id',
+            'libelle_M' => 'required|string|max:255',
+            'cycle_id' => 'required|exists:cycle,id',
+            'categories_id' => 'required|exists:categories,id',
+            'classes_id' => 'required|exists:classes,id',
+            'prof_id' => 'required|exists:prof,id',
             ]);
 
             Matiere::create($validatedData);

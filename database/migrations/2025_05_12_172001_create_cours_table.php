@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cours', function (Blueprint $table) {
+       Schema::create('cours', function (Blueprint $table) {
         $table->id();
         $table->string('titre');
-        $table->string('imageUrl');
-        $table->string('description');
-        $table->unsignedBigInteger('categorie_id');
+        $table->unsignedBigInteger('matiere_id');
+        $table->text('description')->nullable();
+        $table->string('module');
+        $table->string('type')->default('pdf');
         $table->timestamps();
 
-        $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
+        $table->foreign('matiere_id')->references('id')->on('matiere')->onDelete('cascade');
         });
-
     }
 
     /**

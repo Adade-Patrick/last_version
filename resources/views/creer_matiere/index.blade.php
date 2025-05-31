@@ -43,14 +43,14 @@
             <form action="{{ route('creer_matiere.store') }}" method="POST">
                 @csrf
 
-                <!-- Titre du cours -->
+                <!-- Libelle du cours -->
                 <div class="mb-4">
-                    <label for="libelle_M" class="block text-lg font-medium text-blue-600">Libellé </label>
+                    <label for="libelle_M" class="form-control block text-lg font-medium text-blue-600">Libellé </label>
                     <input type="text" name="libelle_M" id="libelle_M" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2" required>
                 </div>
 
                 <!-- Sélection du cycle -->
-                <div class="mb-6">
+                {{-- <div class="mb-6">
                     <label for="cycle" class="block text-lg font-medium text-blue-600">Cycle</label>
                     <select name="cycle_id" id="cycle" class="w-full border border-gray-300 p-2 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
                         <option value="" disabled selected>
@@ -62,21 +62,13 @@
                             </option>
                         @endforeach
                     </select>
-                </div>
-
-                {{-- <div class="mb-6">
-                    <label for="cycle" class="block text-lg font-medium text-blue-600">Categorie</label>
-                    <select name="cycle[]" id="cycle" multiple class="mt-1 block w-full border border-gray-300 rounded px-3 py-2" required>
-                        <option value="" disabled>-- Sélectionnez une Categorie --</option>
-                        <option value="science" >Science</option>
-                        <option value="Calcul" >Calcul</option>
-                        @foreach($cycles as $cycle)
-                            <option value="{{ $cycle->id }}">
-                                {{ $cycle->libelle_C }}
-                            </option>
-                        @endforeach
-                    </select>
                 </div> --}}
+
+                <!-- Categorie du cours -->
+                <div class="mb-4">
+                    <label for="libelle_cat" class="form-control block text-lg font-medium text-blue-600">Catégorie </label>
+                    <input type="text" name="libelle_cat" id="libelle_cat" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2" required>
+                </div>
 
                 <!-- Sélection de la classe -->
                 <div class="mb-4">
@@ -93,14 +85,15 @@
                 </div>
 
                 <!--prof-->
-                {{-- <div class="form-group mb-3">
-                    <label for="prof_id">Professeur</label>
-                    <select name="prof_id" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2" required>
-                        <option value="{{ Auth::user()->id }}" selected>
-                            {{ Auth::user()->name }}
-                        </option>
+                <div class="mb-4">
+                    <label for="prof_id" class="block text-lg font-medium text-blue-600">Professeur</label>
+                    <select name="prof_id" id="prof_id" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2" required>
+                        <option value="">-- Associer un professeur --</option>
+                        @foreach($profs as $prof)
+                            <option value="{{ $prof->id }}">{{ $prof->nom }}</option>
+                        @endforeach
                     </select>
-                </div> --}}
+                </div>
 
                 <div class="flex ">
                     <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500">Créer la matière</button>
@@ -121,6 +114,11 @@
                             <th scope="col" class="px-6 py-3">Libelle</th>
                             <th scope="col" class="px-6 py-3">Cycle</th>
                             <th scope="col" class="px-6 py-3">Categorie</th>
+                            <th scope="col" class="px-6 py-3">Classe</th>
+
+                            <th scope="col" class="px-6 py-3">Professeur</th>
+
+                            <th scope="col" class="px-6 py-3">Date</th>
                             <th scope="col" class="px-6 py-3">Action</th>
                         </tr>
                     </thead>
@@ -135,9 +133,13 @@
                                 <tr class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700 border-gray-200">
                                     <td class="px-6 py-4">{{ $matiere->libelle_M }}</td>
 
-                                    <td class="px-6 py-4">{{ $matiere->cycle->libelle_C }}</td>
+                                    {{-- <td class="px-6 py-4">{{ $matiere->cycle->libelle_C }}</td> --}}
 
-                                    <td class="px-6 py-4">{{ $matiere->libelle->libelle_Cl }}</td>
+                                    <td class="px-6 py-4">{{ $matiere->categories->libelle_cat }}</td>
+
+                                    <td class="px-6 py-4">{{ $matiere->classes->libelle_Cl }}</td>
+
+                                    <td class="px-6 py-4">{{ $matiere->prof->info_perso->nom }}</td>
 
                                     <td class="px-6 py-4">{{ $matiere->created_at->format('d/m/Y') }}</td>
 

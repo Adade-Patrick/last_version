@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Classe;
-use App\Models\Cycle;
+use App\Models\Cours;
+
 use Illuminate\Http\Request;
 
 class CreerProfCoursController extends Controller
@@ -23,10 +23,9 @@ class CreerProfCoursController extends Controller
     {
         //
         try{
-            $classes = Classe::all();
-            $cycles = cycle::all();
+            $cours = Cours::all();
             // dd($classes);
-        return view('int_prof.creer_cours',['classes'=>$classes, 'cycles'=>$cycles]);
+        return view('int_prof.creer_cours',['cours'=>$cours,]);
 
         }catch(\Exception $e){
 

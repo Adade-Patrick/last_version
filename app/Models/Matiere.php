@@ -35,15 +35,16 @@ class Matiere extends Model
      * Relation avec le cycle.
      * Une matière appartient à un cycle.
      */
-    public function cycle()
+     public function cycle()
     {
-        return $this->belongsTo(Cycle::class, 'matiere_id');
+        return $this->belongsTo(Cycle::class);
     }
 
     public function categorie()
     {
-        return $this->belongsTo(Categorie::class, 'matiere_id');
+        return $this->belongsTo(Categorie::class, 'categories_id');
     }
+
 
 
     // public function resultat()

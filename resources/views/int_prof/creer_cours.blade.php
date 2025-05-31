@@ -46,7 +46,7 @@
 
                 <!-- Classe et Matière -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
+                    {{-- <div>
                         <label class="block text-lg font-medium text-blue-700 mb-1">Classe</label>
                         <select class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200">
                             <option>Sélectionnez une classe</option>
@@ -54,11 +54,14 @@
                                 <option value="{{ $classe->id }}"> {{ $classe->libelle_Cl }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <div>
-                        <label class="block text-lg font-medium text-blue-700 mb-1">Matière</label>
-                        <select class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200">
-                            <option>Sélectionnez une matière</option>
+                        <label for="matiere_id" class="block text-lg font-medium text-blue-700 mb-1">Matière</label>
+                        <select name="matiere_id" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200" required>
+                            <option value="">Sélectionnez une matière</option>
+                            @foreach($cours as $cour)
+                                <option value="{{ $matiere->id }}">{{ $cour->libelle_M }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -82,13 +85,21 @@
                     </button>
 
                     <!-- Affichage des fichiers sélectionnés -->
-                    <div class="overflow">
+                    <div class="mb-6">
                         <div class="max-w-sm ml-0 mt-2 mx-auto bg-white rounded-xl shadow-md">
                             <div id="selectedFiles" class="grid grid-cols-1 gap-2"></div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Type -->
+                <div class="mb-6">
+                    <label for="type" class="block text-sm font-medium text-blue-700 mb-2">Type</label>
+                    <select name="type" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200" required">
+                        <option value="pdf">PDF</option>
+                        <option value="video">Vidéo</option>
+                    </select>
+                </div>
 
                 <!-- Boutons -->
                 <div class="flex flex-wrap gap-3">

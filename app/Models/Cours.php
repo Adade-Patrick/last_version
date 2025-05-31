@@ -15,14 +15,15 @@ class Cours extends Model
     // Champs autorisés pour le remplissage en masse
     protected $fillable = [
         'titre',
-        'imageUrl',
+        'matiere_id',
         'description',
-        'categorie_id',
+        'module',
+        'type',
     ];
 
-    public function categorie()
+        public function matiere()
     {
-        return $this->belongsTo(Categorie::class);
+        return $this->belongsTo(Matiere::class, 'matiere_id');
     }
 
     public function chapitres()
