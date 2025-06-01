@@ -5,7 +5,7 @@
             <ul class="space-y-4 font-medium">
                 <!--Admin dashbord-->
                 <li>
-                    <a href="{{ route('admin.dashboard') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center w-full p-2 text-base text-white rounded-lg group hover:bg-blue-500 dark:text-white dark:hover:bg-gray-700">
+                    <a href="{{ route('super_admin.dashboard') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center w-full p-2 text-base text-white rounded-lg group hover:bg-blue-500 dark:text-white dark:hover:bg-gray-700">
                     <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-gray-400 dark:group-hover:text-white " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 20C20 20.5523 19.5523 21 19 21H5C4.44772 21 4 20.5523 4 20V11H1L11.3273 1.6115C11.7087 1.26475 12.2913 1.26475 12.6727 1.6115L23 11H20V20ZM18 19V9.15745L12 3.7029L6 9.15745V19H18ZM12 17L8.64124 13.6412C7.76256 12.7625 7.76256 11.3379 8.64124 10.4592C9.51992 9.58056 10.9445 9.58056 11.8232 10.4592L12 10.636L12.1768 10.4592C13.0555 9.58056 14.4801 9.58056 15.3588 10.4592C16.2374 11.3379 16.2374 12.7625 15.3588 13.6412L12 17Z"></path></svg>
                     <span class="ms-3 font-extrabold">Tableau de bord</span>
                     </a>
@@ -62,9 +62,7 @@
                     </ul>
                 </li>
 
-
-
-            <!--Gestion utilisateur-->
+                <!--Traitements-->
                 <li>
                 <button type="button" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center w-full p-2 text-base text-white rounded-lg group hover:bg-blue-500 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-one">
                     <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true"
@@ -90,7 +88,7 @@
                     </li>
 
                     <li>
-                            <a href="{{ route('admin.index') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg hover:bg-blue-500 group">
+                            <a href="{{ route('super_admin.index') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg hover:bg-blue-500 group">
                             <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-whith-400 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11 14.0619V20H13V14.0619C16.9463 14.554 20 17.9204 20 22H4C4 17.9204 7.05369 14.554 11 14.0619ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13Z"></path></svg>
                             <span class="ms-3 font-extrabold">Gestion admin</span>
                             </a>
@@ -116,7 +114,7 @@
                     </ul>
                 </li>
 
-            <!--Gestion compte-->
+                <!--Gestion compte-->
                 <li>
                 <button type="button" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center w-full p-2 text-base text-white  rounded-lg group hover:bg-blue-500 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-two" data-collapse-toggle="dropdown-two">
                     <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14V22H4C4 17.5817 7.58172 14 12 14ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM21 17H22V22H14V17H15V16C15 14.3431 16.3431 13 18 13C19.6569 13 21 14.3431 21 16V17ZM19 17V16C19 15.4477 18.5523 15 18 15C17.4477 15 17 15.4477 17 16V17H19Z"></path></svg>
@@ -145,7 +143,7 @@
                     </ul>
                 </li>
 
-            <!--Notifications-->
+                <!--Notifications-->
                 <li>
                     <a href="#" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center p-2 text-white  rounded-lg dark:text-white hover:bg-blue-500 dark:hover:bg-gray-700 group">
                         <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true"
@@ -207,7 +205,7 @@
                     </ul>
                 </li>
 
-                <!--Gestion utilisateur-->
+                <!--Traitements-->
                 <li>
                     <button type="button" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center w-full p-2 text-base text-white rounded-lg group hover:bg-blue-500 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-one">
                         <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true"
@@ -218,6 +216,7 @@
                         </svg>
                     </button>
                     <ul id="dropdown-one" class="hidden py-2 space-y-2 font-extrabold">
+                        <!---->
                         <li>
                             <a href="{{ route('traitements.eleve.index') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg hover:bg-blue-500 group">
                                 <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-whith-400  dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13Z"></path></svg>
@@ -225,6 +224,7 @@
                             </a>
                         </li>
 
+                        <!---->
                         <li>
                                 <a href="{{ route('traitements.prof.index') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg hover:bg-blue-500 group">
                                 <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-whith-400 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11 14.0619V20H13V14.0619C16.9463 14.554 20 17.9204 20 22H4C4 17.9204 7.05369 14.554 11 14.0619ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13Z"></path></svg>
@@ -232,13 +232,15 @@
                                 </a>
                         </li>
 
+                        <!--Liste admin-->
                         <li>
                                 <a href="{{ route('admin.index') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg hover:bg-blue-500 group">
                                 <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-whith-400 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11 14.0619V20H13V14.0619C16.9463 14.554 20 17.9204 20 22H4C4 17.9204 7.05369 14.554 11 14.0619ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13Z"></path></svg>
-                                <span class="ms-3 font-extrabold">Gestion admin</span>
+                                <span class="ms-3 font-extrabold">Liste admin</span>
                                 </a>
                         </li>
 
+                        <!--Cours publiés-->
                         <li>
                             <a href="{{ route('traitements.cours.index') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg hover:bg-blue-500 dark:hover:bg-gray-700 group">
                                 <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true"

@@ -36,13 +36,8 @@
     <h2 class="text-2xl font-semibold text-blue-600 mb-2">Créer une nouvelle matière</h2>
     <div class="p-8 overflow">
         <div class=" mx-auto bg-white p-4 rounded-xl shadow-md">
-            @if (session('success'))
-                <div class="mb-4 text-green-600">{{ session('success') }}</div>
-            @endif
-
             <form action="{{ route('creer_matiere.store') }}" method="POST">
                 @csrf
-
                 <!-- Libelle du cours -->
                 <div class="mb-4">
                     <label for="libelle_M" class="form-control block text-lg font-medium text-blue-600">Libellé </label>
@@ -66,8 +61,8 @@
 
                 <!-- Categorie du cours -->
                 <div class="mb-4">
-                    <label for="libelle_cat" class="form-control block text-lg font-medium text-blue-600">Catégorie </label>
-                    <input type="text" name="libelle_cat" id="libelle_cat" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2" required>
+                    <label for="categories" class="form-control block text-lg font-medium text-blue-600">Catégorie </label>
+                    <input type="text" name="categories" id="categories" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2" required>
                 </div>
 
                 <!-- Sélection de la classe -->
@@ -79,9 +74,6 @@
                             <option value="{{ $classe->id }}">{{ $classe->libelle_Cl }}</option>
                         @endforeach
                     </select>
-                    @error('classes_id')
-                        <div class="text-red-600 text-sm">{{ $message }}</div>
-                    @enderror
                 </div>
 
                 <!--prof-->
@@ -90,7 +82,7 @@
                     <select name="prof_id" id="prof_id" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2" required>
                         <option value="">-- Associer un professeur --</option>
                         @foreach($profs as $prof)
-                            <option value="{{ $prof->id }}">{{ $prof->nom }}</option>
+                            <option value="{{ $prof->infoPerso->id }}">{{ $prof->infoPerso->prenom }} {{ $prof->infoPerso->nom }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -108,16 +100,14 @@
 
             <div class="flex justify-center overflow-x-auto shadow-md sm:rounded-lg">
 
+                <!--Tableau-->
                 <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-white uppercase bg-blue-500 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">Libelle</th>
-                            <th scope="col" class="px-6 py-3">Cycle</th>
                             <th scope="col" class="px-6 py-3">Categorie</th>
                             <th scope="col" class="px-6 py-3">Classe</th>
-
                             <th scope="col" class="px-6 py-3">Professeur</th>
-
                             <th scope="col" class="px-6 py-3">Date</th>
                             <th scope="col" class="px-6 py-3">Action</th>
                         </tr>
@@ -192,6 +182,31 @@
     </div>
 </div>
 
+<!-- Modal message -->
+<div id="messageModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 invisible">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+        <h2 class="text-lg font-semibold mb-4 text-center">Message</h2>
 
+        @if ($errors->any())
+            <ul class="text-red-500 mb-4">
+                @foreach ($errors->all() as $error)
+                    <li class="mb-1">• {{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+
+        @if (session('success'))
+            <div class="text-green-500 mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <div class="flex justify-center">
+            <button onclick="closeModal()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                OK
+            </button>
+        </div>
+    </div>
+</div>
 
 @endsection

@@ -31,16 +31,15 @@
     </main>
 </div>
 
-<div class="p-10 sm:ml-64 bg-no-repeat bg-cover bg-gray-200 bg-blend-multiply">
+<div class="p-2 sm:ml-64 bg-no-repeat bg-cover bg-gray-200 bg-blend-multiply">
     <main class="mt-5 mb-5">
-        <h2 class="text-3xl text-center font-bold text-blue-600 mb-6">Bienvenue dans la gestion des professeurs</h2>
-        <div class="h-full p-8 overflow">
-            {{-- Formulaire de recherche et ajout --}}
+        <h2 class="text-3xl text-center font-bold text-blue-600 mb-6">Bienvenue dans la gestion des administrateurs</h2>
+        <div class="p-8 overflow">
             <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
-                <h2 class="text-2xl font-bold text-blue-600 mb-6">Ajouter un professeur</h2>
+                <h2 class="text-2xl font-bold text-blue-600 mb-6">Ajouter un admin</h2>
 
-                <form method="GET" action="{{ route('traitements.prof.index') }}" class="mb-4">
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher un professeur..."
+                <form method="GET" action="{{ route('super_admin.index') }}" class="mb-4">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher un admin..."
                         class="px-4 py-2 border rounded-lg focus:ring focus:ring-indigo-200">
                     <button type="submit" class="bg-violet-600 text-white px-4 py-2 rounded hover:bg-blue-600 ml-2">
                         Rechercher
@@ -48,13 +47,13 @@
                 </form>
 
                 <button id="openModalBtn" class="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition" onclick="openModal()">
-                    + Ajouter un prof
+                    + Ajouter un admin
                 </button>
             </div>
         </div>
 
-    <div class="mt-10 max-w-full mx-auto bg-white p-6 rounded-xl shadow-md">
-            <h3 class="mb-4 text-3xl text-center font-bold text-blue-600 dark:text-white">Liste des professeurs</h3>
+        <div class="mt-4 max-w-full mx-auto bg-white p-8 rounded-xl shadow-md">
+            <h3 class="mb-4 text-3xl text-center font-bold text-blue-600 dark:text-white">Liste des admins</h3>
 
             <div class="flex justify-center overflow-x-auto shadow-md sm:rounded-lg">
 
@@ -64,38 +63,29 @@
                             <th scope="col" class="px-6 py-3">ID</th>
                             <th scope="col" class="px-6 py-3">Nom</th>
                             <th scope="col" class="px-6 py-3">Prénom</th>
-                            <th scope="col" class="px-6 py-3">Nom d'utilisateur</th>
                             <th scope="col" class="px-6 py-3">Email</th>
                             <th scope="col" class="px-6 py-3">Téléphone</th>
-                            <th scope="col" class="px-6 py-3">Spécialité</th>
                             <th scope="col" class="px-6 py-3">Action</th>
                         </tr>
                     </thead>
+
                     <tbody id="tableBody">
-                        @if($profs->isEmpty())
+                        @if($admins->isEmpty())
                             <tr>
-                                <td colspan="7">Aucun professeur trouvé</td>
+                                <td colspan="7">Aucun admin trouvé</td>
                             </tr>
                         @else
-                            @foreach($profs as $prof)
-                               <tr class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700 border-gray-200">
-                                    <td class="px-6 py-4">{{ $prof->id }}</td>
-
-                                    <td class="px-6 py-4">{{ $prof->infoPerso->nom }}</td>
-
-                                    <td class="px-6 py-4">{{ $prof->infoPerso->prenom }}</td>
-
-                                    <td class="px-6 py-4">{{ $prof->user->name }}</td>
-
-                                    <td class="px-6 py-4">{{ $prof->user->email }}</td>
-
-                                    <td class="px-6 py-4">{{ $prof->infoPerso->telephone}}</td>
-
-                                    <td class="px-6 py-4">{{ $prof->specialite}}</td>
+                            @foreach($admins as $admin)
+                                <tr class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700 border-gray-200">
+                                    <td class="px-6 py-4">{{ $admin->id }}</td>
+                                    <td class="px-6 py-4">{{ $admin->infoPerso->nom }}</td>
+                                    <td class="px-6 py-4">{{ $admin->infoPerso->prenom }}</td>
+                                    <td class="px-6 py-4">{{ $admin->user->email }}</td>
+                                    <td class="px-6 py-4">{{ $admin->infoPerso->telephone ?? '-' }}</td>
 
                                     <td class="px-6 py-4">
                                         <!--button sup-->
-                                        <form action="{{ route('prof.destroy', $prof->id) }}" method="POST" class="inline-block">
+                                        <form action="{{ route('super_admin.destroy', $admin->id) }}" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-white hover:underline">
@@ -144,8 +134,8 @@
  <!-- Formulaire modal -->
 <div id="formModal" class="fixed inset-0 flex items-center justify-center invisible bg-black bg-opacity-30 backdrop-blur-sm z-50">
     <div class="bg-white p-2 rounded-lg shadow-lg w-full max-w-xl relative">
-        <h2 class="text-xl font-bold mb-4 text-center text-blue-600">Ajouter un professeur</h2>
-        <form id="multiStepForm" action="{{ route('prof.store') }}" method="POST">
+        <h2 class="text-xl font-bold mb-4 text-center text-blue-600">Ajouter un administrateur</h2>
+        <form id="multiStepForm" action="{{ route('super_admin.store') }}" method="POST">
             @csrf
             <div id="step1" class="step hidden">
                 <h3 class="text-lg font-semibold mb-2 text-gray-700">Étape 1 : Informations personnelles</h3>
@@ -218,37 +208,10 @@
                     <input type="text" name="name" class="w-full border rounded p-1" required>
                     <span class="text-red-500 text-xs hidden error-message"></span>
                 </div>
-                <!--password-->
-                {{-- <div class="mb-4">
+                <div class="mb-4">
                     <label for="password" class="block text-sm font-medium text-blue-600">Mot de passe</label>
                     <input type="password" name="password" class="w-full border rounded p-1" required>
-                </div> --}}
-                <div class="mb-4 relative">
-                    <label for="password" class="block text-sm font-medium text-blue-600">Mot de passe</label>
-
-                    <input id="password" type="password" name="password" class="w-full border rounded p-1 pr-10" required>
-
-                    <!-- Bouton/icone pour voir ou masquer -->
-                    <button type="button" onclick="togglePasswordVisibility()"
-                            class="absolute right-2 top-8 text-gray-500 hover:text-gray-800 focus:outline-none">
-                        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478
-                                0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7
-                                -4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                    </button>
                 </div>
-
-
-                <div class="mb-4">
-                    <label for="specialite" class="block text-sm font-medium text-blue-600">Spécialité</label>
-                    <input type="specialite" name="specialite" class="w-full border rounded p-1" required>
-                </div>
-
                 <div class="flex justify-between mt-4">
                     <button type="button" class="prevStep bg-gray-400 text-white px-4 py-1 rounded">Retour</button>
                     <button type="button" class="nextStep bg-blue-600 text-white px-4 py-1 rounded">Suivant</button>
@@ -257,7 +220,7 @@
 
             <div id="step3" class="step hidden">
                 <h3 class="text-lg font-semibold mb-2 text-gray-700">Étape 3 : Finalisation</h3>
-                <p class="mb-4 text-sm text-gray-600">Cliquez sur <strong>Enregistrer</strong> pour ajouter un professeur.</p>
+                <p class="mb-4 text-sm text-gray-600">Cliquez sur <strong>Enregistrer</strong> pour ajouter l'administrateur.</p>
                 <div class="flex justify-between">
                     <button type="button" class="prevStep bg-gray-400 text-white px-4 py-2 rounded">Retour</button>
                     <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Enregistrer</button>
@@ -394,6 +357,49 @@
     });
 </script>
 
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let currentStep = 0;
+        const steps = document.querySelectorAll('.step');
+        const nextButtons = document.querySelectorAll('.nextStep');
+        const prevButtons = document.querySelectorAll('.prevStep');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const formModal = document.getElementById('formModal');
+
+        function showStep(index) {
+            steps.forEach((step, i) => {
+                step.classList.toggle('hidden', i !== index);
+            });
+        }
+
+        nextButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (currentStep < steps.length - 1) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            });
+        });
+
+        prevButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            formModal.classList.add('invisible');
+            currentStep = 0;
+            showStep(currentStep);
+        });
+
+        // Init
+        showStep(currentStep);
+    });
+</script> --}}
 
 <!--fige buton--->
 <script>
@@ -494,39 +500,6 @@
             document.getElementById('messageModal').classList.remove('invisible');
         @endif
     });
-</script>
-
-<!--visualisation password-->
-<script>
-    function togglePasswordVisibility() {
-        const input = document.getElementById("password");
-        const icon = document.getElementById("eyeIcon");
-
-        if (input.type === "password") {
-            input.type = "text";
-            icon.innerHTML = `
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477
-                         0-8.268-2.943-9.542-7a10.05 10.05 0 011.272-2.592m1.746-2.121A9.956
-                         9.956 0 0112 5c4.478 0 8.269 2.943 9.542
-                         7a9.96 9.96 0 01-1.272 2.592M15 12a3
-                         3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M3 3l18 18" />
-            `;
-        } else {
-            input.type = "password";
-            icon.innerHTML = `
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M2.458 12C3.732 7.943 7.523 5
-                         12 5c4.478 0 8.268 2.943 9.542
-                         7-1.274 4.057-5.064 7-9.542
-                         7-4.477 0-8.268-2.943-9.542-7z" />
-            `;
-        }
-    }
 </script>
 
 

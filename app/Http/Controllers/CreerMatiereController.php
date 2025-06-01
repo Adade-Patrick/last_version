@@ -37,10 +37,11 @@ class CreerMatiereController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all()); 
         try {
             $validatedData = $request->validate([
-            'libelle_M' => 'required|string|max:255',
-            'cycle_id' => 'required|exists:cycle,id',
+            'libelle_M' => 'required|string|max:50',
+            // 'cycle_id' => 'required|exists:cycle,id',
             'categories_id' => 'required|exists:categories,id',
             'classes_id' => 'required|exists:classes,id',
             'prof_id' => 'required|exists:prof,id',

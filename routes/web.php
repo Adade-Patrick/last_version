@@ -32,6 +32,9 @@ Route::get('/auth/logout',[UserController::class, 'logout'])->name('auth.logout'
 Route::get('/auth/user/register/forms',[UserController::class, 'create'])->name('auth.user.create');
 Route::post('/auth/user/register',[UserController::class, 'store'])->name('auth.register');
 
+//super_admin require
+require __DIR__.'/super_admin_route.php';
+
 //admin require
 require __DIR__.'/admin_route.php';
 

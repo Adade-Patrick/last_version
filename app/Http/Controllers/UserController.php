@@ -20,7 +20,11 @@ class UserController extends Controller
 
             // dd(auth()->user()->role);
 
-            if(auth()->user()->role === "admin" ||auth()->user()->role === "super_admin" ){
+            if(auth()->user()->role === "super_admin"){
+                return redirect()->route('super_admin.dashboard');
+            }
+
+            else if(auth()->user()->role === "admin" ){
                 return redirect()->route('admin.dashboard');
             }
 

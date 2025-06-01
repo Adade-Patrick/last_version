@@ -34,36 +34,44 @@ class AnneeScolaireController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            // 'libelle' => 'required|unique:annee_scolaires,libelle',
+            'libelle_A' => 'required|unique:annee_scolaires,libelle',
             'libelle_A' => [
             'required',
-            'regex:/^(20\d{2})-(20\d{2})$/', // Vérifie le format "YYYY-YYYY"
+            'unique:annee_scolaires,libelle_A',
+            'regex:/^(20\d{2})-(20\d{2})$/', // Format : YYYY-YYYY
             function ($attribute, $value, $fail) {
-                // 1. Vérifier le format et extraire
-                if (! preg_match('/^(20\d{2})-(20\d{2})$/', $value, $matches)) {
-                    $fail("Le format doit être “YYYY-YYYY”.");
+                // Extraire les deux années
+                if (!preg_match('/^(20\d{2})-(20\d{2})$/', $value, $matches)) {
+                    $fail("Le format doit être ‘AAAA-AAAA’.");
                     return;
                 }
+
                 [, $start, $end] = $matches;
 
-                // 2. Vérifier l’ordre
+                // Vérifie que l'année de début est inférieure à celle de fin
                 if ($start >= $end) {
                     $fail("L'année de début doit être inférieure à l'année de fin.");
                 }
-            }
 
-    ],
+                // Vérifie que l'année de fin ne dépasse pas l'année en cours
+                if ($end > date('Y')) {
+                    $fail("Attention ! Cettre année ne peut pas dépasser l'année actuelle (" . date('Y') . ").");
+                }
+            },
         ],
-            [
-                'libelle_A.required' => 'Le libellé est obligatoire.',
-                'libelle_A.unique' => 'Ce libellé est déjà utilisé.',
-            ]);
-            AnneeScolaire::create($validatedData);
-            return redirect()->route('annee_scolaire.index')->with('success', 'Année scolaire ajoutée avec succès');
+    ],
+    [
+        'libelle_A.required' => 'Attention ! Le libellé est obligatoire.',
+        'libelle_A.unique' => 'Attention ! Cette année existe déjà.',
+        'libelle_A.regex' => 'Attention ! Le format doit être de type “AAAA-AAAA”.',
+    ]);
 
+    AnneeScolaire::create([
+        'libelle_A' => $validatedData['libelle_A'],
+    ]);
 
-    }
-
+    return redirect()->route('annee_scolaire.index')->with('success', 'Année scolaire ajoutée avec succès.');
+}
     /**
      * Display the specified resource.
      */
