@@ -37,34 +37,27 @@
             <h2 class="text-2xl font-semibold text-blue-600 mb-6">Créer un nouveau cours
             </h2>
                 <!--Formulaire-->
-            <form>
+            <form >
                 <!-- Titre du cours -->
                 <div class="mb-4">
                     <label class="block text-lg font-medium text-blue-700 mb-1">Titre du cours</label>
-                    <input type="text" placeholder="Entrez le titre de votre cours" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200">
+                    <input type="text" placeholder="Entrez le titre de votre cours" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200" required>
                 </div>
 
                 <!-- Classe et Matière -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    {{-- <div>
-                        <label class="block text-lg font-medium text-blue-700 mb-1">Classe</label>
-                        <select class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200">
-                            <option>Sélectionnez une classe</option>
-                            @foreach ($classes as $classe)
-                                <option value="{{ $classe->id }}"> {{ $classe->libelle_Cl }}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
                     <div>
                         <label for="matiere_id" class="block text-lg font-medium text-blue-700 mb-1">Matière</label>
-                        <select name="matiere_id" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200" required>
+                        <select wire:model="matiere_id" name="matiere_id"
+                            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200" required>
                             <option value="">Sélectionnez une matière</option>
-                            @foreach($cours as $cour)
-                                <option value="{{ $matiere->id }}">{{ $cour->libelle_M }}</option>
+                            @foreach($matieres as $matiere)
+                                <option value="{{ $matiere->id }}">{{ $matiere->libelle_M }}  ({{ $matiere->categorie->libelle_cat }}) {{ $matiere->classe->libelle_Cl }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
+
 
                 <!-- Description -->
                 <div class="mb-4">

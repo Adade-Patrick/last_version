@@ -134,50 +134,50 @@ class AdminController extends Controller
 
 
 
-    // public function storeInfo(superAdminRegisterInfoRequest $request)
-    // {
-    //     try{
-    //         $validatedData=$request->validated();
-    //         // dd($validatedData);
+    public function storeInfo(superAdminRegisterInfoRequest $request)
+    {
+        try{
+            $validatedData=$request->validated();
+            // dd($validatedData);
 
-    // // Enregistrement dans info_perso
-    //     $infoPerso = InfoPerso::create([
-    //         'nom' => $validatedData['nom'],
-    //         'prenom' => $validatedData['prenom'],
-    //         'date_N' => $validatedData['date_N'],
-    //         'lieu_N' => $validatedData['lieu_N'],
-    //         'sexe' => $validatedData['sexe'],
-    //         'nationalite' => $validatedData['nationalite'],
-    //         'ville_residence' => $validatedData['ville_residence'],
-    //         'telephone' => $validatedData['telephone'],
-    //     ]);
+    // Enregistrement dans info_perso
+        $infoPerso = InfoPerso::create([
+            'nom' => $validatedData['nom'],
+            'prenom' => $validatedData['prenom'],
+            'date_N' => $validatedData['date_N'],
+            'lieu_N' => $validatedData['lieu_N'],
+            'sexe' => $validatedData['sexe'],
+            'nationalite' => $validatedData['nationalite'],
+            'ville_residence' => $validatedData['ville_residence'],
+            'telephone' => $validatedData['telephone'],
+        ]);
 
-    //     // Enregistrement dans users
-    //     $user = User::create([
-    //         'name' => $validatedData['name'],
-    //         'email' => $validatedData['email'],
-    //         'password' => bcrypt($validatedData['password']),
-    //         'role' => 'admin',
-    //     ]);
+        // Enregistrement dans users
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+            'role' => 'admin',
+        ]);
 
-    //     // Enregistrement dans admin
-    //     Admin::create([
-    //         'users_id' => $user->id,
-    //         'info_perso_id' => $infoPerso->id,
+        // Enregistrement dans admin
+        Admin::create([
+            'users_id' => $user->id,
+            'info_perso_id' => $infoPerso->id,
 
-    //     ]);
+        ]);
 
-    //     return redirect()->back()->with('success', 'Administrateur enregistré avec succès.');
-    //     }catch(\Exception $e){
-    //         // dd($e);
-    //     }
-    // }
+        return redirect()->back()->with('success', 'Administrateur enregistré avec succès.');
+        }catch(\Exception $e){
+            // dd($e);
+        }
+    }
 
-    // public function destroy(string $id)
-    // {
-    //     $admin = Admin::findOrFail($id);
-    //     $admin->delete();
-    //     return redirect()->route('admin.index')->with('success', 'Admin supprimé.');
-    // }
+    public function destroy(string $id)
+    {
+        $admin = Admin::findOrFail($id);
+        $admin->delete();
+        return redirect()->route('admin.index')->with('success', 'Admin supprimé.');
+    }
 }
 

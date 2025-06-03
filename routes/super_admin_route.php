@@ -12,7 +12,7 @@ Route::middleware(['auth', 'role:super_admin,'])->prefix('super_admin')->group(f
     Route::get('/index', [SuperAdminController::class, 'index'])->name('super_admin.index');
 
     Route::post('/register-super_admin', [SuperAdminController::class, 'storeInfo'])->name('super_admin.store');
-    Route::post('/register-prof', [ProfController::class, 'store'])->name('prof.store');
+    Route::post('/register-super_admin', [SuperAdminController::class, 'store'])->name('super_admin.store');
 
     Route::delete('/admin/{admin}', [SuperAdminController::class, 'destroy'])->name('super_admin.destroy');
 });
@@ -31,6 +31,7 @@ Route::middleware(['auth', 'role:prof'])->prefix('prof')->group(function () {
     Route::get('/dashboard', [ProfController::class, 'dashboard'])->name('prof.dashboard');
 
 });
+
 
 
 ?>

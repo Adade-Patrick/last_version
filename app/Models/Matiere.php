@@ -15,8 +15,7 @@ class Matiere extends Model
     // Attributs assignables en masse
     protected $fillable = [
         'libelle_M',
-        'cycle_id',
-        'categorie_id',
+        'categories_id',
         'classes_id',
         'prof_id',
     ];
@@ -28,17 +27,17 @@ class Matiere extends Model
      */
     public function classe()
     {
-        return $this->belongsTo(Classe::class, 'matiere_id');
+        return $this->belongsTo(Classe::class, 'classes_id');
     }
 
     /**
      * Relation avec le cycle.
      * Une matière appartient à un cycle.
      */
-     public function cycle()
-    {
-        return $this->belongsTo(Cycle::class);
-    }
+    //  public function cycle()
+    // {
+    //     return $this->belongsTo(Cycle::class);
+    // }
 
     public function categorie()
     {
@@ -59,7 +58,7 @@ class Matiere extends Model
 
     public function prof()
     {
-        return $this->belongsTo(Prof::class, 'matiere_id');
+        return $this->belongsTo(Prof::class, 'prof_id');
     }
 
 }

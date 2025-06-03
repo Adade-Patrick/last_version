@@ -13,7 +13,7 @@ class EvaluationController extends Controller
     public function index()
     {
         $evaluations = Evaluation::with('chapitre')->get();
-        return view('traitements.evaluation.index', compact('evaluations'));
+        return view('int_prof.evaluation', compact('evaluations'));
     }
 
     /**

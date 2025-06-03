@@ -2,6 +2,6 @@
 
 use App\Http\Controllers\EvaluationController;
 
-Route::get('/traitements/evaluation/index', [EvaluationController::class, 'index'])->name('traitements.evaluation.index');
+Route::get('/int_prof/evaluation', [EvaluationController::class, 'index'])->name('int_prof.evaluation');
 
 ?>

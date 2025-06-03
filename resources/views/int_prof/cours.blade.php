@@ -37,49 +37,11 @@
         <div class="p-4 bg-gray-100 ">
         <h2 class="text-2xl font-semibold text-blue-700 mb-6">Mes cours</h2>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-            <!-- Carte cours -->
-            <div class="bg-white rounded-xl shadow p-4 border-t-4 border-blue-600">
-                <h3 class="text-lg font-bold text-blue-700 mb-2">Mathématiques - 3ème A</h3>
-                <p class="text-sm text-gray-700">26 élèves inscrits</p>
-                <p class="text-sm text-gray-700 mb-4">4 modules · 12 leçons</p>
-                <div class="flex gap-2">
-                    <button class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">Gérer</button>
-                    <button class="bg-gray-300 text-gray-700 px-4 py-1 rounded hover:bg-gray-400">Voir activité</button>
-                </div>
-            </div>
 
-            <div class="bg-white rounded-xl shadow p-4 border-t-4 border-red-500">
-                <h3 class="text-lg font-bold text-red-700 mb-2">Physique - 2nde B</h3>
-                <p class="text-sm text-gray-700">28 élèves inscrits</p>
-                <p class="text-sm text-gray-700 mb-4">3 modules · 9 leçons</p>
-                <div class="flex gap-2">
-                    <button class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">Gérer</button>
-                    <button class="bg-gray-300 text-gray-700 px-4 py-1 rounded hover:bg-gray-400">Voir activité</button>
-                </div>
-            </div>
 
-            <div class="bg-white rounded-xl shadow p-4 border-t-4 border-yellow-400">
-                <h3 class="text-lg font-bold text-yellow-700 mb-2">SVT - 4ème C</h3>
-                <p class="text-sm text-gray-700">30 élèves inscrits</p>
-                <p class="text-sm text-gray-700 mb-4">5 modules · 15 leçons</p>
-                <div class="flex gap-2">
-                    <button class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">Gérer</button>
-                    <button class="bg-gray-300 text-gray-700 px-4 py-1 rounded hover:bg-gray-400">Voir activité</button>
-                </div>
-            </div>
+        @livewire('matiere.index')
 
-            <div class="bg-white rounded-xl shadow p-4 border-t-4 border-purple-500">
-                <h3 class="text-lg font-bold text-purple-700 mb-2">Chimie - 1ère D</h3>
-                <p class="text-sm text-gray-700">24 élèves inscrits</p>
-                <p class="text-sm text-gray-700 mb-4">4 modules · 12 leçons</p>
-                <div class="flex gap-2">
-                    <button class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">Gérer</button>
-                    <button class="bg-gray-300 text-gray-700 px-4 py-1 rounded hover:bg-gray-400">Voir activité</button>
-                </div>
-            </div>
-        </div>
-        </div>
+
     </main>
 </div>
 

@@ -147,6 +147,43 @@ class SuperAdminController extends Controller
         }
     }
 
+    public function store(profRegisterInfoRequest $request)
+    {
+
+        // dd($request->all());
+        $validatedData = $request->validated();
+        try{
+            // Enregistrement dans info_perso
+            $infoPerso = InfoPerso::create([
+                'nom' => $validatedData['nom'],
+                'prenom' => $validatedData['prenom'],
+                'date_N' => $validatedData['date_N'],
+                'lieu_N' => $validatedData['lieu_N'],
+                'sexe' => $validatedData['sexe'],
+                'nationalite' => $validatedData['nationalite'],
+                'ville_residence' => $validatedData['ville_residence'],
+                'telephone' => $validatedData['telephone'],
+            ]);
+
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+            'role' => 'prof',
+        ]);
+
+        Prof::create([
+            'users_id' => $user->id,
+            'info_perso_id' => $infoPerso->id,
+            'specialite' => "physique",
+        ]);
+
+        return redirect()->route('traitements.prof.index')->with('success', 'Prof ajouté avec succès.');
+        }catch(\Exception $e){
+            // dd($e);
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -158,44 +195,7 @@ class SuperAdminController extends Controller
     }
 
 
-    public function storeProf(profRegisterInfoRequest $request)
-    {
-        try{
-            $validatedData=$request->validated();
 
-            // Enregistrement dans info_perso
-        $infoPerso = InfoPerso::create([
-            'nom' => $validatedData['nom'],
-            'prenom' => $validatedData['prenom'],
-            'date_N' => $validatedData['date_N'],
-            'lieu_N' => $validatedData['lieu_N'],
-            'sexe' => $validatedData['sexe'],
-            'nationalite' => $validatedData['nationalite'],
-            'ville_residence' => $validatedData['ville_residence'],
-            'telephone' => $validatedData['telephone'],
-        ]);
-
-        // Enregistrement dans users
-        $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => bcrypt($validatedData['password']),
-            'role' => 'admin',
-        ]);
-
-        // Enregistrement dans prof
-        Prof::create([
-            'users_id' => $user->id,
-            'info_perso_id' => $infoPerso->id,
-            'specialite' => "physique",
-
-        ]);
-
-        return redirect()->back()->with('success', 'Professeur enregistré avec succès.');
-        }catch(\Exception $e){
-            // dd($e);
-        }
-    }
     /**
      * Display the specified resource.
      */

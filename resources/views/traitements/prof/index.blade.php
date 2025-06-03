@@ -145,7 +145,7 @@
 <div id="formModal" class="fixed inset-0 flex items-center justify-center invisible bg-black bg-opacity-30 backdrop-blur-sm z-50">
     <div class="bg-white p-2 rounded-lg shadow-lg w-full max-w-xl relative">
         <h2 class="text-xl font-bold mb-4 text-center text-blue-600">Ajouter un professeur</h2>
-        <form id="multiStepForm" action="{{ route('prof.store') }}" method="POST">
+        <form id="multiStepForm" action="{{ route('super_admin.store') }}" method="POST">
             @csrf
             <div id="step1" class="step hidden">
                 <h3 class="text-lg font-semibold mb-2 text-gray-700">Étape 1 : Informations personnelles</h3>

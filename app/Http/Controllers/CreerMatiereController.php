@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Matiere;
-use App\Models\Cycle;
 use App\Models\Categorie;
 use App\Models\Classe;
 use App\Models\Prof;
@@ -17,7 +16,6 @@ class CreerMatiereController extends Controller
     public function index()
     {
         $matieres = Matiere::all();
-        // $cycles = Cycle::all();
         $categories = Categorie::all();
         $classes = Classe::all();
         $profs = Prof::all();
@@ -37,11 +35,10 @@ class CreerMatiereController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all()); 
+        // dd($request->all());
         try {
             $validatedData = $request->validate([
             'libelle_M' => 'required|string|max:50',
-            // 'cycle_id' => 'required|exists:cycle,id',
             'categories_id' => 'required|exists:categories,id',
             'classes_id' => 'required|exists:classes,id',
             'prof_id' => 'required|exists:prof,id',
@@ -54,7 +51,6 @@ class CreerMatiereController extends Controller
             return back()->with('error', 'Erreur lors de l’ajout du cours : ' . $e->getMessage());
         }
     }
-
 
     /**
      * Display the specified resource.

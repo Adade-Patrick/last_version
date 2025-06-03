@@ -18,7 +18,7 @@
             </div>
 
             <!-- Stats Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                 <!-- Total Students -->
                 <div class="bg-blue-500 dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
                     <div class="flex items-center justify-between mb-4">
@@ -30,11 +30,11 @@
                         <span class="text-sm font-medium text-green-600 bg-green-50 px-2.5 py-0.5 rounded-full">+12%</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white dark:text-white mb-1">2,450</h3>
-                    <p class="text-sm text-white dark:text-gray-400">Total Élèves</p>
+                    <p class="text-sm text-white dark:text-gray-400">Total Cours publiés
                 </div>
 
                 <!-- Total Teachers -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
+                {{-- <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="bg-purple-600 dark:bg-purple-500/10 p-3 rounded-lg">
                             <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -45,7 +45,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">145</h3>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Total Professeurs</p>
-                </div>
+                </div> --}}
 
                 <!-- Total Classes -->
                 <div class="bg-blue-500 dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
@@ -99,15 +99,15 @@
                     </div>
                 </div>
 
-                <!-- Quick Actions -->
+                <!-- Action rapides-->
                 <div class="bg-blue-500 dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700">
                     <div class="p-6 border-b border-gray-100 dark:border-gray-700">
                         <h3 class="text-lg font-semibold text-white dark:text-white">Actions Rapides</h3>
                     </div>
                     <div class="p-6">
                         <div class="grid grid-cols-2 gap-4">
-                            <!--Ajouter élève-->
-                            <a href="{{ route('traitements.eleve.index') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <!--Cours-->
+                            <a href="{{ route('int_prof.cours') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                                 <div class="flex-shrink-0">
                                     <div class="p-2 bg-blue-500 rounded-lg">
                                         <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -116,12 +116,12 @@
                                     </div>
                                 </div>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Ajouter un élève</p>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Mes cours</p>
                                 </div>
                             </a>
 
-                            <!--Ajouter prof-->
-                            <a href="{{ route('traitements.prof.index') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <!--Créer cours-->
+                            <a href="{{ route('int_prof.creer_cours') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                                 <div class="flex-shrink-0">
                                     <div class="p-2 bg-purple-600 rounded-lg">
                                         <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -130,12 +130,12 @@
                                     </div>
                                 </div>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Ajouter un prof</p>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Créer cours</p>
                                 </div>
                             </a>
 
-                            <!--Cours publier-->
-                            <a href="{{ route('traitements.cours.index') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <!--Evaluation-->
+                            <a href="{{ route('int_prof.evaluation') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                                 <div class="flex-shrink-0">
                                     <div class="p-2 bg-yellow-300 rounded-lg">
                                         <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -144,12 +144,12 @@
                                     </div>
                                 </div>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Cours publier</p>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Evaluation</p>
                                 </div>
                             </a>
 
                             <!--Gérer profil compte-->
-                            <a href="{{ route('profile.compte') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            {{-- <a href="{{ route('profile.compte') }}" class="flex items-center p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                                 <div class="flex-shrink-0">
                                     <div class="p-2 bg-orange-500 rounded-lg">
                                         <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -160,7 +160,7 @@
                                 <div class="ml-4">
                                     <p class="text-sm font-medium text-gray-900 dark:text-white">Gérer compte</p>
                                 </div>
-                            </a>
+                            </a> --}}
 
                         </div>
                     </div>

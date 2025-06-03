@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('evaluations', function (Blueprint $table) {
             $table->id();
-            $table->date('date_evaluation');
             $table->unsignedBigInteger('chapitre_id');
+            $table->date('date_evaluation');
             $table->timestamps();
 
             $table->foreign('chapitre_id')->references('id')->on('chapitres')->onDelete('cascade');
