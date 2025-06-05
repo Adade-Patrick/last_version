@@ -3,8 +3,10 @@
 namespace App\Livewire\Matiere;
 
 use Livewire\Component;
-use App\Models\Cours;
 use App\Models\Matiere;
+use App\Models\Categorie;
+use App\Models\Classe;
+use App\Models\Prof;
 
 class Index extends Component
 {
@@ -13,81 +15,81 @@ class Index extends Component
     public $isModify = false;
 
     // Champs du formulaire
-    public $titre, $matiere_id, $description, $module, $type = 'pdf';
+    public $libelle_M, $categories_id, $classes_id, $prof_id;
 
-    public function mount()
+    public $categories, $classes, $profs;
+
+     public function mount()
     {
         $this->refresh();
+        $this->categories = Categorie::all();
+        $this->classes = Classe::all();
+        $this->profs = Prof::all();
     }
 
     public function refresh()
     {
-        $this->cours = Cours::with('matiere.classe', 'matiere.categorie')->get();
-        $this->matieres = Matiere::with('classe', 'categorie')->get();
+        $this->matieres = Matiere::with('categorie', 'classe', 'prof')->get();
     }
 
     public function clearForm()
     {
         $this->id = '';
-        $this->titre = '';
-        $this->matiere_id = '';
-        $this->description = '';
-        $this->module = '';
-        $this->type = 'pdf';
+        $this->libelle_M = '';
+        $this->categories_id = '';
+        $this->classes_id = '';
+        $this->prof_id = '';
+        $this->isModify = false;
     }
 
     public function store()
     {
         $validated = $this->validate([
-            'titre' => 'required|string|max:255',
-            'matiere_id' => 'required|exists:matiere,id',
-            'description' => 'nullable|string',
-            'module' => 'required|string|max:255',
-            'type' => 'required|string|max:20',
+            'libelle_M' => 'required|string|max:255',
+            'categories_id' => 'required|exists:categories,id',
+            'classes_id' => 'required|exists:classes,id',
+            'prof_id' => 'required|exists:prof,id',
         ]);
 
-        Cours::create($validated);
+        Matiere::create($validated);
         $this->refresh();
         $this->clearForm();
-        session()->flash('success', 'Cours créé avec succès !');
+        session()->flash('success', 'Matière créée avec succès !');
     }
 
     public function loadData($id)
     {
-        $cours = $this->cours->where("id", $id)->first();
-        $this->id = $cours->id;
-        $this->titre = $cours->titre;
-        $this->matiere_id = $cours->matiere_id;
-        $this->description = $cours->description;
-        $this->module = $cours->module;
-        $this->type = $cours->type;
+        $matiere = $this->matieres->where("id", $id)->first();
+        $this->id = $matiere->id;
+        $this->libelle_M = $matiere->libelle_M;
+        $this->categories_id = $matiere->categories_id;
+        $this->classes_id = $matiere->classes_id;
+        $this->prof_id = $matiere->prof_id;
         $this->isModify = true;
     }
 
     public function update()
     {
         $validated = $this->validate([
-            'titre' => 'required|string|max:255',
-            'matiere_id' => 'required|exists:matiere,id',
-            'description' => 'nullable|string',
-            'module' => 'required|string|max:255',
-            'type' => 'required|string|max:20',
+            'libelle_M' => 'required|string|max:50',
+            'categories_id' => 'required|exists:categories,id',
+            'classes_id' => 'required|exists:classes,id',
+            'prof_id' => 'required|exists:prof,id',
         ]);
 
-        $cours = Cours::findOrFail($this->id);
-        $cours->update($validated);
+        $matiere = Matiere::findOrFail($this->id);
+        $matiere->update($validated);
         $this->refresh();
         $this->clearForm();
-        $this->isModify = false;
-        session()->flash('success', 'Cours modifié avec succès !');
+        session()->flash('success', 'Matière modifiée avec succès !');
     }
 
     public function delete($id)
     {
-        $cours = Cours::findOrFail($id);
-        $cours->delete();
+        $matiere = Matiere::findOrFail($id);
+        $matiere->delete();
         $this->refresh();
-        session()->flash('success', 'Cours supprimé avec succès !');
+        session()->flash('success', 'Matière supprimée avec succès !');
     }
 
     public function render()

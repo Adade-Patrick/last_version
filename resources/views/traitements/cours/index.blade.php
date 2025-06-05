@@ -51,25 +51,7 @@
                     </div>
                 @endif
             </div>
-            <!-- Cours -->
-            {{-- <div class="max-w-xl mx-auto bg-white p-2 px-8 rounded-xl shadow-md">
-                <h2 class="text-2xl font-bold text-blue-600 mb-6">
-                    Ajouter un cours
-                </h2>
-                <!--form d'ajout--->
-                <form method="GET" action="{{ route('traitements.cours.index') }}" class="mb-4 overflow">
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher un cours..."
-                        class="px-4 py-2 border rounded-lg focus:ring focus:ring-indigo-200">
-                    <button type="submit" class="bg-violet-600 text-white px-4 py-2 rounded hover:bg-blue-600 ml-2">
-                        Rechercher
-                    </button>
-                </form>
 
-                <!--Button-->
-                <button id="openModalBtn" class="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition" onclick="openModal()">
-                + Ajouter un Cours
-                </button>
-            </div> --}}
 
             <!-- Section cours -->
             <div class="mt-10 max-w-full mx-auto bg-white p-6 rounded-xl shadow-md">

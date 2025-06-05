@@ -58,7 +58,6 @@
                     </div>
                 </div>
 
-
                 <!-- Description -->
                 <div class="mb-4">
                     <label class="block text-lg font-medium text-blue-600 mb-1">Description du cours</label>
@@ -105,6 +104,7 @@
         </div>
     </main>
 </div>
+
 
 {{-- <script>
     const input = document.getElementById('moduleFileInput');

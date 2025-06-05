@@ -32,7 +32,7 @@ class CoursController extends Controller
 
         Cours::create($request->all());
 
-        return redirect()->route('cours.index')->with('success', 'Cours créé avec succès.');
+        return redirect()->route('traietments.cours.index')->with('success', 'Cours créé avec succès.');
     }
 
     public function show(Cours $cour)
@@ -57,14 +57,14 @@ class CoursController extends Controller
 
         $cour->update($request->all());
 
-        return redirect()->route('cours.index')->with('success', 'Cours mis à jour avec succès.');
+        return redirect()->route('traietments.cours.index')->with('success', 'Cours mis à jour avec succès.');
     }
 
     public function destroy(Cours $cour)
     {
         $cour->delete();
 
-        return redirect()->route('cours.index')->with('success', 'Cours supprimé avec succès.');
+        return redirect()->route('traietments.cours.index')->with('success', 'Cours supprimé avec succès.');
     }
 }
 

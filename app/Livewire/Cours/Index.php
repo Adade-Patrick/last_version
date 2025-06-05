@@ -3,62 +3,65 @@
 namespace App\Livewire\Cours;
 
 use Livewire\Component;
-use Livewire\WithPagination;
 use App\Models\Cours;
 use App\Models\Matiere;
 
 class Index extends Component
 {
-    use WithPagination;
 
-    public $cours, $matieres;
-    public $id;
+    public $cours;
     public $isModify = false;
+    public $id;
 
+    // Champs du formulaire
     public $titre, $matiere_id, $description, $module, $type = 'pdf';
-    public $search = '';
 
-    protected $rules = [
-        'titre' => 'required|string|max:255',
-        'matiere_id' => 'required|exists:matiere,id',
-        'description' => 'nullable|string',
-        'module' => 'required|string',
-        'type' => 'required|in:pdf,video',
-    ];
+    public $matieres;
 
     public function mount(){
 
-            // dd(auth()->user()->prof);
-            $query=Cours::query();
+        // dd(auth()->user()->prof);
+        $query=Cours::query();
 
-            if(auth()->user()->prof){
-                $prof_id = auth()->user()->prof->id;
-                $query->where(function($q) use($prof_id){
-                    $q->where('prof_id',$prof_id);
-                });
-            }
+        if(auth()->user()->prof){
+            $prof_id = auth()->user()->prof->id;
+            $query->where(function($q) use($prof_id){
+                $q->where('prof_id',$prof_id);
+            });
+        }
 
-            $this->cours=$query->latest();
-            $this->matieres = Matiere::all();
+        $this->cours=$query->latest();
+        $this->matieres = Matiere::all();
     }
 
     public function refresh(){
          $query=Cours::query();
 
-            if(auth()->user()->prof){
-                $prof_id = auth()->user()->prof->id;
-                $query->where(function($q) use($prof_id){
-                    $q->where('prof_id',$prof_id);
-                });
-            }
+        if(auth()->user()->prof){
+            $prof_id = auth()->user()->prof->id;
+            $query->where(function($q) use($prof_id){
+                $q->where('prof_id',$prof_id);
+            });
+        }
 
-            $this->cours=$query->latest();
-            $this->matieres = Matiere::all();
+        $this->cours=$query->latest();
+        $this->matieres = Matiere::all();
     }
 
-    public function save()
+    public function clearForm()
     {
-        $this->validate();
+        $this->id = '';
+        $this->titre = '';
+        $this->matiere_id = '';
+        $this->description = '';
+        $this->module = '';
+        $this->type = 'pdf';
+        $this->isModify = false;
+    }
+
+    public function store()
+    {
+        // $this->validate();
 
         Cours::create([
             'titre' => $this->titre,
@@ -74,18 +77,14 @@ class Index extends Component
 
     public function delete($id)
     {
-        Cours::findOrFail($id)->delete();
-        session()->flash('success', 'Cours supprimé.');
+        $cours = Cours::findOrFail($id);
+        $cours->delete();
+        $this->refresh();
+        session()->flash('success', 'Cours supprimé avec succès !');
     }
 
     public function render()
     {
-        $cours = Cours::with('matiere.classe', 'matiere.categorie')
-            ->latest()
-            ->paginate(7);
-
-        $matieres = Matiere::all();
-
         return view('livewire.cours.index');
     }
 }
