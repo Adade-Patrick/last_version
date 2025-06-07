@@ -15,11 +15,11 @@ return new class extends Migration
         $table->id();
         $table->string('titre');
         $table->unsignedBigInteger('matiere_id');
-        $table->text('description')->nullable();
-        $table->string('module');
-        $table->string('type')->default('pdf');
+        $table->unsignedBigInteger('prof_id');
+        $table->text('description');
         $table->timestamps();
 
+        $table->foreign('prof_id')->references('id')->on('prof')->onDelete('cascade');
         $table->foreign('matiere_id')->references('id')->on('matiere')->onDelete('cascade');
         });
     }

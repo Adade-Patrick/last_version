@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('titre');
             $table->string('description');
             $table->unsignedBigInteger('cours_id');
-            $table->time('duree');
-            $table->string('pdfUrl');
+            $table->integer('temps_estime');
+             $table->string('ressource')->nullable(); // fichier (PDF, vidéo, etc.)
+            $table->boolean('has_evaluation')->default(false); // évaluation optionnelle
             $table->timestamps();
 
             $table->foreign('cours_id')->references('id')->on('cours')->onDelete('cascade');
@@ -32,4 +33,3 @@ return new class extends Migration
         Schema::dropIfExists('chapitres');
     }
 };
-    

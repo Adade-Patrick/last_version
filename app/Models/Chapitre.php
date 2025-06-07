@@ -17,8 +17,9 @@ class Chapitre extends Model
         'titre',
         'description',
         'cours_id',
-        'duree',
-        'pdfUrl',
+        'temps_estime',
+        'ressource',
+        'evaluation_id',
     ];
 
     // Relation avec le modèle Cour
@@ -30,6 +31,10 @@ class Chapitre extends Model
     public function sections()
     {
         return $this->hasMany(Section::class, 'chapitres_id');
+    }
+    public function ressource()
+    {
+        return $this->hasMany(Ressource::class, 'chapitres_id');
     }
 
     public function evaluations()

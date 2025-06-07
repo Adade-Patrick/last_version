@@ -16,14 +16,18 @@ class Cours extends Model
     protected $fillable = [
         'titre',
         'matiere_id',
+        'prof_id',
         'description',
-        'module',
-        'type',
     ];
 
-        public function matiere()
+    public function matiere()
     {
         return $this->belongsTo(Matiere::class, 'matiere_id');
+    }
+
+    public function prof()
+    {
+        return $this->belongsTo(Prof::class, 'prof_id');
     }
 
     public function chapitres()

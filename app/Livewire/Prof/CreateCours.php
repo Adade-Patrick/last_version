@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Livewire\Cours;
+namespace App\Livewire\Prof;
 
-use Livewire\Component;
 use App\Models\Cours;
 use App\Models\Matiere;
+use App\Models\Chapitre;
+use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
-class Index extends Component
+class CreateCours extends Component
 {
+    public $titre;
+    public $description;
+    public $matiere_id;
+    public $chapitres_id;
 
-    public $cours;
-    public $isModify = false;
-    public $id;
+    public $matieres ;
+    public $chapitres ;
 
-    // Champs du formulaire
-    public $titre, $matiere_id, $description, $module, $type = 'pdf';
-
-    public $matieres;
-
-    public function mount(){
-
+    public function mount()
+    {
         // dd(auth()->user()->prof);
         $query=Cours::query();
 
@@ -32,6 +32,7 @@ class Index extends Component
 
         $this->cours=$query->latest();
         $this->matieres = Matiere::all();
+
     }
 
     public function refresh(){
@@ -53,9 +54,8 @@ class Index extends Component
         $this->id = '';
         $this->titre = '';
         $this->matiere_id = '';
+        $this->chapitres_id = '';
         $this->description = '';
-        $this->module = '';
-        $this->type = 'pdf';
         $this->isModify = false;
     }
 
@@ -65,14 +65,13 @@ class Index extends Component
 
         Cours::create([
             'titre' => $this->titre,
-            'matiere_id' => $this->matiere_id,
+            'matieres_id' => $this->matiere_id,
+            'chapitres_id' => $this->chapitres_id,
             'description' => $this->description,
-            'module' => $this->module,
-            'type' => $this->type,
         ]);
 
         session()->flash('success', 'Cours ajouté avec succès.');
-        $this->reset(['titre', 'matiere_id', 'description', 'module', 'type']);
+        $this->reset(['titre', 'matieres_id', 'description']);
     }
 
     public function delete($id)
@@ -83,9 +82,37 @@ class Index extends Component
         session()->flash('success', 'Cours supprimé avec succès !');
     }
 
+
+    public function rules()
+    {
+        return [
+            'titre' => 'required|string|max:255',
+            'matieres_id' => 'required|exists:matieres,id',
+            'chapitres_id' => 'required|exists:chapitres,id',
+            'description' => 'required|string',
+        ];
+    }
+
+    public function save()
+    {
+        $this->validate();
+
+        Cours::create([
+            'titre' => $this->titre,
+            'description' => $this->description,
+            'matiere_id' => $this->matiere_id,
+            'chapitres_id' => $this->chapitres_id,
+            'prof_id' => Auth::id(),
+        ]);
+
+        $this->reset(['titre', 'description', 'matiere_id', 'chapitres_id']);
+        session()->flash('message', 'Cours créé avec succès !');
+    }
+
     public function render()
     {
-        return view('livewire.cours.index');
+        return view('livewire.prof.create-cours');
+
     }
 }
 
