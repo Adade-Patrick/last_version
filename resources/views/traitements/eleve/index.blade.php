@@ -32,59 +32,10 @@
 
 <div class="p-10 sm:ml-64 bg-no-repeat bg-cover bg-gray-200 bg-blend-multiply">
     <main class="mt-5 mb-0">
-        <div class="h-full p-8 overflow">
-            <!--Zone erreur-->
-            <div class="max-w-xl mx-auto bg-white p-0 rounded-xl">
-                @if($errors->any())
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li role="alert" class="flex justify-center  bg-red-100 border-black text-red-500 px-4 py-3 rounded relative">{{$error }}</li>
-                        @endforeach
-                    </ul>
-                    @endif
-                    <!--message apres action-->
-                    @if (session('success'))
-                        <div class="flex justify-center  bg-green-100 border-black text-green-500 px-4 py-3 rounded relative" role="alert">
-                        <span class="block sm:inline">{{session('success')}}</span>
-                    </div>
-                @endif
-            </div>
-            {{-- Formulaire de recherche et ajout --}}
-            <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
-                <h2 class="text-2xl font-bold text-blue-600 mb-6">Elèves</h2>
 
-                <form method="GET" action="{{ route('traitements.eleve.index') }}" class="mb-4">
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher un élève..."
-                        class="px-4 py-2 border rounded-lg focus:ring focus:ring-indigo-200">
-                    <button type="submit" class="bg-violet-600 text-white px-4 py-2 rounded hover:bg-blue-600 ml-2">
-                        Rechercher
-                    </button>
-                </form>
-
-                <button id="openModalBtn" class="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition" onclick="openModal()">
-                    + Ajouter un élève
-                </button>
-
-                <ul class="divide-y divide-gray-200">
-                    {{-- @foreach ($eleves as $eleve)
-                        <li class="py-3 flex justify-between items-center">
-                            <span class="text-gray-800">{{ $eleves->libelle_Cl }}</span>
-                            <div class="flex space-x-2">
-                                <a href="{{ route('classe.edit', $classes->classe_id) }}" class="text-blue-500 hover:underline">Modifier</a>
-                                <form action="{{ route('annee.destroy', $classes->classes_id) }}" method="POST" onsubmit="return confirm('Supprimer cette année ?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:underline">Supprimer</button>
-                                </form>
-                            </div>
-                        </li>
-                    @endforeach --}}
-                </ul>
-            </div>
-        </div>
 
         <div class="mt-10 max-w-full mx-auto bg-white p-6 rounded-xl shadow-md">
-            <h3 class="mmb-4 text-3xl text-center font-bold text-blue-600 dark:text-white">Liste des élèves</h3>
+            <h3 class="mmb-4 text-3xl text-center font-bold text-blue-600 dark:text-white">Liste des comptes élèves</h3>
 
             <div class="flex justify-center overflow-x-auto shadow-md sm:rounded-lg">
                 @if(session('success'))
@@ -108,7 +59,7 @@
                     <tbody id="tableBody">
                         @if($eleves->isEmpty())
                             <tr>
-                                <td colspan="3">
+                                <td colspan="3" class="text-center">
                                     Aucun élève trouvé
                                 </td>
                             </tr>

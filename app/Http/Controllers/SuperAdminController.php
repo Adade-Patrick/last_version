@@ -175,7 +175,7 @@ class SuperAdminController extends Controller
         Prof::create([
             'users_id' => $user->id,
             'info_perso_id' => $infoPerso->id,
-            'specialite' => "physique",
+            'specialite' => $validatedData['specialite'],
         ]);
 
         return redirect()->route('traitements.prof.index')->with('success', 'Prof ajouté avec succès.');

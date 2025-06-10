@@ -10,7 +10,7 @@
 
 
 <!-- Modules -->
-{{-- <div class="mb-6">
+<div class="mb-6">
     <label class="block text-sm font-medium text-blue-700 mb-2">Modules</label>
 
     <input type="file" id="moduleFileInput" class="hidden" multiple>
@@ -27,16 +27,16 @@
             <div id="selectedFiles" class="grid grid-cols-1 gap-2"></div>
         </div>
     </div>
-</div> --}}
+</div>
 
 <!-- Type -->
-{{-- <div class="mb-6">
+<div class="mb-6">
     <label for="type" class="block text-sm font-medium text-blue-700 mb-2">Type</label>
     <select name="type" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200" required">
         <option value="pdf">PDF</option>
-        <option value="video">Vidéo</option>
+        <option value="video">Vidéo</option> 
     </select>
-</div> --}}
+</div>
 
 
 {{-- <script>

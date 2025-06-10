@@ -54,7 +54,7 @@
                     <select wire:model.defer="prof_id" id="prof_id" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2" required>
                         <option value="">-- Associer un professeur --</option>
                         @foreach($profs as $prof)
-                            <option value="{{ $prof->infoPerso->id }}">{{ $prof->infoPerso->prenom }} {{ $prof->infoPerso->nom }}</option>
+                            <option value="{{ $prof->id }}">{{ $prof->infoPerso->prenom }} {{ $prof->infoPerso->nom }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -77,11 +77,12 @@
                 <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-white uppercase bg-blue-500 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
+                            <th scope="col" class="px-6 py-3">ID</th>
                             <th scope="col" class="px-6 py-3">Libelle</th>
                             <th scope="col" class="px-6 py-3">Categorie</th>
                             <th scope="col" class="px-6 py-3">Classe</th>
                             <th scope="col" class="px-6 py-3">Professeur</th>
-                            <th scope="col" class="px-6 py-3">Date</th>
+                            <th scope="col" class="px-6 py-3">Date de creation</th>
                             <th scope="col" class="px-6 py-3">Action</th>
                         </tr>
                     </thead>
@@ -94,6 +95,8 @@
                         @else
                             @foreach($matieres as $matiere)
                                 <tr class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700 border-gray-200">
+                                    <td class="px-6 py-4">{{ $matiere->id}}</td>
+
                                     <td class="px-6 py-4">{{ $matiere->libelle_M }}</td>
 
                                     <td class="px-6 py-4">{{ $matiere->categorie->libelle_cat }}</td>
@@ -102,12 +105,12 @@
 
                                     <td class="px-6 py-4">{{ $matiere->prof->infoPerso->prenom }} {{ $matiere->prof->infoPerso->nom }}</td>
 
-                                    <td class="px-6 py-4">{{ $matiere->created_at->format('d/m/Y') }}</td>
+                                    <td class="px-6 py-4">{{ $matiere->created_at->format('h:m d/m/Y') }}</td>
 
 
                                     <td class="px-6 py-4">
                                         <!--button sup-->
-                                        <form wire:submit.prevent="delete({{ $matiere->id }})" class="inline-block">
+                                        <form wire:submit.prevent="delete({{ $matiere->id }})" class="inline-block" title="Supprimer">
                                             <button type="submit" class="text-white hover:underline">
                                             <div class="p-1 hover:bg-red-600 bg-red-500 rounded-lg">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -119,7 +122,7 @@
 
 
                                         <!--button modif-->
-                                        <form wire:submit.prevent="loadData({{ $matiere->id }})" class="inline-block">
+                                        <form wire:submit.prevent="loadData({{ $matiere->id }})" class="inline-block" title="Modifier">
                                             <button type="submit" class=" text-white hover:underline">
                                                 <div class="p-1 hover:bg-green-600 bg-green-500 rounded-lg">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" >
@@ -137,50 +140,9 @@
         </div>
     </div>
 
-    <!-- Modal message -->
-    <div id="messageModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 invisible">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-96">
-            <h2 class="text-lg font-semibold mb-4 text-center">Message</h2>
 
-            @if ($errors->any())
-                <ul class="text-red-500 mb-4">
-                    @foreach ($errors->all() as $error)
-                        <li class="mb-1">• {{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
-
-            @if (session('success'))
-                <div class="text-green-500 mb-4">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            <div class="flex justify-center">
-                <button onclick="closeModal()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                    OK
-                </button>
-            </div>
-        </div>
-    </div>
 </div>
 
 
 </div>
-<script>
-    window.addEventListener("matiere_store", function(e) {
-        document.querySelector("#messageModal").classList.remove("invisible");
 
-        setTimeout(() => {
-        document.querySelector("#messageModal").classList.add("invisible");
-        }, 5000);
-    })
-
-    window.addEventListener("matiere_delete", function(e) {
-        document.querySelector("#messageModal").classList.remove("invisible");
-
-        setTimeout(() => {
-        document.querySelector("#messageModal").classList.add("invisible");
-        }, 5000);
-    })
-</script>

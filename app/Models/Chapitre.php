@@ -19,7 +19,7 @@ class Chapitre extends Model
         'cours_id',
         'temps_estime',
         'ressource',
-        'evaluation_id',
+        'has_evaluation',
     ];
 
     // Relation avec le modèle Cour

@@ -32,7 +32,7 @@ class CreateChapitre extends Component
             'titre' => 'required|string|max:50',
             'description' => 'required|string|max:100',
             'temps_estime' => 'required|integer|min:1',
-            'ressource' => 'nullable|file|max:102400|mimes:pdf,docx,jpg,png', // max 100 Mb
+            'ressource' => 'nullable|file|max:1024|mimes:pdf', // max 10 Mb
             'has_evaluation' => 'boolean',
         ];
     }

@@ -122,7 +122,7 @@ class AdminController extends Controller
         Prof::create([
             'users_id' => $user->id,
             'info_perso_id' => $infoPerso->id,
-            'specialite' => "physique",
+            'specialite' => $validatedData['specialite'],
 
         ]);
 
