@@ -15,6 +15,9 @@ class Matiere extends Model
     // Attributs assignables en masse
     protected $fillable = [
         'libelle_M',
+
+        //'cycle_id',
+
         'categories_id',
         'classes_id',
         'prof_id',

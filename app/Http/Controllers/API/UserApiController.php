@@ -1,20 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterUsersRequest;
 use Exception;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\InfoPerso;
+use App\Models\Eleve;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Events\UserRegisterEvent;
 
 class UserApiController extends Controller
 {
-  function login(LoginRequest $request){
+    //
+
+    function login(LoginRequest $request){
 
         try{
             if(auth()->attempt($request->only('name', 'password'))){
@@ -87,21 +92,137 @@ class UserApiController extends Controller
     //     try{
     //         $user = User::create([
     //             'name' => $request->name,
-    //             'email' => $request->email,
+    //             'email' => $request->email??null,
     //             'password' => $request->password,
     //         ]);
 
-    //         event(new UserRegisterEvent($user));
+    //         $info = new InfoPerso();
+    //         $info->nom = $request->nom;
+    //         $info->prenom = $request->prenom;
+    //         $info->date_N = $request->date_N;
+    //         $info->lieu_N = $request->lieu_N;
+    //         $info->sexe = $request->sexe;
+    //         $info->nationalite = $request->nationalite;
+    //         $info->ville_residence = $request->ville_residence;
+    //         $info->telephone = $request->telephone;
+    //         $info->save();
 
-    //         return response()->json([
-    //            'message'=>"user created successfully",
-    //            'data'=>$user,
+    //         $eleve = new Eleve();
+    //         $eleve->user_id = $user->id;
+    //         $eleve->info_perso_id = $info->id;
+    //         $eleve->classe_id = $request->classe_id;
+    //         $eleve->cycle_id = $request->cycle_id;
+    //         $eleve->annee_scolaire_id = $request->annee_scolaire_id;
+    //         $eleve->createMatricule($request->nom);
+    //         response()->json([
+    //             'message'=>"user created successfully",
+    //             'data'=>$user,
     //         ]);
+    //         $eleve->save();
+
+
+    //         event(new UserRegisterEvent([
+    //             'email'=>$user->email,
+    //         ]));
+
+    //         if(auth()->attempt($request->only($user->name, $user->password))){
+    //             $user = auth()->user();
+    //             $token = $user->createToken(config('app.key'))->plainTextToken;
+
+    //             return response()->json([
+    //                 'message'=>"user connected successfully",
+    //                 'accessToken'=>$token,
+    //                 'refreshToken'=>$token,
+    //             ]);
+    //         }else{
+    //             return response()->json([
+    //                 'message'=>'invalide creadentials',
+    //             ],400);
+    //         }
+
+            
 
     //     }catch(Exception $e){
     //         return response()->json(["message"=>$e], 500);
     //     }
     // }
+
+
+public function register(RegisterUsersRequest $request)
+{
+    try {
+        // Création du compte utilisateur
+        $user =new User();
+
+        $user->name = $request->name;
+        $user->email = $request->email ?? null;
+        $user->password = Hash::make($request->password);
+
+
+        // Informations personnelles
+        $info = new InfoPerso();
+        $info->nom = $request->nom;
+        $info->prenom = $request->prenom;
+        $info->date_N = $request->date_N;
+        $info->lieu_N = $request->lieu_N;
+        $info->sexe = $request->sexe;
+        $info->nationalite = $request->nationalite;
+        $info->ville_residence = $request->ville_residence;
+        $info->telephone = $request->telephone;
+        
+
+        // Vérifie que l'année scolaire est bien fournie
+        if (!$request->filled('annee_scolaire_id')) {
+            return response()->json(['message' => "annee_scolaire_id manquant."], 422);
+        }
+        $user->save();
+        $info->save();
+
+        // Création de l'élève
+        $eleve = new Eleve();
+        $eleve->users_id = $user->id;
+        $eleve->info_perso_id = $info->id;
+        $eleve->classes_id = $request->classe_id;
+        $eleve->cycle_id = $request->cycle_id;
+        $eleve->annee_scolaires_id = $request->annee_scolaire_id;
+        $eleve->createMatricule($request->nom);
+
+        
+        $eleve->save();
+
+        // event(new UserRegisterEvent([
+        //     'email' => $user->email,
+        // ]));
+
+        // Authentifie l'utilisateur
+        if (Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ])) {
+            $user = Auth::user();
+            $token = $user->createToken(config('app.key'))->plainTextToken;
+
+            return response()->json([
+                'message' => "user connected successfully",
+                'accessToken' => $token,
+                'refreshToken' => $token,
+                'user' => $user,
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Invalid credentials',
+            ], 400);
+        }
+
+    } catch (Exception $e) {
+        return response()->json([
+            'message' => $e->getMessage(),
+            'file' => $e->getFile(),
+            'line' => $e->getLine()
+        ], 500);
+    }
+}
+
 
 
     function me(Request $request) {
@@ -122,4 +243,25 @@ class UserApiController extends Controller
         }
 
     }
+
+public function getProfile(){
+    try{
+            $user = auth()->user();
+            if(!$user){
+                return response()->json(["message"=>"user invalided"], 400);
+            }
+            $eleve = $user->eleve;
+
+            if(!$eleve){
+                return response()->json(["message"=>"profil cannot loaded"], 400);
+            }
+            return response()->json(["message"=>"profil loaded","data"=>$eleve->to_json()], 200);
+
+
+        }catch(Exception $e){
+            return response()->json(["message"=>$e->getMessage()], 500);
+        }
+
+}
+
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('eleves', function (Blueprint $table) {
             $table->id();
+            $table->string('matricule')->unique();
              $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('info_perso_id');
             $table->unsignedBigInteger('classes_id');
