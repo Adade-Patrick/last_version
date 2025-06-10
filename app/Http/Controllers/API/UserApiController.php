@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\InfoPerso;
+use App\Models\AnneeScolaire;
 use App\Models\Eleve;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -153,6 +154,7 @@ public function register(RegisterUsersRequest $request)
     try {
         // Création du compte utilisateur
         $user =new User();
+        $anneeScolaire =  AnneeScolaire::all()->last();
 
         $user->name = $request->name;
         $user->email = $request->email ?? null;
@@ -170,11 +172,6 @@ public function register(RegisterUsersRequest $request)
         $info->ville_residence = $request->ville_residence;
         $info->telephone = $request->telephone;
         
-
-        // Vérifie que l'année scolaire est bien fournie
-        if (!$request->filled('annee_scolaire_id')) {
-            return response()->json(['message' => "annee_scolaire_id manquant."], 422);
-        }
         $user->save();
         $info->save();
 
@@ -184,7 +181,7 @@ public function register(RegisterUsersRequest $request)
         $eleve->info_perso_id = $info->id;
         $eleve->classes_id = $request->classe_id;
         $eleve->cycle_id = $request->cycle_id;
-        $eleve->annee_scolaires_id = $request->annee_scolaire_id;
+        $eleve->annee_scolaires_id = $anneeScolaire->id;
         $eleve->createMatricule($request->nom);
 
         

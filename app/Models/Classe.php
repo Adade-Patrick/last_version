@@ -41,4 +41,21 @@ class Classe extends Model
         return $this->hasMany(Quizz::class, 'classes_id');
     }
 
+    public function to_json(){
+      return [
+        'id' => $this->id,
+        'libelle_Cl' => $this->libelle_Cl,
+      ];
+    }
+
+
+    public static function toArrayJson($data){
+        $json = [];
+        foreach($data as $classe){
+            $json[] = $classe->to_json();
+        }
+
+        return $json;
+    }
+
 }
