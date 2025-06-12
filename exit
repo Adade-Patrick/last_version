@@ -1,0 +1,53 @@
+[33mcommit 73697173bdcde7f1d4d9dfc77dc4bc0469709658[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Elysa-DJ <adadepatrick0@gmail.com>
+Date:   Tue Jun 10 20:35:59 2025 +0100
+
+    autres modification du register
+
+[33mcommit c9a79e716c570fa9ed1b5ad1b119dcb855331237[m
+Author: Elysa-DJ <adadepatrick0@gmail.com>
+Date:   Tue Jun 10 18:02:06 2025 +0100
+
+    modification register
+
+[33mcommit 0b0409f8974fb825a256c5520c7e7ab001f2dc5c[m
+Author: Patrick-ADADE <adadepatrick0@gmail.com>
+Date:   Sun Jun 1 20:46:40 2025 +0100
+
+    structuration de super_admin
+
+[33mcommit 7831cea31473eb6f4fa5e0e5bcf2042e2367818f[m
+Author: Patrick-ADADE <adadepatrick0@gmail.com>
+Date:   Sat May 31 19:22:59 2025 +0100
+
+    mise à jour des migrations
+
+[33mcommit 76763f09edeae3fa3a5d5e61dfa4939270f78288[m
+Author: Patrick-ADADE <adadepatrick0@gmail.com>
+Date:   Fri May 30 20:02:46 2025 +0100
+
+    nouvelles mises à jour
+
+[33mcommit c2165a4e2c71268972880420b56159177bb30126[m
+Author: Patrick-ADADE <adadepatrick0@gmail.com>
+Date:   Mon May 26 10:24:19 2025 +0100
+
+    nouvelle mise à jour
+
+[33mcommit 30789468d3d15f64e2f9e54150bb7b88d69745e0[m
+Author: Patrick-ADADE <adadepatrick0@gmail.com>
+Date:   Wed May 21 00:02:40 2025 +0100
+
+    profil dynamique
+
+[33mcommit 09aef95813b27ececf113f13bc165fc757e0397b[m
+Author: Patrick-ADADE <adadepatrick0@gmail.com>
+Date:   Mon May 19 21:38:44 2025 +0100
+
+    authentification et création d'admin terminé
+
+[33mcommit fb98cf57d8d96ba8f9613a352ae8b3c2f5d11645[m
+Author: Patrick-ADADE <adadepatrick0@gmail.com>
+Date:   Wed May 14 14:56:47 2025 +0100
+
+    premier commit

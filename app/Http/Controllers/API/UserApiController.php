@@ -247,12 +247,12 @@ public function getProfile(){
             if(!$user){
                 return response()->json(["message"=>"user invalided"], 400);
             }
-            $eleve = $user->eleve;
+            $eleves = $user->eleves;
 
-            if(!$eleve){
+            if(!$eleves){
                 return response()->json(["message"=>"profil cannot loaded"], 400);
             }
-            return response()->json(["message"=>"profil loaded","data"=>$eleve->to_json()], 200);
+            return response()->json(["message"=>"profil loaded","data"=>$eleves->to_json()], 200);
 
 
         }catch(Exception $e){

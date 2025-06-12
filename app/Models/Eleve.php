@@ -43,7 +43,7 @@ class Eleve extends Model
         'user_name' => $this->users ? $this->users->name : null,
         'classe' => $this->classes ? $this->classes->libelle_Cl : null,
         'cycle' => $this->cycle ? $this->cycle->libelle_C : null,
-        'annee_scolaire' => $this->annee_scolaires_ ? $this->annee_scolaires_->libelle_A : null,
+        'annee_scolaire' => $this->anneeScolaire  ? $this->anneeScolaire ->libelle_A : null,
         'created_at' => $this->created_at ? $this->created_at->toDateTimeString() : null,
         'updated_at' => $this->updated_at ? $this->updated_at->toDateTimeString() : null,
     ];
@@ -73,9 +73,9 @@ class Eleve extends Model
         return $this->belongsTo(Cycle::class, 'cycle_id');
     }
 
-    public function annee_scolaires_()
+    public function anneeScolaire()
     {
-        return $this->belongsTo(Annee_scolaire::class, 'annee_scolaires_id');
+        return $this->belongsTo(AnneeScolaire::class, 'annee_scolaires_id');
     }
 
     public function resultats()
