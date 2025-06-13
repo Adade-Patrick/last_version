@@ -33,7 +33,7 @@
 
 <div class="p-2 sm:ml-64 bg-no-repeat bg-cover bg-gray-200 bg-blend-multiply">
     <main class="mt-5 mb-0">
-        <h2 class="text-3xl text-center font-bold text-blue-600 mb-6">Bienvenue dans la liste des cours publiés</h2>
+        <h2 class="text-3xl text-center font-bold text-blue-600 mb-6">Bienvenue dans la liste des cours crée par des professeurs</h2>
         <div class="p-8 overflow">
             <!--Zone erreur-->
             <div class="max-w-xl mx-auto bg-white p-0 rounded-xl">
@@ -61,9 +61,13 @@
                         <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400 rounded">
                             <thead class="text-xs text-white uppercase bg-blue-500 dark:bg-gray-700">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3">Id</th>
+                                    {{-- <th scope="col" class="px-6 py-3">Id</th> --}}
 
                                     <th scope="col" class="px-6 py-3">Titre</th>
+
+                                    <th scope="col" class="px-6 py-3">Classe</th>
+
+                                    <th scope="col" class="px-6 py-3">Matiere</th>
 
                                     <th scope="col" class="px-6 py-3">Professeur</th>
 
@@ -78,19 +82,23 @@
                                         <td colspan="7">Aucun cours trouvé</td>
                                     </tr>
                                 @else
-                                    @foreach($cours as $cour)
+                                    @foreach($cours as $c)
                                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
-                                            <td class="px-6 py-4">{{ $cours->id }}</td>
+                                            {{-- <td class="px-6 py-4">{{ $c->cours->id }}</td> --}}
 
-                                            <td class="px-6 py-4">{{ $cours->titre }}</td>
+                                            <td class="px-6 py-4">{{ $c->titre }}</td>
 
-                                            <td class="px-6 py-4">{{ $prof->nom }}</td>
+                                            <td class="px-6 py-4">{{ $c->matiere->classe->libelle_Cl }}</td>
 
-                                            <td class="px-6 py-4">{{ $cours->created_at }}</td>
+                                            <td class="px-6 py-4">{{ $c->matiere->libelle_M }}</td>
 
-                                            <td class="px-1 py-2">
-                                                <!--button sup-->
-                                                <form action="{{ route('cours.edit', $cycle->id) }}" method="POST" class="inline-block">
+                                            <td class="px-6 py-4">{{ $c->prof->infoPerso->prenom }} {{ $c->prof->infoPerso->nom }}</td>
+
+                                            <td class="px-6 py-4">{{ $c->created_at }}</td>
+
+                                            <td class="px-1 py-2 flex justify-center">
+                                                    <!--button sup-->
+                                                <form action="#" method="POST" class="px-1" >
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-white hover:underline">
@@ -102,8 +110,8 @@
 
                                                 </form>
 
-                                                <!--button voir-->
-                                                <form action="#" method="POST" class="inline-block">
+                                                    <!--button voir-->
+                                                <form action="#" method="POST" class="px-1">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-white hover:underline">
@@ -114,8 +122,8 @@
                                                     </button>
                                                 </form>
 
-                                                <!--button modif-->
-                                                <form action="#" method="POST" class="inline-block">
+                                                    <!--button modif-->
+                                                <form action="#" method="POST" class="px-1">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-white hover:underline">

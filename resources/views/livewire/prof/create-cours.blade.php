@@ -1,3 +1,4 @@
+@if($editModal)
 <div>
     <div class="fixed-div p-3 sm:ml-64 bg-no-repeat bg-cover bg-white bg-blend-multiply overfl">
     <main class="mt-24 mb-0">
@@ -52,24 +53,6 @@
                         </div>
                     </div>
 
-                    <!-- Chapitre -->
-                    {{-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label for="chapitres_id" class="block text-lg font-medium text-blue-700 mb-1">Chapitre</label>
-                            <select wire:model="chapitres_id" name="chapitres_id"
-                                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200" required>
-                                <option value="">Sélectionnez le chapitre</option>
-                                @if(!empty($chapitres) && $chapitres->count())
-                                    @foreach($chapitres as $chapitre)
-                                        <option value="{{ $chapitre->id }}">{{ $chapitre->titre }}</option>
-                                    @endforeach
-                                @else
-                                    <option disabled>Aucun chapitre disponible</option>
-                                @endif
-                            </select>
-                        </div>
-                    </div> --}}
-
                     <!-- Description -->
                     <div class="mb-4">
                         <label class="block text-lg font-medium text-blue-600 mb-1">Description du cours</label>
@@ -94,5 +77,5 @@
             </div>
         </main>
     </div>
-
 </div>
+@endif

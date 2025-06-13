@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evaluation;
+use App\Models\Chapitre;
+use App\Models\Cours;
 use Illuminate\Http\Request;
 
 class EvaluationController extends Controller
@@ -12,8 +14,10 @@ class EvaluationController extends Controller
      */
     public function index()
     {
+        $cours = Cours::all();
+        $chapitres = Chapitre::all();
         $evaluations = Evaluation::with('chapitre')->get();
-        return view('int_prof.evaluation', compact('evaluations'));
+        return view('int_prof.evaluation', compact('evaluations', 'chapitres', 'cours'));
     }
 
     /**

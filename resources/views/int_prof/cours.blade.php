@@ -74,7 +74,7 @@
 
                                         <td class="px-6 py-4">{{ $cour->titre }}</td>
 
-                                        <td class="px-6 py-4">{{ $cour->matiere->classe->libelle_Cl }}</td>
+                                        <td class="px-6 py-4">{{ $cour->matiere->libelle_M }} {{ $cour->matiere->classe->libelle_Cl }}</td>
 
                                         <td class="px-6 py-4">{{ $cour->description }}</td>
 

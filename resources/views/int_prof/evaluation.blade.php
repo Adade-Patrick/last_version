@@ -50,7 +50,7 @@
                 </form>
 
                 <!--Button-->
-                <button id="openModalBtn" class="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition" onclick="openModal()">
+                <button id="openEvaluationModalBtn" class="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition" onclick="openModal()">
                 + Ajouter une évaluation
                 </button>
 
@@ -67,10 +67,11 @@
                             <tr>
                                 <th class="px-6 py-3">Id</th>
                                 <th class="px-6 py-3">Titre</th>
+                                <th class="px-6 py-3">Cours</th>
                                 <th class="px-6 py-3">Chapitre</th>
                                 <th class="px-6 py-3">Type</th>
                                 <th class="px-6 py-3">Durée (min)</th>
-                                <th class="px-6 py-3">Date de début</th>
+                                <th class="px-6 py-3">Date de création</th>
                                 <th class="px-6 py-3">Action</th>
                             </tr>
                         </thead>
@@ -84,10 +85,10 @@
                                     <tr class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700 border-gray-200">
                                         <td class="px-6 py-4">{{ $evaluation->id }}</td>
                                         <td class="px-6 py-4">{{ $evaluation->titre }}</td>
-                                        <td class="px-6 py-4">{{ $evaluation->chapitre->titre ?? 'Non défini' }}</td>
+                                        <td class="px-6 py-4">{{ $evaluation->chapitre->titre}}</td>
                                         <td class="px-6 py-4">{{ ucfirst($evaluation->type) }}</td>
                                         <td class="px-6 py-4">{{ $evaluation->duree }}</td>
-                                        <td class="px-6 py-4">{{ $evaluation->date_debut->format('d/m/Y H:i') }}</td>
+                                        <td class="px-6 py-4">{{ $evaluation->date_debut->format('d/m/Y') }}</td>
 
                                         <td class="px-6 py-4">
                                             <!-- Supprimer -->
@@ -132,6 +133,114 @@
         </div>
     </main>
 </div>
+
+<div id="evaluationModal" class="fixed inset-0 flex items-center justify-center invisible bg-black bg-opacity-30 backdrop-blur-sm z-50">
+    <div class="max-w-xl w-full bg-white p-8 rounded-xl shadow-md">
+        <h2 class="text-lg font-bold mb-4 text-center text-blue-600">Ajouter une évaluation</h2>
+        <form id="evaluationForm" action="#" method="POST">
+            @csrf
+
+            <div class="mb-4">
+                <label for="titre" class="block text-sm font-medium text-blue-600">Titre</label>
+                <input type="text" id="titre" name="titre" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="cours_id" class="block text-sm font-medium text-blue-600">Cours</label>
+                <select id="chapitre_id" name="cours_id" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+                    <option value="">-- Sélectionner un cours --</option>
+                    @foreach($cours as $cour)
+                        <option value="{{ $cour->id }}">{{ $cour->titre }} </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="chapitre_id" class="block text-sm font-medium text-blue-600">Chapitre</label>
+                <select id="chapitre_id" name="chapitre_id" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+                    <option value="">-- Sélectionner un chapitre --</option>
+                    @foreach($chapitres as $chapitre)
+                        <option value="{{ $chapitre->id }}">{{ $chapitre->titre }} </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="type" class="block text-sm font-medium text-blue-600">Type</label>
+                <select id="type" name="type" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+                    <option value="">-- Sélectionner --</option>
+                    <option value="quiz">Quiz</option>
+                    <option value="examen">Examen</option>
+                    <option value="test">Test</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="duree" class="block text-sm font-medium text-blue-600">Durée (en minutes)</label>
+                <input type="number" id="duree" name="duree" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required min="1">
+            </div>
+
+            <div class="mb-6">
+                <label for="date_debut" class="block text-sm font-medium text-blue-600">Date de creation</label>
+                <input type="date" id="date_debut" name="date_debut" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+            </div>
+
+            <div class="flex justify-center space-x-4">
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Enregistrer</button>
+                <button type="button" id="closeEvaluationModalBtn" class="bg-red-600 text-white px-4 py-2 rounded">Annuler</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal message -->
+<div id="messageModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 invisible">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-96">
+        <h2 class="text-lg font-semibold mb-4 text-center">Message</h2>
+
+        @if ($errors->any())
+            <ul class="text-red-500 mb-4 text-sm">
+                @foreach ($errors->all() as $error)
+                    <li class="mb-1">• {{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+
+        @if (session('success'))
+            <div class="text-green-500 mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <div class="flex justify-center">
+            <button onclick="closeModal()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                OK
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('openEvaluationModalBtn').addEventListener('click', function() {
+        document.getElementById('evaluationModal').classList.remove('invisible');
+    });
+
+    document.getElementById('closeEvaluationModalBtn').addEventListener('click', function() {
+        document.getElementById('evaluationModal').classList.add('invisible');
+    });
+</script>
+
+<script>
+    function closeModal() {
+        document.getElementById('messageModal').classList.add('invisible');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        @if ($errors->any() || session('success'))
+            document.getElementById('messageModal').classList.remove('invisible');
+        @endif
+    });
+</script>
 
 
 @endsection
