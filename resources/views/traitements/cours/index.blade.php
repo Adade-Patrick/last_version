@@ -50,6 +50,20 @@
                         <span class="block sm:inline">{{session('success')}}</span>
                     </div>
                 @endif
+                <div class="h-full p-8 overflow">
+                    {{-- Formulaire de recherche et ajout --}}
+                    <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
+                        <h2 class="text-2xl font-bold text-blue-600 mb-6">Rechercher un cours</h2>
+
+                        <form method="GET" action="{{ route('traitements.prof.index') }}" class="mb-4">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="Rechercher un cours..."
+                                class="px-4 py-2 border rounded-lg focus:ring focus:ring-indigo-200">
+                            <button type="submit" class="bg-violet-600 text-white px-4 py-2 rounded hover:bg-blue-600 ml-2">
+                                Rechercher
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
 
 
@@ -97,8 +111,10 @@
                                             <td class="px-6 py-4">{{ $c->created_at }}</td>
 
                                             <td class="px-1 py-2 flex justify-center">
+                                                <p>Publier</p>
+
                                                     <!--button sup-->
-                                                <form action="#" method="POST" class="px-1" >
+                                                {{-- <form action="#" method="POST" class="px-1" >
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-white hover:underline">
@@ -132,7 +148,7 @@
                                                             </svg>
                                                         </div>
                                                     </button>
-                                                </form>
+                                                </form> --}}
                                             </td>
                                         </tr>
                                     @endforeach

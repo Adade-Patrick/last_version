@@ -71,9 +71,3 @@ require __DIR__.'/stats_route.php';
 
 require __DIR__.'/creer_matiere_route.php';
 
-
-
-
-
-//  Zone de test
-// Route::view('test/admin/dashboard', 'admin.dashboard')->name('dashboard');

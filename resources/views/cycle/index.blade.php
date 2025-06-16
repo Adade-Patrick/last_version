@@ -77,7 +77,7 @@
                                 </tr>
                             @else
                                 @foreach($cycles as $cycle)
-                                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+                                    <tr data-id="{{ $cycle->id }}" class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
                                         <td class="px-6 py-4">{{ $cycle->id }}</td>
                                         <td class="px-6 py-4">{{ $cycle->libelle_C }}</td>
                                         <td class="px-1 py-2">
@@ -95,16 +95,12 @@
                                             </form>
 
                                             <!--button modif-->
-                                            <form action="{{ route('cycle.edit', $cycle->id) }}" method="POST" class="inline-block">
-                                                @csrf
-                                                @method('GET')
-                                                <button type="submit" class="text-white hover:underline" title="Modifier">
+                                            <button id="openModalBtn" class="update-cycle text-white hover:underline" title="Modifier" >
                                                     <div class="p-1 hover:bg-green-600 bg-green-500 rounded-lg">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" >
                                                         </svg>
                                                     </div>
-                                                </button>
-                                            </form>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -182,6 +178,22 @@
         @if ($errors->any() || session('success'))
             document.getElementById('messageModal').classList.remove('invisible');
         @endif
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(e){
+        $(document).ready(
+            $('.update-cycle').click(function(){
+                console.log('update button clicked');
+                const id = $(this).find("tr").data("id");
+                console.log(id);
+                console.log($(this).find("tr"));
+            }),
+        function (){
+
+        });
+
     });
 </script>
 @endsection

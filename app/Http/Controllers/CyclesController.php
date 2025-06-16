@@ -50,22 +50,22 @@ class cyclesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        return view('cycle.edit', compact('cycle'));
-    }
+    // public function edit(string $id)
+    // {
+    //     return view('cycle.edit', compact('cycle'));
+    // }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'libelle_C' => 'required|max:50|unique:cycle,libelle_C,' . $cycle->idcycle . ',idcycle',
+        $cycle = Cycle::findOrFail($id);
+        $cycle->update([
+            'libelle_C' => $request->libelle_C,
         ]);
 
-        $cycles->update($request->all());
-        return redirect()->route('cycle.index')->with('success', 'Cycle modifié avec succès.');
+        return redirect()->route('cycle.index')->with('success', 'Cycle modifié avec succès');
     }
 
     /**

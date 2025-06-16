@@ -54,7 +54,7 @@
                     <select wire:model.defer="prof_id" id="prof_id" class="mt-1 block w-full border border-gray-300 rounded px-3 py-2" required>
                         <option value="">-- Associer un professeur --</option>
                         @foreach($profs as $prof)
-                            <option value="{{ $prof->id }}">{{ $prof->infoPerso->prenom }} {{ $prof->infoPerso->nom }}</option>
+                            <option value="{{ $prof->id }}">{{ $prof->infoPerso->prenom }} {{ $prof->infoPerso->nom }} ({{ $prof->specialite }})</option>
                         @endforeach
                     </select>
                 </div>
@@ -82,6 +82,7 @@
                             <th scope="col" class="px-6 py-3">Categorie</th>
                             <th scope="col" class="px-6 py-3">Classe</th>
                             <th scope="col" class="px-6 py-3">Professeur</th>
+                            <th scope="col" class="px-6 py-3">Specialite</th>
                             <th scope="col" class="px-6 py-3">Date de creation</th>
                             <th scope="col" class="px-6 py-3">Action</th>
                         </tr>
@@ -104,6 +105,8 @@
                                     <td class="px-6 py-4">{{ $matiere->classe->libelle_Cl }}</td>
 
                                     <td class="px-6 py-4">{{ $matiere->prof->infoPerso->prenom }} {{ $matiere->prof->infoPerso->nom }}</td>
+
+                                    <td class="px-6 py-4">{{ $matiere->prof->specialite }}</td>
 
                                     <td class="px-6 py-4">{{ $matiere->created_at->format('h:m d/m/Y') }}</td>
 

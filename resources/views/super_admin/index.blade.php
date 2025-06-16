@@ -10,7 +10,7 @@
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <a href="{{ route('super_admin.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                     <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
                     </svg>
@@ -23,7 +23,7 @@
                     <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                     </svg>
-                    <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Prof</span>
+                    <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Gestion admin</span>
                     </div>
                 </li>
             </ol>
@@ -63,6 +63,7 @@
                             <th scope="col" class="px-6 py-3">ID</th>
                             <th scope="col" class="px-6 py-3">Nom</th>
                             <th scope="col" class="px-6 py-3">Prénom</th>
+                            <th scope="col" class="px-6 py-3">Nom d'utilisateur</th>
                             <th scope="col" class="px-6 py-3">Email</th>
                             <th scope="col" class="px-6 py-3">Téléphone</th>
                             <th scope="col" class="px-6 py-3">Action</th>
@@ -80,6 +81,7 @@
                                     <td class="px-6 py-4">{{ $admin->id }}</td>
                                     <td class="px-6 py-4">{{ $admin->infoPerso->nom }}</td>
                                     <td class="px-6 py-4">{{ $admin->infoPerso->prenom }}</td>
+                                    <td class="px-6 py-4">{{ $admin->user->name }}</td>
                                     <td class="px-6 py-4">{{ $admin->user->email }}</td>
                                     <td class="px-6 py-4">{{ $admin->infoPerso->telephone ?? '-' }}</td>
 
@@ -135,7 +137,7 @@
 <div id="formModal" class="fixed inset-0 flex items-center justify-center invisible bg-black bg-opacity-30 backdrop-blur-sm z-50">
     <div class="bg-white p-2 rounded-lg shadow-lg w-full max-w-xl relative">
         <h2 class="text-xl font-bold mb-4 text-center text-blue-600">Ajouter un administrateur</h2>
-        <form id="multiStepForm" action="{{ route('super_admin.store') }}" method="POST">
+        <form id="multiStepForm" action="{{ route('super_admin.storeInfo') }}" method="POST">
             @csrf
             <div id="step1" class="step hidden">
                 <h3 class="text-lg font-semibold mb-2 text-gray-700">Étape 1 : Informations personnelles</h3>

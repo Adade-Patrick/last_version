@@ -79,6 +79,50 @@ class SuperAdminController extends Controller
             ? ($currentWeekEleves > 0 ? 100 : 0)
             : round((($currentWeekEleves - $lastWeekEleves) / $lastWeekEleves) * 100, 1);
 
+            // Total Admin
+        $totalAdmin = Admin::count();
+
+        // Classes créées cette semaine
+        $currentWeekAdmin = Admin::whereBetween('created_at', [
+            Carbon::now()->startOfWeek(),
+            Carbon::now()->endOfWeek()
+        ])->count();
+
+        // Admins créés la semaine dernière
+        $lastWeekAdmin = Admin::whereBetween('created_at', [
+            Carbon::now()->subWeek()->startOfWeek(),
+            Carbon::now()->subWeek()->endOfWeek()
+        ])->count();
+
+        // Variation hebdo classes
+        $AdminVariation = $lastWeekAdmin == 0
+            ? ($currentWeekAdmin > 0 ? 100 : 0)
+            : round((($currentWeekAdmin - $lastWeekAdmin) / $lastWeekAdmin) * 100, 1);
+
+            // Total Admin
+        $totalAdmin = Admin::count();
+
+        // Admin créés cette semaine
+        $currentWeekAdmin = Admin::whereBetween('created_at', [
+            Carbon::now()->startOfWeek(),
+            Carbon::now()->endOfWeek()
+        ])->count();
+
+        // Admin créés la semaine dernière
+        $lastWeekAdmin = Admin::whereBetween('created_at', [
+            Carbon::now()->subWeek()->startOfWeek(),
+            Carbon::now()->subWeek()->endOfWeek()
+        ])->count();
+
+        // Variation hebdomadaire (%)
+        $adminVariation = $lastWeekAdmin == 0
+            ? ($currentWeekAdmin > 0 ? 100 : 0)
+            : round((($currentWeekAdmin - $lastWeekAdmin) / $lastWeekAdmin) * 100, 1);
+
+        // Dernières activités (ex: inscriptions récentes)
+        $recentActivities = Eleve::latest()->take(5)->get(); // 5 derniers inscrits
+
+
         return view('super_admin.dashboard', [
             'totalProfs' => $totalProfs,
             'profVariation' => $profVariation,
@@ -86,6 +130,10 @@ class SuperAdminController extends Controller
             'classeVariation' => $classeVariation,
             'totalEleves' => $totalEleves,
             'eleveVariation' => $eleveVariation,
+            'adminVariation' => $adminVariation,
+            'totalAdmin' => $totalAdmin,
+            'adminVariation' => $adminVariation,
+            'recentActivities' => $recentActivities
         ]);
     }
 
