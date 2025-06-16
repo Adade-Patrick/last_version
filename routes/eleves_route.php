@@ -14,6 +14,8 @@ Route::prefix('traitements/eleve')->name('traitements.eleve.')->group(function (
     Route::get('{id}/edit', [EleveController::class, 'edit'])->name('edit');
 
     Route::put('{id}/update', [EleveController::class, 'update'])->name('update');
+
+    Route::delete('{id}', [EleveController::class, 'destroy'])->name('destroy');
 });
 
 

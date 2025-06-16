@@ -50,6 +50,8 @@
                             <th class="px-6 py-3">ID</th>
                             <th class="px-6 py-3">Nom(s)</th>
                             <th class="px-6 py-3">Prénom(s)</th>
+                            <th class="px-6 py-3">Date de naissance</th>
+                            <th class="px-6 py-3">Téléphone</th>
                             <th class="px-6 py-3">Cycle</th>
                             <th class="px-6 py-3">Classe</th>
                             <th class="px-6 py-3">Nom d'utilisateur</th>
@@ -67,19 +69,19 @@
                         @foreach($eleves as $eleve)
                             <tr class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700">
                                 <td class="px-6 py-4">{{ $eleve->id }}</td>
-                                <td class="px-6 py-4">{{ $eleve->dateNaissance->format('d/m/Y') }}</td>
-                                <td class="px-6 py-4">{{ $eleve->telephone }}</td>
-                                <td class="px-6 py-4">{{ $eleve->cycle->libelle ?? '' }}</td>
-                                <td class="px-6 py-4">{{ $eleve->anneeScolaire->libelle_A ?? '' }}</td>
-                                <td class="px-6 py-4">{{ $eleve->classe->libelle_Cl ?? '' }}</td>
-                                <td class="px-6 py-4">{{ $eleve->user->user_name ?? '' }}</td>
+                                <td class="px-6 py-4">{{ $eleve->infoPerso->nom ?? '-' }}</td>
+                                <td class="px-6 py-4">{{ $eleve->infoPerso->prenom ?? '-' }}</td>
+                                <td class="px-6 py-4">
+                                    {{ $eleve->infoPerso->date_N ? date('Y-m-d', strtotime($eleve->infoPerso->date_N)) : '-' }}
+                                </td>
+                                <td class="px-6 py-4">{{ $eleve->infoPerso->telephone ?? '-' }}</td>
+                                <td class="px-6 py-4">{{ $eleve->cycle->libelle_C ?? '-' }}</td>
+                                <td class="px-6 py-4">{{ $eleve->classe->libelle_Cl ?? '-' }}</td>
+                                <td class="px-6 py-4">{{ $eleve->user->name ?? '-' }}</td>
                                 <td class="px-6 py-4 space-x-2">
-
-                                    <a href="{{ route('eleves.show', $eleve) }}" class="text-blue-600 hover:underline">Voir</a>
-
-                                    <a href="{{ route('eleves.edit', $eleve) }}" class="text-yellow-600 hover:underline">Modifier</a>
-
-                                    <form action="{{ route('eleves.destroy', $eleve) }}" method="POST" class="inline-block" onsubmit="return confirm('Supprimer cet élève ?')">
+                                    <a href="{{ route('traitements.eleve.show', $eleve->id) }}" class="text-blue-600 hover:underline">Voir</a>
+                                    <a href="{{ route('traitements.eleve.edit', $eleve->id) }}" class="text-yellow-600 hover:underline">Modifier</a>
+                                    <form action="{{ route('traitements.eleve.destroy', $eleve->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Supprimer cet élève ?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600 hover:underline">Supprimer</button>
