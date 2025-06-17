@@ -11,13 +11,7 @@
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-6">
             <!-- Welcome Banner -->
             <div class="relative overflow-hidden bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl shadow-lg mb-6">
-                {{-- <div class="absolute right-0 top-0 -mt-10 -mr-10">
-                    <div class="text-white/10">
-                        <svg class="w-48 h-48" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M4 13H3C2.44772 13 2 12.5523 2 12C2 11.4477 2.44772 11 3 11H4C4.55228 11 5 11.4477 5 12C5 12.5523 4.55228 13 4 13Z"></path>
-                        </svg>
-                    </div>
-                </div> --}}
+               
                 <div class="relative p-6">
                     <h2 class="text-2xl text-center font-bold text-white mb-2">Bienvenue sur votre Dashbord {{ Auth::user()->name }} !</h2>
                     <p class="text-blue-100 text-center">Voici un aperçu de votre tableau de bord</p>

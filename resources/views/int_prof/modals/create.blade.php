@@ -20,9 +20,17 @@
                 @csrf
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">
-                        <label for="titre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre</label>
+                        <label for="titre" class="block mb-2 text-sm font-medium text-blue-700 dark:text-white">Titre</label>
                         <input type="text" name="titre" id="titre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
                     </div>
+
+                    <div class="col-span-2">
+                        <label class="block mb-2 text-sm font-medium text-blue-700 dark:text-white">ImageUrl</label>
+                        <input type="file" wire:model="imageUrl"
+                            class="mt-1 w-full px-4 py-2 border rounded-xl" />
+                        @error('imageUrl') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+
                     <div class="col-span-2">
                         <label for="matiere_id" class="block text-lg font-medium text-blue-700 mb-1">Matière</label>
                         <select wire:model="matiere_id" name="matiere_id"
@@ -35,7 +43,7 @@
                     </div>
 
                     <div class="col-span-2">
-                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                        <label for="description" class="block mb-2 text-sm font-medium text-blue-700 dark:text-white">Description</label>
                         <textarea id="description" name="description"  rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Description du cours" required></textarea>
                     </div>
                 </div>

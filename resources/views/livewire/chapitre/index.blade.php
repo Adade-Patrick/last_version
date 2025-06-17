@@ -263,29 +263,27 @@
 
 
 <script defer>
-document.querySelectorAll('.toggle-eyes').forEach(element => {
-    element.addEventListener('click', function(e) {
-        // Toujours utiliser currentTarget ici pour pointer vers le bouton sur lequel l'écouteur est attaché
-        const eye = e.currentTarget.querySelector('.eye');
-        const noEye = e.currentTarget.querySelector('.no-eye');
+    document.querySelectorAll('.toggle-eyes').forEach(element => {
+        element.addEventListener('click', function(e) {
+            // Toujours utiliser currentTarget ici pour pointer vers le bouton sur lequel l'écouteur est attaché
+            const eye = e.currentTarget.querySelector('.eye');
+            const noEye = e.currentTarget.querySelector('.no-eye');
 
-        if (eye && noEye) {
-            eye.classList.toggle('hidden');
-            noEye.classList.toggle('hidden');
-        }
+            if (eye && noEye) {
+                eye.classList.toggle('hidden');
+                noEye.classList.toggle('hidden');
+            }
+        });
     });
-});
-document.querySelectorAll('.add-section').forEach(element => {
-    element.addEventListener('click', function(e) {
-        // Utilise parentElement ou closest selon la structure
-        const form = e.currentTarget.parentElement.parentElement.parentElement.parentElement.querySelector('.form-section');
-        if (form) {
-            console.log('he');
-            form.classList.toggle('flex');
-            form.classList.toggle('hidden');
-        }
+    document.querySelectorAll('.add-section').forEach(element => {
+        element.addEventListener('click', function(e) {
+            // Utilise parentElement ou closest selon la structure
+            const form = e.currentTarget.parentElement.parentElement.parentElement.parentElement.querySelector('.form-section');
+            if (form) {
+                console.log('he');
+                form.classList.toggle('flex');
+                form.classList.toggle('hidden');
+            }
+        });
     });
-});
-
-
 </script>
