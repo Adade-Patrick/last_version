@@ -13,7 +13,10 @@ class Evaluation extends Model
 
     protected $fillable = [
         'chapitre_id',
+        'titre',
         'date_evaluation',
+        'type',
+        'duree',
     ];
 
     public function chapitre()
@@ -21,15 +24,6 @@ class Evaluation extends Model
         return $this->belongsTo(Chapitre::class, 'chapitre_id');
     }
 
-    // public function resultat()
-    // {
-    //     return $this->hasMany(Resultat::class, 'evaluations_id');
-    // }
-
-    // public function questions()
-    // {
-    //     return $this->hasMany(Question::class, 'evaluations_id');
-    // }
 
 
 }

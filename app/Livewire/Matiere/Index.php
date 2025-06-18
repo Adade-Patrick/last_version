@@ -10,14 +10,18 @@ use App\Models\Prof;
 
 class Index extends Component
 {
-    public $cours, $matieres;
+    public $cours;
     public $id;
     public $isModify = false;
 
     // Champs du formulaire
     public $libelle_M, $categories_id, $classes_id, $prof_id;
 
-    public $categories, $classes, $profs;
+    public $categories = [];
+    public $classes = [];
+    public $profs = [];
+    public $matieres = [];
+
 
      public function mount()
     {
@@ -25,6 +29,7 @@ class Index extends Component
         $this->categories = Categorie::all();
         $this->classes = Classe::all();
         $this->profs = Prof::all();
+        $this->matieres = Matiere::all();
     }
 
     public function refresh()
@@ -82,7 +87,15 @@ class Index extends Component
         $this->refresh();
         $this->clearForm();
         session()->flash('success', 'Matière modifiée avec succès !');
+
+        $this->reset();
     }
+
+    public function cancelEdit()
+    {
+        $this->reset(['libelle_M', 'categories_id', 'classes_id', 'prof_id', 'isModify']);
+    }
+
 
     public function delete($id)
     {

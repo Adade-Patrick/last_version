@@ -12,7 +12,7 @@ use App\Http\Controllers\ClassesController;
 
   Route::put('/classe/{id}', [ClassesController::class, 'edit'])->name('classe.edit');
 
-  Route::get('/classe/{id}', [ClassesController::class, 'update'])->name('classe.update');
+  Route::post('/classe', [ClassesController::class, 'update'])->name('classe.update');
 
 
 ?>

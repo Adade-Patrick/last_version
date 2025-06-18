@@ -51,6 +51,6 @@ class Quizz extends Model
         return $this->hasMany(Question::class, 'quizz_id');
     }
 
-    
+
 
 }

@@ -4,13 +4,14 @@
 
 @include('partials.navbar')
 @include('partials.sidebar')
+@include('traitements.prof.update')
 
 <div class="p-3 sm:ml-64  bg-no-repeat bg-cover bg-white bg-blend-multiply">
     <main class="mt-24 mb-0 ">
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="{{ route('super_admin.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                     <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                         <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
                     </svg>
@@ -78,7 +79,7 @@
                             </tr>
                         @else
                             @foreach($profs as $prof)
-                               <tr class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700 border-gray-200">
+                               <tr data-id="{{ $prof->id }}" class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700 border-gray-200">
                                     <td class="px-6 py-4">{{ $prof->id }}</td>
 
                                     <td class="px-6 py-4">{{ $prof->infoPerso->nom }}</td>
@@ -109,16 +110,12 @@
                                         </form>
 
                                         <!--button modif-->
-                                        <form action="#" method="POST" class="inline-block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-white hover:underline">
-                                                <div class="p-1 hover:bg-green-600 bg-green-500 rounded-lg">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" >
-                                                    </svg>
-                                                </div>
-                                            </button>
-                                        </form>
+                                        <button data-modal-target="popup-prof" data-modal-toggle="popup-prof" class="update-prof text-white hover:underline" title="Modifier" >
+                                            <div class="p-1 hover:bg-green-600 bg-green-500 rounded-lg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" >
+                                                </svg>
+                                            </div>
+                                        </button>
 
                                         <!--button voir-->
                                         {{-- <form action="#" method="POST" class="inline-block">
@@ -219,11 +216,7 @@
                     <input type="text" name="name" class="w-full border rounded p-1" required>
                     <span class="text-red-500 text-xs hidden error-message"></span>
                 </div>
-                <!--password-->
-                {{-- <div class="mb-4">
-                    <label for="password" class="block text-sm font-medium text-blue-600">Mot de passe</label>
-                    <input type="password" name="password" class="w-full border rounded p-1" required>
-                </div> --}}
+
                 <div class="mb-4 relative">
                     <label for="password" class="block text-sm font-medium text-blue-600">Mot de passe</label>
 
@@ -530,6 +523,45 @@
     }
 </script>
 
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function(e){
+        $(document).ready(
+            $('table').on('click', 'tr', (function(){
+
+                console.log('update button clicked');
+                const id = $(this).data("id");
+                console.log(id);
+                $('#popup-prof #libelle_C').val($(this).find('td').eq(1).text());
+                $('#popup-prof #cycle-id').val(id);
+            }),
+        )
+        );
+    });
+</script>   --}}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $('table').on('click', 'tr[data-id]', function () {
+            console.log('update button clicked');
+
+            const id = $(this).data("id");
+            const nom = $(this).find('.nom').text().trim();
+            const prenom = $(this).find('.prenom').text().trim();
+            const email = $(this).find('.email').text().trim();
+            const specialite = $(this).find('.specialite').text().trim();
+
+            // Remplir le formulaire
+            $('#popup-prof #prof-id').val(id);
+            console.log("Nom reçu :", nom);
+            $('#popup-prof #nom').val(nom);
+            $('#editProfModal #prenom').val(prenom);
+            $('#editProfModal #email').val(email);
+            $('#editProfModal #specialite').val(specialite);
+
+            // Afficher le modal
+
+    });
+</script>
 
 
 @endsection

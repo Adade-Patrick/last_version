@@ -23,48 +23,78 @@ class EvaluationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+     public function create()
     {
-        //
+        $chapitres = Chapitre::all();
+        return view('int_prof.evaluation', compact('chapitres'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'chapitre_id' => 'required|exists:chapitres,id',
+            'titre' => 'required|string|',
+            'date_evaluation' => 'required|date',
+            'type' => 'required|string|',
+            'duree' => 'required|int|',
+        ]);
+
+        Evaluation::create([
+            'chapitre_id' => $request->chapitre_id,
+            'titre' => $request->titre,
+            'date_evaluation' => $request->date_evaluation,
+            'type' => $request->type,
+            'duree' => $request->duree,
+        ]);
+
+        return redirect()->route('int_prof.evaluation')->with('success', 'Évaluation ajoutée avec succès.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show($id)
+        {
+            try{
+                $evaluation=Evaluation::where('id',$id)->first();
+                return view('int_prof.evaluation',compact('cours'));
+
+            }catch(\Exception $e){
+                 return redirect()->back()->with('error', 'Une erreur est survenue : ' . $e->getMessage());
+            }
+        }
+
+    public function update(Request $request)
     {
-        //
+        // 1. Valider les données
+        $validated = $request->validate([
+            'chapitre_id' => 'required|exists:chapitres,id',
+            'titre' => 'required|string',
+            'date_evaluation' => 'required|date',
+            'type' => 'required|string',
+            'duree' => 'required|integer',
+        ]);
+
+        // 2. Récupérer l'évaluation à modifier
+        $evaluation = Evaluation::findOrFail($id);
+
+        // 3. Mettre à jour les champs
+        $evaluation->chapitre_id = $validated['chapitre_id'];
+        $evaluation->titre = $validated['titre'];
+        $evaluation->date_evaluation = $validated['date_evaluation'];
+        $evaluation->type = $validated['type'];
+        $evaluation->duree = $validated['duree'];
+
+        // 4. Sauvegarder les modifications
+        $evaluation->save();
+
+        // 5. Rediriger ou retourner une réponse
+        return redirect()->back()->with('success', 'Évaluation mise à jour avec succès.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+
+    public function destroy($id)
     {
-        //
+        $evaluations = Evaluation::findOrFail($id);
+        $evaluations->delete();
+        return redirect()->route('int_prof.evaluation')->with('success', 'Evaluation supprimé.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

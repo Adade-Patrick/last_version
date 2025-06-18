@@ -85,14 +85,15 @@
                                     <tr class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700 border-gray-200">
                                         <td class="px-6 py-4">{{ $evaluation->id }}</td>
                                         <td class="px-6 py-4">{{ $evaluation->titre }}</td>
+                                        <td class="px-6 py-4">{{ $evaluation->chapitre->cours->titre }}</td>
                                         <td class="px-6 py-4">{{ $evaluation->chapitre->titre}}</td>
-                                        <td class="px-6 py-4">{{ ucfirst($evaluation->type) }}</td>
+                                        <td class="px-6 py-4">{{ $evaluation->type }}</td>
                                         <td class="px-6 py-4">{{ $evaluation->duree }}</td>
-                                        <td class="px-6 py-4">{{ $evaluation->date_debut->format('d/m/Y') }}</td>
+                                        <td class="px-6 py-4">{{ $evaluation->date_evaluation }}</td>
 
                                         <td class="px-6 py-4">
                                             <!-- Supprimer -->
-                                            <form action="{{ route('evaluations.destroy', $evaluation->id) }}" method="POST" class="inline-block">
+                                            <form action="{{ route('int_prof.destroy', $evaluation->id) }}" method="POST" class="inline-block">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-white hover:underline">
@@ -104,24 +105,29 @@
                                                 </button>
                                             </form>
 
-                                            <!-- Voir -->
-                                            <a href="{{ route('evaluations.show', $evaluation->id) }}" class="inline-block">
-                                                <div class="p-1 hover:bg-blue-600 bg-blue-500 rounded-lg text-white">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                    </svg>
-                                                </div>
-                                            </a>
+                                            <!-- quizz -->
+                                            <form action="{{ route('int_prof.show', $evaluation->id) }}"  class="inline-block" title="Quizz">
+                                                <button type="submit" class="text-white hover:underline">
+                                                        <div class="p-1 hover:bg-blue-600 bg-blue-500 rounded-lg text-white">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+                                                        </svg>
+                                                        </div>
+                                                </button>
+                                            </form>
 
                                             <!-- Modifier -->
-                                            <a href="{{ route('evaluations.edit', $evaluation->id) }}" class="inline-block">
-                                                <div class="p-1 hover:bg-green-600 bg-green-500 rounded-lg text-white">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Z" />
-                                                    </svg>
-                                                </div>
-                                            </a>
+                                            {{-- <form action="{{ route('int_prof.show', $evaluation->id) }}"  class="inline-block" title="Chapitre">
+                                                <button type="submit" class="text-white hover:underline">
+                                                    <a href="#" class="inline-block">
+                                                        <div class="p-1 hover:bg-green-600 bg-green-500 rounded-lg text-white">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Z" />
+                                                            </svg>
+                                                        </div>
+                                                    </a>
+                                                </button>
+                                            </form> --}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -137,7 +143,7 @@
 <div id="evaluationModal" class="fixed inset-0 flex items-center justify-center invisible bg-black bg-opacity-30 backdrop-blur-sm z-50">
     <div class="max-w-xl w-full bg-white p-8 rounded-xl shadow-md">
         <h2 class="text-lg font-bold mb-4 text-center text-blue-600">Ajouter une évaluation</h2>
-        <form id="evaluationForm" action="#" method="POST">
+        <form id="evaluationForm" action="{{ route('int_prof.store') }}" method="POST">
             @csrf
 
             <div class="mb-4">
@@ -179,8 +185,8 @@
             </div>
 
             <div class="mb-6">
-                <label for="date_debut" class="block text-sm font-medium text-blue-600">Date de creation</label>
-                <input type="date" id="date_debut" name="date_debut" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+                <label for="date_evaluation" class="block text-sm font-medium text-blue-600">Date de creation</label>
+                <input type="date" id="date_evaluation" name="date_evaluation" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
             </div>
 
             <div class="flex justify-center space-x-4">

@@ -99,9 +99,23 @@ class ProfController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+        // 1. Validation des données
+        $validated = $request->validate([
+            'users_id' => 'required|exists:users,id',
+            'info_perso_id' => 'required|exists:info_persos,id',
+            'specialite' => 'required|string|max:255',
+        ]);
 
+        // 2. Recherche du professeur
+        $Prof = Prof::findOrFail($id);
+
+        // 3. Mise à jour
+        $Prof->update($validated);
+
+        // 4. Redirection avec message de succès
+        return redirect()->route('traitements.prof.index')->with('success', 'Professeur mis à jour avec succès.');
     }
 
     /**

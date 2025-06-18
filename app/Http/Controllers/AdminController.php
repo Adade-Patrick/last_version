@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Prof;
 use App\Models\Classe;
 use App\Models\Eleve;
+use App\Models\Matiere;
 use Carbon\Carbon;
 
 
@@ -77,6 +78,29 @@ class AdminController extends Controller
             ? ($currentWeekEleves > 0 ? 100 : 0)
             : round((($currentWeekEleves - $lastWeekEleves) / $lastWeekEleves) * 100, 1);
 
+            // Total matières
+        $totalMatieres = Matiere::count();
+
+        // Matiere créés cette semaine
+        $currentWeekMatiere = Matiere::whereBetween('created_at', [
+            Carbon::now()->startOfWeek(),
+            Carbon::now()->endOfWeek()
+        ])->count();
+
+        // Matiere créés la semaine dernière
+        $lastWeekMatiere = Matiere::whereBetween('created_at', [
+            Carbon::now()->subWeek()->startOfWeek(),
+            Carbon::now()->subWeek()->endOfWeek()
+        ])->count();
+
+        // Variation hebdomadaire (%)
+        $matiereVariation = $lastWeekMatiere == 0
+            ? ($currentWeekMatiere > 0 ? 100 : 0)
+            : round((($currentWeekMatiere - $lastWeekMatiere) / $lastWeekMatiere) * 100, 1);
+
+            // Dernières activités (ex: inscriptions récentes)
+        $recentActivities = Eleve::latest()->take(5)->get(); // 5 derniers inscrits
+
         return view('admin.dashboard', [
             'totalProfs' => $totalProfs,
             'profVariation' => $profVariation,
@@ -84,6 +108,9 @@ class AdminController extends Controller
             'classeVariation' => $classeVariation,
             'totalEleves' => $totalEleves,
             'eleveVariation' => $eleveVariation,
+            'totalMatieres' => $totalMatieres,
+            'matiereVariation' => $matiereVariation,
+            'recentActivities' => $recentActivities
         ]);
         }
 

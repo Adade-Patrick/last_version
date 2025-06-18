@@ -95,8 +95,8 @@ class AnneeScolaireController extends Controller
     {
         $id = $request->id;
 
-        $annee_scolaire = AnneeScolaire::findOrFail($id);
-        $annee_scolaire->update([
+        $annee_scolaires = AnneeScolaire::findOrFail($id);
+        $annee_scolaires->update([
             'libelle_A' => $request->libelle_A,
         ]);
 

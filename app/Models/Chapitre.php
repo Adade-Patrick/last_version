@@ -25,7 +25,7 @@ class Chapitre extends Model
     // Relation avec le modèle Cour
     public function cours()
     {
-        return $this->belongsTo(Cour::class, 'cours_id');
+        return $this->belongsTo(Cours::class, 'cours_id');
     }
 
     public function sections()
@@ -40,6 +40,11 @@ class Chapitre extends Model
     public function evaluations()
     {
         return $this->hasMany(Evaluation::class);
+    }
+
+    public function chapitre()
+    {
+        return $this->belongsTo(Chapitre::class);
     }
 
 

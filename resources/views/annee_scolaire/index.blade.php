@@ -4,7 +4,7 @@
 
 @include('partials.navbar')
 @include('partials.sidebar')
-@include('cycle.update')
+@include('annee_scolaire.update')
 
 {{-- Navigation --}}
 <div class="fixed-div p-3 sm:ml-64 bg-no-repeat bg-cover bg-white bg-blend-multiply">
@@ -74,7 +74,7 @@
                         </thead>
                         <tbody>
                             @forelse($annees as $annee)
-                                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                <tr data-id="{{ $annee->id }}" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                                     <td class="px-6 py-4">{{ $annee->id }}</td>
                                     <td class="px-6 py-4">{{ $annee->libelle_A }}</td>
                                     <!--btn--->
@@ -208,7 +208,6 @@
             }),
         )
         );
-
     });
 </script>
 

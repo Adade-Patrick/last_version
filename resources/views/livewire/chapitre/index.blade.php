@@ -45,7 +45,7 @@
                                         <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Evaluation</p>
                                     @endif
 
-                                    @if ($chapitre->ressource)	e
+                                    @if ($chapitre->ressource)
                                         <p class="">
                                             <a href="{{ $chapitre->ressource }}" target="blank"> ressources ...</a>
                                         </p>

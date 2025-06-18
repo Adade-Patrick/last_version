@@ -36,7 +36,7 @@
         <h2 class="text-3xl text-center font-bold text-blue-600 mb-6">Bienvenue dans la liste des cours crée par des professeurs</h2>
         <div class="p-8 overflow">
             <!--Zone erreur-->
-            <div class="max-w-xl mx-auto bg-white p-0 rounded-xl">
+            {{-- <div class="max-w-xl mx-auto bg-white p-0 rounded-xl">
                 @if($errors->any())
                     <ul>
                         @foreach($errors->all() as $error)
@@ -51,7 +51,7 @@
                     </div>
                 @endif
                 <div class="h-full p-8 overflow">
-                    {{-- Formulaire de recherche et ajout --}}
+
                     <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
                         <h2 class="text-2xl font-bold text-blue-600 mb-6">Rechercher un cours</h2>
 
@@ -64,7 +64,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
 
             <!-- Section cours -->

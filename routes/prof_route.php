@@ -10,6 +10,8 @@ Route::prefix('/prof')->group(function(){
 
     Route::delete('/prof/{prof}', [ProfController::class, 'destroy'])->name('prof.destroy');
 
+    Route::post('/update', [ProfController::class, 'update'])->name('traitements.prof.update');
+
     Route::delete('/show', [ProfController::class, 'show'])->name('traitements.prof.show');
 
 });

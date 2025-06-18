@@ -72,20 +72,23 @@ class ClassesController extends Controller
         return view('classe.edit', compact('classes', 'cycles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Classe $classe)
+    public function update(Request $request)
     {
-        $validated = $request->validate([
-        'libelle_Cl' => 'required|string|max:50',
-        'cycle_id' => 'required|exists:cycles,id',
+        $request->validate([
+            'id' => 'required|exists:classes,id',
+            'libelle_Cl' => 'required|string|max:255',
+            'cycle_id' => 'required|exists:cycle,id',
         ]);
 
-        $classe->update($validated);
+        $classe = Classe::findOrFail($request->id);
+        $classe->update([
+            'libelle_Cl' => $request->libelle_Cl,
+            'cycle_id' => $request->cycle_id,
+        ]);
 
-        return redirect()->route('classe.index')->with('success', 'classe mise à jour');
+        return redirect()->route('classe.index')->with('success', 'Classe mise à jour avec succès');
     }
+
 
 
     /**
