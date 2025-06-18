@@ -13,6 +13,8 @@ Route::prefix('/prof')->group(function(){
     Route::post('/update', [ProfController::class, 'update'])->name('traitements.prof.update');
 
     Route::delete('/show', [ProfController::class, 'show'])->name('traitements.prof.show');
+    
+    Route::get('/dashboard', [ProfController::class, 'dashboard'])->name('int_prof.dashboard');
 
 });
 

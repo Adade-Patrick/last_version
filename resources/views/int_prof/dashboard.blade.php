@@ -20,18 +20,18 @@
             <!-- Stats Grid -->
             <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                 <!-- Total Students -->
-                <div class="bg-blue-500 dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
+                {{-- <div class="bg-blue-500 dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="bg-white dark:bg-blue-500/10 p-3 rounded-lg">
                             <svg class="w-6 h-6 text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M20 22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22Z"></path>
                             </svg>
                         </div>
-                        <span class="text-sm font-medium text-green-600 bg-green-50 px-2.5 py-0.5 rounded-full">+12%</span>
+                        <span class="text-sm font-medium text-green-600 bg-green-50 px-2.5 py-0.5 rounded-full ">+12%</span>
                     </div>
                     <h3 class="text-2xl font-bold text-white dark:text-white mb-1">2,450</h3>
-                    <p class="text-sm text-white dark:text-gray-400">Total Cours publiés
-                </div>
+                    <p class="text-sm text-white dark:text-gray-400">Total Cours Créés
+                </div> --}}
 
                 <!-- Total Teachers -->
                 {{-- <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
@@ -48,7 +48,7 @@
                 </div> --}}
 
                 <!-- Total Classes -->
-                <div class="bg-blue-500 dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
+                {{-- <div class="bg-blue-500 dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="bg-orange-50 dark:bg-orange-500/10 p-3 rounded-lg">
                             <svg class="w-6 h-6 text-orange-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -59,10 +59,10 @@
                     </div>
                     <h3 class="text-2xl font-bold text-white dark:text-white mb-1">32</h3>
                     <p class="text-sm text-white dark:text-gray-400">Total Classes</p>
-                </div>
+                </div> --}}
 
                 <!-- Success Rate -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
+                {{-- <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-blue-600 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="bg-green-50 dark:bg-green-500/10 p-3 rounded-lg">
                             <svg class="w-6 h-6 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -73,7 +73,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">92%</h3>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Taux de Réussite</p>
-                </div>
+                </div> --}}
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -90,7 +90,7 @@
                                     <img class="w-8 h-8 rounded-full" src="https://ui-avatars.com/api/?name=User+{{ $i }}" alt="User">
                                 </div>
                                 <div class="ml-4">
-                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Nouvel élève inscrit</p>
+                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Nouveaux cours créé</p>
                                     <p class="text-sm text-gray-500 dark:text-gray-400">Il y a {{ $i * 5 }} minutes</p>
                                 </div>
                             </div>

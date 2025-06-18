@@ -13,6 +13,7 @@ class ProfilProfController extends Controller
     {
         return view('int_prof.cours');
     }
+    
 
     /**
      * Show the form for creating a new resource.

@@ -6,6 +6,7 @@ use App\Models\Prof;
 use App\Models\Classe;
 use App\Models\Cycle;
 use App\Models\User;
+use App\Models\Cours;
 use App\Models\InfoPerso;
 use App\Models\AnneeScolaire;
 use App\Models\Matiere;
@@ -25,6 +26,13 @@ class ProfController extends Controller
         return view('traitements.prof.index', compact('profs'));
     }
 
+
+    public function dasboard()
+    {
+        $recentCours = Cours::with('prof')->latest()->take(5)->get();
+        compact('recentCours');
+        return view('int_prof.dashboard');
+    }
     /**
      * Show the form for creating a new resource.
      */
