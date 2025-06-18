@@ -108,8 +108,10 @@
                                                 </button>
                                             </form>
 
+
                                             <!--button chapitre-->
                                             <form action="{{ route('int_prof.cours.show', $cour->id) }}"  class="inline-block" title="Chapitre">
+
                                                 <button type="submit" class=" text-white hover:underline">
                                                     <div class="p-1 hover:bg-blue-600 bg-blue-500 rounded-lg">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

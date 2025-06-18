@@ -311,6 +311,7 @@
         },
         {
             "name": "doctrine/dbal",
+
             "version": "4.2.4",
             "source": {
                 "type": "git",
@@ -320,8 +321,8 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/dbal/zipball/b37d160498ea91a2382a2ebe825c4ea6254fc0ec",
-                "reference": "b37d160498ea91a2382a2ebe825c4ea6254fc0ec",
-                "shasum": ""
+                "reference": "b37d160498ea91a2382a2ebe825c4ea6254fc0ec"
+
             },
             "require": {
                 "doctrine/deprecations": "^0.5.3|^1",
@@ -397,7 +398,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
+
                 "source": "https://github.com/doctrine/dbal/tree/4.2.4"
+
             },
             "funding": [
                 {
@@ -413,7 +416,9 @@
                     "type": "tidelift"
                 }
             ],
+
             "time": "2025-06-15T23:15:01+00:00"
+
         },
         {
             "name": "doctrine/deprecations",
@@ -6344,16 +6349,17 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.18.3",
+            "version": "2.18.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "59a123a3d459c5a23055802237cb317f609867e5"
+                "reference": "89dabca1490bc77dbcab41c2b20968c7e44bf7c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/59a123a3d459c5a23055802237cb317f609867e5",
-                "reference": "59a123a3d459c5a23055802237cb317f609867e5",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/89dabca1490bc77dbcab41c2b20968c7e44bf7c3",
+                "reference": "89dabca1490bc77dbcab41c2b20968c7e44bf7c3",
+
                 "shasum": ""
             },
             "require": {
@@ -6403,7 +6409,9 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.18.3"
+
+                "source": "https://github.com/filp/whoops/tree/2.18.2"
+
             },
             "funding": [
                 {
@@ -6411,7 +6419,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-16T00:02:10+00:00"
+            "time": "2025-06-11T20:42:19+00:00"
+
         },
         {
             "name": "hamcrest/hamcrest-php",
