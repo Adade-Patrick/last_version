@@ -91,9 +91,16 @@ class AnneeScolaireController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, AnneeScolaire $annee_scolaires_id)
+    public function update(Request $request)
     {
-        //
+        $id = $request->id;
+
+        $annee_scolaire = AnneeScolaire::findOrFail($id);
+        $annee_scolaire->update([
+            'libelle_A' => $request->libelle_A,
+        ]);
+
+        return redirect()->route('annee_scolaire.index')->with('success', 'Annee scolaire modifié avec succès');
     }
 
     /**

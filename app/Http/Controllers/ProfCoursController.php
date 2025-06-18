@@ -52,6 +52,7 @@ class ProfCoursController extends Controller
             // dd($request->all());
             $validator = Validator::make($request->all(), [
                 'titre' => 'required|string|max:255',
+                'imageUrl' => 'nullable|image|max:1024|mimes:jpeg,png,jpg,gif,svg,webp',
                 'matiere_id' => 'required|integer|exists:matiere,id',
                 'description' => 'nullable|string',
             ]);

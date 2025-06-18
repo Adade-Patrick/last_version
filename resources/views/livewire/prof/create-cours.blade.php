@@ -39,6 +39,13 @@
                         <input type="text" placeholder="Entrez le titre de votre cours" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200" required>
                     </div>
 
+                    <div class="mb-4">
+                        <label class="block text-lg font-medium text-blue-700 mb-1">ImageUrl</label>
+                        <input type="file" wire:model="imageUrl"
+                            class="mt-1 w-full px-4 py-2 border rounded-xl" />
+                        @error('imageUrl') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+
                     <!-- Classe -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div>

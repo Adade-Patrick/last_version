@@ -11,7 +11,7 @@
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-6">
             <!-- Welcome Banner -->
             <div class="relative overflow-hidden bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl shadow-lg mb-6">
-                
+
                 <div class="relative p-6">
                     <h2 class="text-2xl text-center font-bold text-white mb-2">Bienvenue sur votre Dashbord {{ Auth::user()->name }} !</h2>
                     <p class="text-blue-100 text-center">Voici un aperçu de votre tableau de bord</p>

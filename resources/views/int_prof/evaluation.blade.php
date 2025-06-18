@@ -168,8 +168,7 @@
                 <label for="type" class="block text-sm font-medium text-blue-600">Type</label>
                 <select id="type" name="type" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
                     <option value="">-- Sélectionner --</option>
-                    <option value="quiz">Quiz</option>
-                    <option value="examen">Examen</option>
+                    <option value="quiz">Quizz</option>
                     <option value="test">Test</option>
                 </select>
             </div>

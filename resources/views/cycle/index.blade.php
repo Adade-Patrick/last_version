@@ -4,13 +4,14 @@
 
 @include('partials.navbar')
 @include('partials.sidebar')
+@include('cycle.update')
 
 <div class="fixed-div p-3 sm:ml-64 bg-no-repeat bg-cover bg-white bg-blend-multiply">
     <main class="mt-24 mb-0">
         <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                    <a href="{{ route('super_admin.dashboard') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
                         <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
                         </svg>
@@ -93,9 +94,8 @@
                                                 </button>
 
                                             </form>
-
                                             <!--button modif-->
-                                            <button id="openModalBtn" class="update-cycle text-white hover:underline" title="Modifier" >
+                                            <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="update-cycle text-white hover:underline" title="Modifier" >
                                                     <div class="p-1 hover:bg-green-600 bg-green-500 rounded-lg">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" >
                                                         </svg>
@@ -141,7 +141,6 @@
     });
 </script>
 
-
 <!-- Modal message -->
 <div id="messageModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 invisible">
     <div class="bg-white rounded-lg shadow-lg p-6 w-96">
@@ -184,16 +183,16 @@
 <script>
     document.addEventListener('DOMContentLoaded', function(e){
         $(document).ready(
-            $('.update-cycle').click(function(){
+            $('table').on('click', 'tr', (function(){
+
                 console.log('update button clicked');
-                const id = $(this).find("tr").data("id");
+                const id = $(this).data("id");
                 console.log(id);
-                console.log($(this).find("tr"));
+                $('#popup-modal #libelle_C').val($(this).find('td').eq(1).text());
+                $('#popup-modal #cycle-id').val(id);
             }),
-        function (){
-
-        });
-
+        )
+        );
     });
 </script>
 @endsection

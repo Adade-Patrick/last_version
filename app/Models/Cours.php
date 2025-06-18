@@ -15,6 +15,7 @@ class Cours extends Model
     // Champs autorisés pour le remplissage en masse
     protected $fillable = [
         'titre',
+        'imageUrl',
         'matiere_id',
         'prof_id',
         'description',
@@ -34,6 +35,7 @@ class Cours extends Model
     {
         return $this->hasMany(Chapitre::class, 'cours_id');
     }
+
     public function eleves()
     {
         return $this->belongsToMany(Eleve::class, 'cours_eleves', 'cours_id', 'eleve_id');
@@ -57,5 +59,10 @@ class Cours extends Model
         }
 
         return $json;
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
     }
 }

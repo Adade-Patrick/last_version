@@ -20,7 +20,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                         </svg>
                     </button>
-                    <ul id="dropdown-example" class="hidden py-2 space-y-2 font-extrabold">
+                    <ul id="dropdown-example" class="py-2 space-y-2 font-extrabold">
 
                         <li>
                             <a href="{{ route('cycle.index') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg hover:bg-blue-500 group ">
@@ -72,7 +72,7 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                     </svg>
                 </button>
-                    <ul id="dropdown-one" class="hidden py-2 space-y-2 font-extrabold">
+                    <ul id="dropdown-one" class="py-2 space-y-2 font-extrabold">
                     <li>
                         <a href="{{ route('traitements.eleve.index') }}" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg hover:bg-blue-500 group">
                             <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-whith-400  dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13Z"></path></svg>
@@ -115,7 +115,7 @@
                 </li>
 
                 <!--Gestion compte-->
-                <li>
+                {{-- <li>
                 <button type="button" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 flex items-center w-full p-2 text-base text-white  rounded-lg group hover:bg-blue-500 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-two" data-collapse-toggle="dropdown-two">
                     <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-gray-400 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14V22H4C4 17.5817 7.58172 14 12 14ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM21 17H22V22H14V17H15V16C15 14.3431 16.3431 13 18 13C19.6569 13 21 14.3431 21 16V17ZM19 17V16C19 15.4477 18.5523 15 18 15C17.4477 15 17 15.4477 17 16V17H19Z"></path></svg>
                         <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap font-extrabold">Gestion Profil</span>
@@ -131,17 +131,9 @@
                             <span class="ms-3 font-extrabold">Gestion compte</span>
                         </a>
                     </li>
-                    <!--role-->
-                    {{-- <li>
-                        <a href="#" class="cursor-pointer group font-bold shadow-2xl hover:scale-110 transition active:scale-90 px-8 flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-blue-500 dark:hover:bg-gray-700 group">
-                            <svg class="shrink-0 w-5 h-5 text-green-300 transition duration-75 dark:text-whith-400  dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                                <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
-                            </svg>
-                            <span class="ms-3 font-extrabold">Rôle</span>
-                            </a>
-                    </li> --}}
+
                     </ul>
-                </li>
+                </li> --}}
 
                 <!--Notifications-->
                 {{-- <li>
@@ -343,7 +335,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
                         </svg>
 
-                        <span class="ms-3 font-extrabold">Parametre</span>
+                        <span class="ms-3 font-extrabold">Informations</span>
                     </a>
                 </li>
             </ul>

@@ -39,7 +39,7 @@ class Index extends Component
 
     public function mount($arguments)
     {
-        $this->cours = $arguments['cours'];
+        $this->cours = $arguments['cours']; 
     }
 
     public function toggleSectionModal ( $chapitres_id){

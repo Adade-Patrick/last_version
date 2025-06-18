@@ -58,8 +58,10 @@ class cyclesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $id = $request->id;
+        
         $cycle = Cycle::findOrFail($id);
         $cycle->update([
             'libelle_C' => $request->libelle_C,

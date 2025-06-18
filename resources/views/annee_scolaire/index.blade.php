@@ -4,6 +4,7 @@
 
 @include('partials.navbar')
 @include('partials.sidebar')
+@include('cycle.update')
 
 {{-- Navigation --}}
 <div class="fixed-div p-3 sm:ml-64 bg-no-repeat bg-cover bg-white bg-blend-multiply">
@@ -104,16 +105,13 @@
                                         </form> --}}
 
                                         <!--button modif-->
-                                        <form action="#" method="POST" class="inline-block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-white hover:underline" title="Modifier">
+
+                                            <button data-modal-target="popup-annee" data-modal-toggle="popup-annee" class="update-annee text-white hover:underline" title="Modifier" >
                                                 <div class="p-1 hover:bg-green-600 bg-green-500 rounded-lg">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" >
                                                     </svg>
                                                 </div>
                                             </button>
-                                        </form>
                                     </td>
                                 </tr>
                             @empty
@@ -194,6 +192,23 @@
         @if ($errors->any() || session('success'))
             document.getElementById('messageModal').classList.remove('invisible');
         @endif
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(e){
+        $(document).ready(
+            $('table').on('click', 'tr', (function(){
+
+                console.log('update button clicked');
+                const id = $(this).data("id");
+                console.log(id);
+                $('#popup-annee #libelle_A').val($(this).find('td').eq(1).text());
+                $('#popup-annee #annee-id').val(id);
+            }),
+        )
+        );
+
     });
 </script>
 
