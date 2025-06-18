@@ -34,4 +34,28 @@ class Cours extends Model
     {
         return $this->hasMany(Chapitre::class, 'cours_id');
     }
+    public function eleves()
+    {
+        return $this->belongsToMany(Eleve::class, 'cours_eleves', 'cours_id', 'eleve_id');
+    }
+
+    public function to_json()
+    {
+        return [
+            'id' => $this->id,
+            'titre' => $this->titre,
+            'matiere' => $this->matiere,
+            'description' => $this->description,
+            'prof' => $this->prof ? $this->prof->toArray() : null,
+        ];
+    }
+
+    public static function toArrayJson($data){
+        $json = [];
+        foreach($data as $cours){
+            $json[] = $cours->to_json();
+        }
+
+        return $json;
+    }
 }

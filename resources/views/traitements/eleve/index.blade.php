@@ -47,7 +47,7 @@
                 <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-white uppercase bg-blue-500 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th class="px-6 py-3">ID</th>
+                            <th class="px-6 py-3 hidden">ID</th>
                             <th class="px-6 py-3">Matricule</th>
                             <th class="px-6 py-3">Nom(s)</th>
                             <th class="px-6 py-3">Prénom(s)</th>
@@ -67,8 +67,8 @@
                             @else
                         @foreach($eleves as $eleve)
                             <tr class="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700">
-                                <td class="px-6 py-4">{{ $eleve->id }}</td>
-                                <td class="px-6 py-4">{{ $eleve->Matricule }}</td>
+                                <td class="px-6 py-4 hidden">{{ $eleve->id }}</td>
+                                <td class="px-6 py-4">{{ $eleve->matricule }}</td>
                                 <td class="px-6 py-4">{{ $eleve->infoPerso->nom }}</td>
                                 <td class="px-6 py-4">{{ $eleve->infoPerso->prenom }}</td>
                                 <td class="px-6 py-4">{{ $eleve->user->name }}</td>
